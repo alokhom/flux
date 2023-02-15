@@ -90,8 +90,8 @@ spec:
             memory: "256Mi"
             cpu: "100m"
           limits:
-            memory: "256Mi"
-            cpu: "100m"
+            memory: "400Mi"
+            cpu: "200m"
 
     persistence:
       nameNode:
@@ -104,4 +104,4 @@ spec:
         enabled: false
         storageClass: "standard"
         accessMode: ReadWriteOnce
-        size: 20Gi
+        size: 50Gi
