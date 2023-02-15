@@ -7,7 +7,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: pfisterer-hadoop
+      chart: hadoop
       version: "1.2.0"
       sourceRef:
         kind: HelmRepository
