@@ -101,7 +101,7 @@ spec:
         size: 10Gi
 
       dataNode:
-        enabled: false
+        enabled: true
         storageClass: "standard"
         accessMode: ReadWriteOnce
         size: 50Gi
