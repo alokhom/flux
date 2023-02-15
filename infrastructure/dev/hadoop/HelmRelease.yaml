@@ -56,8 +56,8 @@ spec:
             memory: "256Mi"
             cpu: "10m"
           limits:
-            memory: "400Mi"
-            cpu: "200m"
+            memory: "600Mi"
+            cpu: "500m"
 
       webhdfs:
         enabled: true
