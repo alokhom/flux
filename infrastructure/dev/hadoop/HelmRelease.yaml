@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: hadoop
         namespace: hadoop
-      interval: 30m
+      interval: 5m
   values:
     image:
       repository: farberg/apache-hadoop
