@@ -5,4 +5,4 @@ metadata:
   namespace: hadoop
 spec:
   interval: 5m
-  url:  https://pfisterer.github.io/apache-hadoop-helm/
+  url:   https://gchq.github.io/gaffer-docker
