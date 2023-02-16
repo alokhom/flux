@@ -52,14 +52,14 @@ spec:
           httpGet:
             path: /ws/v1/cluster/info
             port: 8088
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
         livenessProbe:
           httpGet:
             path: /ws/v1/cluster/info
             port: 8088
-          initialDelaySeconds: 10
-          timeoutSeconds: 2
+          initialDelaySeconds: 20
+          timeoutSeconds: 5
         volumeMounts:
         - name: hadoop-config
           mountPath: /tmp/hadoop-config
