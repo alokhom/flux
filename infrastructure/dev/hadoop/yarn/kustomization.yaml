@@ -7,3 +7,9 @@ resources:
   - rm-sts.yaml
   - rm-svc.yaml
   - ui-svc.yaml
+###
+  - name-node-sts.yaml
+  - name-node-svc.yaml
+###
+  - data-node-sts.yaml
+  - data-node-svc.yaml
