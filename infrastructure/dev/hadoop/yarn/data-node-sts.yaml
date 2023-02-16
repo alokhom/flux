@@ -37,7 +37,7 @@ spec:
         command:
            - "/bin/bash"
            - "/tmp/hadoop-config/bootstrap.sh"
-           # - "-d"
+           - "-d"
         resources:
           requests:
             memory: "256Mi"
@@ -45,18 +45,18 @@ spec:
           limits:
             memory: "1024Mi"
             cpu: "1000m"
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 9864
-          initialDelaySeconds: 60
-          timeoutSeconds: 2
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 9864
-          initialDelaySeconds: 60
-          timeoutSeconds: 2
+        #readinessProbe:
+        #  httpGet:
+        #    path: /
+        #    port: 9864
+        #  initialDelaySeconds: 60
+        #  timeoutSeconds: 2
+        #livenessProbe:
+        #  httpGet:
+        #    path: /
+        #    port: 9864
+        #  initialDelaySeconds: 60
+        #  timeoutSeconds: 2
         volumeMounts:
         - name: hadoop-config
           mountPath: /tmp/hadoop-config
