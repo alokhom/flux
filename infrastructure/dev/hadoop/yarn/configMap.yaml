@@ -39,14 +39,14 @@ data:
       # Example hostname: hadoop-hadoop-hdfs-dn-0
       HOSTNAME_ARR=(${HOSTNAME//-/ })
       # Add instance number to start of external port ranges
-      EXTERNAL_HTTP_PORT=$(({{ .Values.hdfs.dataNode.externalHTTPPortRangeStart }} + ${HOSTNAME_ARR[4]}))
-      EXTERNAL_DATA_PORT=$(({{ .Values.hdfs.dataNode.externalDataPortRangeStart }} + ${HOSTNAME_ARR[4]}))
+      EXTERNAL_HTTP_PORT=$((50500 + ${HOSTNAME_ARR[4]}))
+      EXTERNAL_DATA_PORT=$((51000 + ${HOSTNAME_ARR[4]}))
       # sed command changing REPLACEME in $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml to actual port numbers
       sed -i "s/EXTERNAL_HTTP_PORT_REPLACEME/${EXTERNAL_HTTP_PORT}/" $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
       sed -i "s/EXTERNAL_DATA_PORT_REPLACEME/${EXTERNAL_DATA_PORT}/" $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
       mkdir -p /root/hdfs/datanode
       #  wait up to 30 seconds for namenode
-      (while [[ $count -lt 15 && -z `curl -sf http://{{ include "hadoop.fullname" . }}-hdfs-nn:9870` ]]; do ((count=count+1)) ; echo "Waiting for {{ include "hadoop.fullname" . }}-hdfs-nn" ; sleep 5; done && [[ $count -lt 15 ]])
+      (while [[ $count -lt 15 && -z `curl -sf http://hadoop-hdfs-namenodes:9870` ]]; do ((count=count+1)) ; echo "Waiting for hadoop-hdfs-namenodes" ; sleep 5; done && [[ $count -lt 15 ]])
       [[ $? -ne 0 ]] && echo "Timeout waiting for hdfs-nn, exiting." && exit 1
       $HADOOP_PREFIX/bin/hdfs datanode
     fi
@@ -73,7 +73,7 @@ data:
       cd $HADOOP_PREFIX/sbin
       chmod +x start-yarn-nm.sh
       #  wait up to 30 seconds for resourcemanager
-      (while [[ $count -lt 15 && -z `curl -sf http://{{ include "hadoop.fullname" . }}-yarn-rm:8088/ws/v1/cluster/info` ]]; do ((count=count+1)) ; echo "Waiting for {{ include "hadoop.fullname" . }}-yarn-rm" ; sleep 2; done && [[ $count -lt 15 ]])
+      (while [[ $count -lt 15 && -z `curl -sf http://hadoop-yarn-rm:8088/ws/v1/cluster/info` ]]; do ((count=count+1)) ; echo "Waiting for hadoop-yarn-rm" ; sleep 2; done && [[ $count -lt 15 ]])
       [[ $? -ne 0 ]] && echo "Timeout waiting for yarn-rm, exiting." && exit 1
       ./start-yarn-nm.sh
     fi
@@ -91,7 +91,7 @@ data:
     <configuration>
       <property>
             <name>fs.defaultFS</name>
-            <value>hdfs://{{ include "hadoop.fullname" . }}-hdfs-nn:9000/</value>
+            <value>hdfs://hadoop-hdfs-nn:9000/</value>
             <description>NameNode URI</description>
         </property>
     </configuration>
@@ -112,7 +112,7 @@ data:
 
       <property>
         <name>dfs.datanode.hostname</name>
-        <value>{{ .Values.hdfs.dataNode.externalHostname }}</value>
+        <value>datanode-hadoop.systemtracker.no-ip.org</value>
       </property>
 
       <property>
@@ -170,11 +170,11 @@ data:
       </property>
       <property>
         <name>mapreduce.jobhistory.address</name>
-        <value>{{ include "hadoop.fullname" . }}-yarn-rm-0.{{ include "hadoop.fullname" . }}-yarn-rm.{{ .Release.Namespace }}.svc.cluster.local:10020</value>
+        <value>hadoop-yarn-rm-0.hadoop-yarn-rm.hadoop.svc.cluster.local:10020</value>
       </property>
       <property>
         <name>mapreduce.jobhistory.webapp.address</name>
-        <value>{{ include "hadoop.fullname" . }}-yarn-rm-0.{{ include "hadoop.fullname" . }}-yarn-rm.{{ .Release.Namespace }}.svc.cluster.local:19888</value>
+        <value>hadoop-yarn-rm-0.hadoop-yarn-rm.hadoop.svc.cluster.local:19888</value>
       </property>
     </configuration>
   slaves: |
@@ -243,7 +243,7 @@ data:
     <configuration>
       <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>{{ include "hadoop.fullname" . }}-yarn-rm</value>
+        <value>hadoop-yarn-rm</value>
       </property>
       <!-- Bind to all interfaces -->
       <property>
