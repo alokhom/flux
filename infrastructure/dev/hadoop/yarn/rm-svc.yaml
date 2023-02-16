@@ -1,0 +1,17 @@
+# A headless service to create DNS records
+apiVersion: v1
+kind: Service
+metadata:
+  name: hadoop-yarn-rm
+  namespace: hadoop
+  labels:
+    app.kubernetes.io/name: hadoop
+    app.kubernetes.io/component: yarn-rm
+spec:
+  ports:
+  - port: 8088
+    name: web
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: hadoop
+    app.kubernetes.io/component: yarn-rm

@@ -1,0 +1,14 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: hadoop-yarn-rm
+  namespace: hadoop
+  labels:
+    app.kubernetes.io/name: hadoop
+    app.kubernetes.io/component: yarn-rm
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hadoop
+      app.kubernetes.io/component: yarn-rm
+  minAvailable: 1
