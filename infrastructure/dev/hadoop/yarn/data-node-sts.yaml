@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hadoop-hdfs-dn
+  namespace: hadoop
+  labels:
+    app.kubernetes.io/name: hadoop
+    app.kubernetes.io/component: hdfs-dn
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hadoop
+      app.kubernetes.io/component: hdfs-dn
+  serviceName: hadoop-hdfs-dn
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hadoop
+        app.kubernetes.io/component: hdfs-dn
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 5
+            podAffinityTerm:
+              topologyKey: "kubernetes.io/hostname"
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: hadoop
+                  app.kubernetes.io/component: hdfs-dn
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: hdfs-dn
+        image: chenseanxy/hadoop:3.2.1-nolib
+        imagePullPolicy: IfNotPresent
+        command:
+           - "/bin/bash"
+           - "/tmp/hadoop-config/bootstrap.sh"
+           # - "-d"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "10m"
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9864
+          initialDelaySeconds: 60
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9864
+          initialDelaySeconds: 60
+          timeoutSeconds: 2
+        volumeMounts:
+        - name: hadoop-config
+          mountPath: /tmp/hadoop-config
+        - name: dfs
+          mountPath: /root/hdfs/datanode
+      volumes:
+      - name: hadoop-config
+        configMap:
+          name: hadoop
+  volumeClaimTemplates:
+  - metadata:
+      name: dfs
+      labels:
+        app.kubernetes.io/name: hadoop
+        app.kubernetes.io/component: hdfs-dn
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 30Gi
+      storageClassName: "standard"
