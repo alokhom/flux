@@ -46,8 +46,8 @@ spec:
             memory: "256Mi"
             cpu: "10m"
           limits:
-            memory: "1024Mi"
-            cpu: "1000m"
+            memory: "400Mi"
+            cpu: "400m"
         readinessProbe:
           httpGet:
             path: /ws/v1/cluster/info
