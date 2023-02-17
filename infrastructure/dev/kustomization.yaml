@@ -5,3 +5,4 @@ resources:
   - ./hadoop
   - ./ingress-nginx
   - ./sealed-secrets
+  - ./spark
