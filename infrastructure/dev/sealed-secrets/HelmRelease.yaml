@@ -15,7 +15,56 @@ spec:
         namespace: sealed-secrets
       interval: 5m
   values:
+    ## @section Common parameters
+
+    ## @param kubeVersion Override Kubernetes version
+    ##
+    kubeVersion: ""
+    ## @param nameOverride String to partially override sealed-secrets.fullname
+    ##
+    nameOverride: ""
+    ## @param fullnameOverride String to fully override sealed-secrets.fullname
+    ##
+    fullnameOverride: ""
+    ## @param namespace Namespace where to deploy the Sealed Secrets controller
+    ##
     namespace: "sealed-secrets"
+    ## @param extraDeploy [array] Array of extra objects to deploy with the release
+    ##
+    extraDeploy: []
+    ## @param commonAnnotations [object] Annotations to add to all deployed resources
+    ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+    ##
+    commonAnnotations: {}
+    ## @section Sealed Secrets Parameters
+
+    ## Sealed Secrets image
+    ## ref: https://hub.docker.com/r/bitnami/sealed-secrets-controller/tags
+    ## @param image.registry Sealed Secrets image registry
+    ## @param image.repository Sealed Secrets image repository
+    ## @param image.tag Sealed Secrets image tag (immutable tags are recommended)
+    ## @param image.pullPolicy Sealed Secrets image pull policy
+    ## @param image.pullSecrets [array]  Sealed Secrets image pull secrets
+    ##
+    image:
+      registry: docker.io
+      repository: bitnami/sealed-secrets-controller
+      tag: v0.19.5
+      ## Specify a imagePullPolicy
+      ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+      ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+      ##
+      pullPolicy: IfNotPresent
+      ## Optionally specify an array of imagePullSecrets.
+      ## Secrets must be manually created in the namespace.
+      ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+      ## e.g:
+      ## pullSecrets:
+      ##   - myRegistryKeySecretName
+      ##
+      pullSecrets: []
+    ## @param createController Specifies whether the Sealed Secrets controller should be created
+    ##
     createController: true
     ## @param secretName The name of an existing TLS secret containing the key used to encrypt secrets
     ##
@@ -324,50 +373,50 @@ spec:
     ## @section Metrics parameters
 
     metrics:
-    ## Prometheus Operator ServiceMonitor configuration
-    ##
-    serviceMonitor:
-      ## @param metrics.serviceMonitor.enabled Specify if a ServiceMonitor will be deployed for Prometheus Operator
+      ## Prometheus Operator ServiceMonitor configuration
       ##
-      enabled: false
-      ## @param metrics.serviceMonitor.namespace Namespace where Prometheus Operator is running in
-      ##
-      namespace: ""
-      ## @param metrics.serviceMonitor.labels Extra labels for the ServiceMonitor
-      ##
-      labels: {}
-      ## @param metrics.serviceMonitor.annotations Extra annotations for the ServiceMonitor
-      ##
-      annotations: {}
-      ## @param metrics.serviceMonitor.interval How frequently to scrape metrics
-      ## e.g:
-      ## interval: 10s
-      ##
-      interval: ""
-      ## @param metrics.serviceMonitor.scrapeTimeout Timeout after which the scrape is ended
-      ## e.g:
-      ## scrapeTimeout: 10s
-      ##
-      scrapeTimeout: ""
-      ## @param metrics.serviceMonitor.honorLabels Specify if ServiceMonitor endPoints will honor labels
-      ##
-      honorLabels: true
-      ## @param metrics.serviceMonitor.metricRelabelings [array] Specify additional relabeling of metrics
-      ##
-      metricRelabelings: []
-      ## @param metrics.serviceMonitor.relabelings [array] Specify general relabeling
-      ##
-      relabelings: []
+      serviceMonitor:
+        ## @param metrics.serviceMonitor.enabled Specify if a ServiceMonitor will be deployed for Prometheus Operator
+        ##
+        enabled: false
+        ## @param metrics.serviceMonitor.namespace Namespace where Prometheus Operator is running in
+        ##
+        namespace: ""
+        ## @param metrics.serviceMonitor.labels Extra labels for the ServiceMonitor
+        ##
+        labels: {}
+        ## @param metrics.serviceMonitor.annotations Extra annotations for the ServiceMonitor
+        ##
+        annotations: {}
+        ## @param metrics.serviceMonitor.interval How frequently to scrape metrics
+        ## e.g:
+        ## interval: 10s
+        ##
+        interval: ""
+        ## @param metrics.serviceMonitor.scrapeTimeout Timeout after which the scrape is ended
+        ## e.g:
+        ## scrapeTimeout: 10s
+        ##
+        scrapeTimeout: ""
+        ## @param metrics.serviceMonitor.honorLabels Specify if ServiceMonitor endPoints will honor labels
+        ##
+        honorLabels: true
+        ## @param metrics.serviceMonitor.metricRelabelings [array] Specify additional relabeling of metrics
+        ##
+        metricRelabelings: []
+        ## @param metrics.serviceMonitor.relabelings [array] Specify general relabeling
+        ##
+        relabelings: []
     ## Grafana dashboards configuration
     ##
     dashboards:
       ## @param metrics.dashboards.create Specifies whether a ConfigMap with a Grafana dashboard configuration should be created
       ## ref https://github.com/helm/charts/tree/master/stable/grafana#configuration
       ##
-      create: true
+      create: false
       ## @param metrics.dashboards.labels Extra labels to be added to the Grafana dashboard ConfigMap
       ##
       labels: {}
       ## @param metrics.dashboards.namespace Namespace where Grafana dashboard ConfigMap is deployed
       ##
-      namespace: "sealed-secrets"
+      namespace: ""
