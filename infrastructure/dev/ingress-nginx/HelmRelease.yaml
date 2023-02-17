@@ -170,9 +170,9 @@ spec:
         maxmindLicenseKey: ""
         # -- Additional command line arguments to pass to nginx-ingress-controller
         # E.g. to specify the default SSL certificate you can use
-        extraArgs: {}
+        extraArgs:
         ## extraArgs:
-        ##   default-ssl-certificate: "<namespace>/<secret_name>"
+          default-ssl-certificate: "ingress-nginx/ssl-ingress-secret"
 
         # -- Additional environment variables to set
         extraEnvs: []
@@ -473,18 +473,18 @@ spec:
             targetPorts:
                 http: http
                 https: https
-            type: LoadBalancer
-            ## type: NodePort
-            ## nodePorts:
-            ##   http: 32080
-            ##   https: 32443
-            ##   tcp:
-            ##     8080: 32808
+            ## type: LoadBalancer
+            type: NodePort
             nodePorts:
-                http: ""
-                https: ""
-                tcp: {}
-                udp: {}
+              http: 32080
+              https: 32443
+            ##  tcp:
+            ##    8080: 32808
+            #nodePorts:
+            #    http: ""
+            #    https: ""
+            #    tcp: {}
+            #    udp: {}
             external:
                 enabled: true
             internal:
