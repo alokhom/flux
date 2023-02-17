@@ -584,13 +584,13 @@ spec:
       ##
       resources:
         ## Example:
-        limits:
+        requests:
           cpu: 250m
           memory: 256Mi
         ##
         #limits:
         ## Examples:
-        requests:
+        limits:
           cpu: 512m
           memory: 512Mi
         ##
