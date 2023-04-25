@@ -4,5 +4,5 @@ resources:
   - ./cert-manager
   #- ./hadoop
   #- ./ingress-nginx
-  #- ./sealed-secrets
+  - ./sealed-secrets
   #- ./spark
