@@ -6,4 +6,3 @@ resources:
   - namespace.yaml
   #- ClusterIssuer.yaml
   #- sealed-secret.yaml
-  
