@@ -1,17 +1,17 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sealed-secrets
-  namespace: sealed-secrets
+  name: splunk-enterprise
+  namespace: splunk-ent
 spec:
   interval: 30m
   chart:
     spec:
-      chart: sealed-secrets
-      version: "2.7.4"
+      chart: splunk-enterprise
+      version: "2.2.1"
       sourceRef:
         kind: HelmRepository
-        name: splunk-operator
+        name: splunk
         namespace: splunk-ent
       interval: 5m
   values:
@@ -203,7 +203,7 @@ spec:
       # reference: https://github.com/splunk/splunk-operator/blob/develop/docs/StorageClass.md
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 3Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
 
       # Storage configuration for /opt/splunk/var volume
@@ -211,7 +211,7 @@ spec:
       # reference: https://github.com/splunk/splunk-operator/blob/develop/docs/StorageClass.md
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 10Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
 
       # Set resource requests and limits for Splunk instance pod containers
@@ -268,7 +268,7 @@ spec:
       namespaceOverride: ""
       additionalLabels: {}
       additionalAnnotations: {}
-      replicaCount: 1
+      replicaCount: 3
       volumes: []
       licenseUrl: ""
       defaultsUrl: ""
@@ -299,12 +299,12 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 3Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
 
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 3Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
 
       resources:
@@ -395,11 +395,11 @@ spec:
         # failureThreshold: 3
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 2Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 4Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
       resources:
         requests:
@@ -477,12 +477,12 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 1Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
 
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 1Gi
+        storageCapacity: 5Gi
         storageClassName: local-path
 
       resources:
@@ -515,7 +515,7 @@ spec:
       #    nodeTaintsPolicy: [Honor|Ignore] # optional; beta since v1.26
 
     licenseManager:
-      enabled: false
+      enabled: true
       name: "lm"
       namespaceOverride: ""
       additionalLabels: {}
@@ -542,15 +542,15 @@ spec:
         #     region:
         #     secretRef:
       
-      volumes: []
+      volumes:
       ## Example: mounting volume containing license in Splunk instance pod container
-      # - name: licenses
-      #   configMap:
-      #     name: splunk-licenses
+      - name: licenses
+        configMap:
+          name: splunk-licenses
 
-      licenseUrl: ""
+      #licenseUrl: ""
       ## Example: using mounted volume to specify license file path
-      # licenseUrl: /mnt/licenses/enterprise.lic
+      licenseUrl: /mnt/licenses/enterprise.lic
 
       defaultsUrl: ""
 
@@ -586,21 +586,21 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 10Gi
-      # storageClassName: gp2
+        storageCapacity: 5Gi
+        storageClassName: local-path
 
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 100Gi
-      # storageClassName: gp2
+        storageCapacity: 5Gi
+        storageClassName: local-path
 
-      resources: {}
-        # requests:
-        #   memory: "2Gi"
-        #   cpu: "4"
-        # limits:
-        #   memory: "12Gi"
-        #   cpu: "24"
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: "900m"
+        limits:
+          memory: "1Gi"
+          cpu: "1"
 
       serviceAccount: ""
 
