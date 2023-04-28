@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ./cert-manager
   #- ./hadoop
-  #- ./ingress-nginx
+  - ./ingress-nginx
   - ./sealed-secrets
   #- ./spark
+  #- splunk-ent
