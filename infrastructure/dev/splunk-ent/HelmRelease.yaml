@@ -85,7 +85,7 @@ spec:
     # Configure a Splunk Cluster Manager instance
     clusterManager:
       # Deploy a cluster manager instance
-      enabled: false
+      enabled: true
       # Specify the custom resource name
       name: "cm"
       # Override the custom resource namespace
@@ -203,26 +203,26 @@ spec:
       # reference: https://github.com/splunk/splunk-operator/blob/develop/docs/StorageClass.md
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 10Gi
-      # storageClassName: gp2
+        storageCapacity: 3Gi
+        storageClassName: local-path
 
       # Storage configuration for /opt/splunk/var volume
       # To use a StorageClass other than your default StorageClass, specify the storageClassName
       # reference: https://github.com/splunk/splunk-operator/blob/develop/docs/StorageClass.md
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 100Gi
-      # storageClassName: gp2
+        storageCapacity: 10Gi
+        storageClassName: local-path
 
       # Set resource requests and limits for Splunk instance pod containers
       # reference: https://github.com/splunk/splunk-operator/blob/develop/docs/CustomResources.md#examples-of-guaranteed-and-burstable-qos
-      resources: {}
-        # requests:
-        #   memory: "2Gi"
-        #   cpu: "4"
-        # limits:
-        #   memory: "12Gi"
-        #   cpu: "24"
+      resources:
+        requests:
+          memory: "500Mi"
+          cpu: 800m
+        limits:
+          memory: "700Mi"
+          cpu: 1
 
       # Specify a service account used by the Splunk instance pods
       # Default uses the Default Service Account to access the API server
@@ -263,7 +263,7 @@ spec:
 
 
     indexerCluster:
-      enabled: false
+      enabled: true
       name: "idxc"
       namespaceOverride: ""
       additionalLabels: {}
@@ -299,21 +299,21 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 10Gi
-      # storageClassName: gp2
+        storageCapacity: 3Gi
+        storageClassName: local-path
 
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 100Gi
-      # storageClassName: gp2
+        storageCapacity: 3Gi
+        storageClassName: local-path
 
-      resources: {}
-        # requests:
-        #   memory: "2Gi"
-        #   cpu: "4"
-        # limits:
-        #   memory: "12Gi"
-        #   cpu: "24"
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: 800m
+        limits:
+          memory: "1Gi"
+          cpu: 1
 
       serviceAccount: ""
 
@@ -337,7 +337,7 @@ spec:
       #    nodeTaintsPolicy: [Honor|Ignore] # optional; beta since v1.26
 
     searchHeadCluster:
-      enabled: false
+      enabled: true
       name: "shc"
       namespaceOverride: ""
       additionalLabels: {}
@@ -395,19 +395,19 @@ spec:
         # failureThreshold: 3
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 10Gi
-      # storageClassName: gp2
+        storageCapacity: 2Gi
+        storageClassName: local-path
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 100Gi
-      # storageClassName: gp2
-      resources: {}
-        # requests:
-        #   memory: "2Gi"
-        #   cpu: "4"
-        # limits:
-        #   memory: "12Gi"
-        #   cpu: "24"  
+        storageCapacity: 4Gi
+        storageClassName: local-path
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: 900m
+        limits:
+          memory: "1Gi"
+          cpu: 1
       serviceAccount: ""
       # ServiceTemplate is a template used to create Kubernetes services
       serviceTemplate: []
@@ -426,7 +426,7 @@ spec:
       #    nodeTaintsPolicy: [Honor|Ignore] # optional; beta since v1.26
 
     monitoringConsole:
-      enabled: false
+      enabled: true
       name: "mc"
       namespaceOverride: ""
       additionalLabels: {}
@@ -477,21 +477,21 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 10Gi
-      # storageClassName: gp2
+        storageCapacity: 1Gi
+        storageClassName: local-path
 
       varVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 100Gi
-      # storageClassName: gp2
+        storageCapacity: 1Gi
+        storageClassName: local-path
 
-      resources: {}
-        # requests:
-        #   memory: "2Gi"
-        #   cpu: "4"
-        # limits:
-        #   memory: "12Gi"
-        #   cpu: "24"  
+      resources:
+        requests:
+          memory: "1Gi"
+          cpu: "900m"
+        limits:
+          memory: "1Gi"
+          cpu: "1"  
 
       serviceAccount: ""
 
