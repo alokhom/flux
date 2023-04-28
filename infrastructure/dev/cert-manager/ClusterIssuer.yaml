@@ -5,4 +5,4 @@ metadata:
   namespace: cert-manager
 spec:
   ca:
-    secretName: ssl-ingress-secret
+    secretName: ssl-ingress-secret-ca
