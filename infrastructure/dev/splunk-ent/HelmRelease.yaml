@@ -203,7 +203,7 @@ spec:
       # reference: https://github.com/splunk/splunk-operator/blob/develop/docs/StorageClass.md
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 5Gi
+        storageCapacity: 1Gi
         storageClassName: local-path
 
       # Storage configuration for /opt/splunk/var volume
@@ -299,7 +299,7 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 5Gi
+        storageCapacity: 1Gi
         storageClassName: local-path
 
       varVolumeStorageConfig:
@@ -395,7 +395,7 @@ spec:
         # failureThreshold: 3
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 5Gi
+        storageCapacity: 1Gi
         storageClassName: local-path
       varVolumeStorageConfig:
         ephemeralStorage: false
@@ -477,7 +477,7 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 5Gi
+        storageCapacity: 1Gi
         storageClassName: local-path
 
       varVolumeStorageConfig:
@@ -586,7 +586,7 @@ spec:
 
       etcVolumeStorageConfig:
         ephemeralStorage: false
-        storageCapacity: 5Gi
+        storageCapacity: 1Gi
         storageClassName: local-path
 
       varVolumeStorageConfig:
