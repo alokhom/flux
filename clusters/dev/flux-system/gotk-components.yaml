@@ -9254,7 +9254,7 @@ spec:
         - mountPath: /tmp
           name: tmp
       nodeSelector:
-        kubernetes.io/os: linux
+        kubernetes.io/arch: arm64
       securityContext:
         fsGroup: 1337
       serviceAccountName: source-controller
