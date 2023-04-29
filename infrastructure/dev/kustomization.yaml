@@ -6,5 +6,5 @@ resources:
   - ./ingress-nginx
   - ./sealed-secrets
   #- ./spark
-  #- splunk-ent
+  - splunk-ent
   #- splunk-collector
