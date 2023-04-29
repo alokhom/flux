@@ -10,7 +10,13 @@ patches: # customize the manifests during bootstrap
       kind: Deployment
       metadata:
         labels:
-          name: all
+          app.kubernetes.io/component: source-controller
+          app.kubernetes.io/instance: flux-system
+          app.kubernetes.io/part-of: flux
+          app.kubernetes.io/version: v2.0.0-rc.1
+          control-plane: controller
+        name: source-controller
+        namespace: flux-system
       spec:
         template:
           spec:
@@ -30,4 +36,4 @@ patches: # customize the manifests during bootstrap
                 value: flux    
     target:
       kind: Deployment
-      labelSelector: app.kubernetes.io/part-of=flux
+      name: source-controller
