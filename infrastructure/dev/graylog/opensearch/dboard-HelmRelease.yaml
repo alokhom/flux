@@ -133,10 +133,10 @@ spec:
         opensearch.ssl.verificationMode: none
         # opensearch.ssl.certificateAuthorities: /usr/share/opensearch-dashboards/certs/dashboards-root-ca.pem
         # if utilizing custom CA certs for connection to opensearch, provide the CA here
-        opensearch_security.multitenancy.enabled: true
-        opensearch_security.multitenancy.tenants.preferred: ["Private", "Global"]
-        opensearch_security.readonly_mode.roles: ["readall"]
-        opensearch_security.cookie.secure: true
+        #opensearch_security.multitenancy.enabled: true
+        #opensearch_security.multitenancy.tenants.preferred: ["Private", "Global"]
+        #opensearch_security.readonly_mode.roles: ["readall"]
+        #opensearch_security.cookie.secure: true
 
 
     opensearchDashboardsYml:
