@@ -5,4 +5,4 @@ metadata:
   namespace: graylog
 spec:
   interval: 5m
-  url: https://groundhog2k.github.io/helm-charts/
+  url: https://charts.bitnami.com/bitnami
