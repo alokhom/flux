@@ -8,7 +8,3 @@ resources:
 generatorOptions:
   disableNameSuffixHash: true
 
-secretGenerator:
-- name: graylog-secret
-  literals:
-  - password=admin123
