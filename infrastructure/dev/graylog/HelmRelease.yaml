@@ -45,7 +45,7 @@ spec:
       # If true, this chart will install opensearch from requirement dependencies
       install-opensearch: true
       # If true, this chart will install MongoDB replicaset from requirement dependencies
-      install-mongodb: true
+      install-mongodb: false
 
     ## Enable only if your current release was migrated from helm2 (using 2to3 plugin).
     ##
