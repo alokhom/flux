@@ -23,7 +23,7 @@ spec:
       repository: "arm64v8/mongo"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "5.0.17"
+      tag: "5"
 
     ## Pull secrets and name override options
     imagePullSecrets: []
