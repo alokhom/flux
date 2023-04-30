@@ -170,7 +170,8 @@ spec:
         # Suffix of the headless service name for hidden secondary instances
         headlessServiceSuffix: hidden
         ## Additional node selector
-        nodeSelector: {}
+        nodeSelector:
+          kubernetes.io/arch: arm64
         ## Pod tolerations
         tolerations: []
         ## Pod affinity
@@ -180,7 +181,7 @@ spec:
       ## Creates an additional arbiter when enabled
       arbiter:
         # Enable arbiter deployment
-        enabled: false
+        enabled: true
         # Suffix of the arbiters headless service name
         headlessServiceSuffix: arbiter
         ## Resource limits and requests for the arbiter
@@ -192,7 +193,8 @@ spec:
           #   cpu: 100m
           #   memory: 128Mi
         ## Additional node selector
-        nodeSelector: {}
+        nodeSelector:
+          kubernetes.io/arch: arm64
         ## Pod tolerations
         tolerations: []
         ## Pod affinity
@@ -204,7 +206,7 @@ spec:
           ## Internal volume name and prefix of a created PVC
           volumeName: "mongodb-arbiter-volume"
           ## Alternative set requestedSize to define a size for a dynamically created PVC
-          requestedSize:
+          requestedSize: 8Gi
           ## the storage class name
           className: "local-path"
           ## Default access mode (ReadWriteOnce)
