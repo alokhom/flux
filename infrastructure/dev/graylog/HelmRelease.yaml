@@ -324,10 +324,10 @@ spec:
         ## Graylog server Ingress TLS configuration
         ## Secrets must be manually created in the namespace
         ##
-        tls:
-          - secretName: graylog-server-tls
-            hosts:
-              - graylog.systemtracker.no-ip.org
+        #tls:
+        #  - secretName: graylog-server-tls
+        #    hosts:
+        #      - graylog.systemtracker.no-ip.org
 
         ## For Kubernetes 1.18 or later. Use Prefix or Exact path types.
         ## See https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
