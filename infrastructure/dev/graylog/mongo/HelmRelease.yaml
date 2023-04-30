@@ -112,7 +112,7 @@ spec:
       ## The root username (default: admin)
       rootUsername: "admin"
       ## The root user password (default: a 10 char. alpahnumerical random password will be generated)
-      rootPassword:
+      rootPassword: "admin123"
       ## Custom configuration (use instead of command args)
       customConfig: |
 
