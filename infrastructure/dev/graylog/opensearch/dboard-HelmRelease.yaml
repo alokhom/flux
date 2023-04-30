@@ -210,7 +210,7 @@ spec:
     autoscaling:
       # This requires metrics server to be installed, to install use kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
       # See https://github.com/kubernetes-sigs/metrics-server
-      enabled: true
+      enabled: false
       minReplicas: 1
       maxReplicas: 3
       targetCPUUtilizationPercentage: 80
