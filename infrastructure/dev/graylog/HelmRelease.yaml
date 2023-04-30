@@ -428,7 +428,7 @@ spec:
         ## If one or more of your elasticsearch hosts require authentication, include the credentials in each node URI that
         ## requires authentication.
         ##
-        hosts: http://opensearch-cluster-master-headless.graylog.svc.cluster.local:9200
+        hosts: "http://opensearch-cluster-master:9200"
         # hosts: ""
         # Allow elasticsearch hosts to be fetched from a k8s secret
         # {{ graylog.fullname }}-es will be used as uriSecretName if left empty
