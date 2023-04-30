@@ -301,6 +301,13 @@ spec:
         # cluster1:
         #   nodes_dn:
         #       - CN=*.example.com
+      custom-opensearch.yml: |
+        - http.host:0.0.0.0
+        - http.port:9200
+        - http.cors.allow-origin:"http://localhost"
+        - http.cors.enabled:true
+        - http.cors.allow-headers:X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+        - http.cors.allow-credentials:true
 
       # log4j2.properties:
 
