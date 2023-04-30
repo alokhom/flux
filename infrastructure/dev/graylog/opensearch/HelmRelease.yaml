@@ -68,8 +68,239 @@ spec:
         # Setting network.host to a non-loopback address enables the annoying bootstrap checks. "Single-node" mode disables them again.
         # Implicitly done if ".singleNode" is set to "true".
         # discovery.type: single-node
-        plugins.security.disabled: true
+        plugins.security.disabled: false
         bootstrap.memory_lock: false
+        plugins.security.ssl.http.enabled: false
+        plugins.security.ssl.transport.enable_openssl_if_available: false
+        plugins.security.ssl.http.enable_openssl_if_available: false
+        plugins.security.ssl.transport.enforce_hostname_verification: false
+        plugins.security.ssl.transport.resolve_hostname: false
+      internal_users.yml: |
+        # This is the internal user database
+        # The hash value is a bcrypt hash and can be generated with plugin/tools/hash.sh
+
+        _meta:
+          type: "internalusers"
+          config_version: 2
+
+        # Define your internal users here
+        new-user:
+          hash: "$2y$12$dn2Jz5.RNvpVkDbxxYBz9uowz41jAefGnzNlIcmxRX2dAudS1bOIK"
+          reserved: false
+          hidden: false
+          opendistro_security_roles:
+          - "complex-role"
+          backend_roles:
+          - "kibanauser"
+          - "readall"
+          attributes:
+            attribute1: "value1"
+          static: false
+
+        ## Demo users
+
+        admin:
+          hash: "$2y$12$rX7LSbCqTGf0f5f/DZTmielDZQvwUghnykx7Lk43zFkh7F9yx9klm"
+          reserved: true
+          backend_roles:
+          - "admin"
+          description: "Demo admin user"
+
+        kibanaserver:
+          hash: "$2y$12$1Yep1oNP5qvNWz2p3DiWcO2lKGAWT8lrCeiX0ajl4lnNi6Ai1cctW"
+          reserved: true
+          description: "Demo user for the OpenSearch Dashboards server"
+
+        kibanaro:
+          hash: "$2y$12$G4kR4boTHOpqb7DgXSjae.4D3/6/aJvHu6KIMWs21J3e/eKlLSZYW"
+          reserved: false
+          backend_roles:
+          - "kibanauser"
+          - "readall"
+          attributes:
+            attribute1: "value1"
+            attribute2: "value2"
+            attribute3: "value3"
+          description: "Demo read-only user for OpenSearch dashboards"
+
+        logstash:
+          hash: "$2y$12$.aJaHHKFcCisW32VNlahOu5b8XKwJtrJdOoG8d6geZC6c0/qYBsCW"
+          reserved: false
+          backend_roles:
+          - "logstash"
+          description: "Demo logstash user"
+
+        readall:
+          hash: "$2y$12$5u49jLMzpq5OLTgYxVisrufZe3k68uqfipbDzgvIcnfdtkm3qfY.u"
+          reserved: false
+          backend_roles:
+          - "readall"
+          description: "Demo readall user"
+
+        snapshotrestore:
+          hash: "$2y$12$yU3NaTvOWoz2TRWVASLOfe/h0qUi/OYAExn4xMAzzgByMK0Cc2s4u"
+          reserved: false
+          backend_roles:
+          - "snapshotrestore"
+          description: "Demo snapshotrestore user"
+      allowlist.yml: |
+        _meta:
+          type: "allowlist"
+          config_version: 2
+
+        # Description:
+        # enabled - feature flag.
+        # if enabled is false, all endpoints are accessible.
+        # if enabled is true, all users except the SuperAdmin can only submit the allowed requests to the specified endpoints.
+        # SuperAdmin can access all APIs.
+        # SuperAdmin is defined by the SuperAdmin certificate, which is configured with the opensearch.yml setting plugins.security.authcz.admin_dn:
+        # Refer to the example setting in opensearch.yml to learn more about configuring SuperAdmin.
+        #
+        # requests - map of allow listed endpoints and HTTP requests
+
+        #this name must be config
+        config:
+          enabled: true
+          requests:
+            /_cluster/settings:
+              - GET
+              - PUT
+            /_cat/nodes:
+              - GET
+            /sample-index1/_doc/1:
+              - GET
+            /sample-index2/_doc/1:
+              - GET
+      roles.yml: |
+        complex-role:
+          reserved: false
+          hidden: false
+          cluster_permissions:
+          - "read"
+          - "cluster:monitor/nodes/stats"
+          - "cluster:monitor/task/get"
+          index_permissions:
+          - index_patterns:
+            - "opensearch_dashboards_sample_data_*"
+            dls: "{\"match\": {\"FlightDelay\": true}}"
+            fls:
+            - "~FlightNum"
+            masked_fields:
+            - "Carrier"
+            allowed_actions:
+            - "read"
+          tenant_permissions:
+          - tenant_patterns:
+            - "analyst_*"
+            allowed_actions:
+            - "kibana_all_write"
+          static: false
+        _meta:
+          type: "roles"
+          config_version: 2
+      roles_mapping.yml: |
+        manage_snapshots:
+          reserved: true
+          hidden: false
+          backend_roles:
+          - "snapshotrestore"
+          hosts: []
+          users: []
+          and_backend_roles: []
+        logstash:
+          reserved: false
+          hidden: false
+          backend_roles:
+          - "logstash"
+          hosts: []
+          users: []
+          and_backend_roles: []
+        own_index:
+          reserved: false
+          hidden: false
+          backend_roles: []
+          hosts: []
+          users:
+          - "*"
+          and_backend_roles: []
+          description: "Allow full access to an index named like the username"
+        kibana_user:
+          reserved: false
+          hidden: false
+          backend_roles:
+          - "kibanauser"
+          hosts: []
+          users: []
+          and_backend_roles: []
+          description: "Maps kibanauser to kibana_user"
+        complex-role:
+          reserved: false
+          hidden: false
+          backend_roles:
+          - "ldap-analyst"
+          hosts: []
+          users:
+          - "new-user"
+          and_backend_roles: []
+        _meta:
+          type: "rolesmapping"
+          config_version: 2
+        all_access:
+          reserved: true
+          hidden: false
+          backend_roles:
+          - "admin"
+          hosts: []
+          users: []
+          and_backend_roles: []
+          description: "Maps admin to all_access"
+        readall:
+          reserved: true
+          hidden: false
+          backend_roles:
+          - "readall"
+          hosts: []
+          users: []
+          and_backend_roles: []
+        kibana_server:
+          reserved: true
+          hidden: false
+          backend_roles: []
+          hosts: []
+          users:
+          - "kibanaserver"
+          and_backend_roles: []
+      action_groups.yml: |
+        my-action-group:
+          reserved: false
+          hidden: false
+          allowed_actions:
+          - "indices:data/write/index*"
+          - "indices:data/write/update*"
+          - "indices:admin/mapping/put"
+          - "indices:data/write/bulk*"
+          - "read"
+          - "write"
+          static: false
+        _meta:
+          type: "actiongroups"
+          config_version: 2
+      tenants.yml: |
+        _meta:
+          type: "tenants"
+          config_version: 2
+        admin_tenant:
+          reserved: false
+          description: "Demo tenant for admin user"
+      nodes_dn.yml: |
+        _meta:
+          type: "nodesdn"
+          config_version: 2
+
+        # Define nodesdn mapping name and corresponding values
+        # cluster1:
+        #   nodes_dn:
+        #       - CN=*.example.com
 
       # log4j2.properties:
 

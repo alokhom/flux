@@ -116,31 +116,37 @@ spec:
       runAsNonRoot: true
       runAsUser: 1000
 
-    config: {}
+    config:
       # Default OpenSearch Dashboards configuration from docker image of Dashboards
 
-      # opensearch_dashboards.yml: |
-      #   server:
-      #     name: dashboards
-      #     host: "{{ .Values.serverHost }}"
-
-      #  opensearch_dashboards.yml:
-      #   server:
-      #     name: dashboards
-      #     host: "{{ .Values.serverHost }}"
-
-
+      opensearch_dashboards.yml: |
+        server:
+          name: dashboards
+          host: "{{ .Values.serverHost }}"
+          port: 5601
       # Dashboards TLS Config (Ensure the cert files are present before enabling SSL
-          # ssl:
-          #   enabled: true
-          #   key: /usr/share/opensearch-dashboards/certs/dashboards-key.pem
-          #   certificate: /usr/share/opensearch-dashboards/certs/dashboards-crt.pem
+          ssl:
+            enabled: false
+            # key: /usr/share/opensearch-dashboards/certs/dashboards-key.pem
+            # certificate: /usr/share/opensearch-dashboards/certs/dashboards-crt.pem
 
         # determines how dashboards will verify certificates (needs to be none for default opensearch certificates to work)
-        # opensearch:
-        #   ssl:
+        opensearch:
+          hosts: "http://opensearch-cluster-master:9200"
+          requestHeadersAllowlist: ["securitytenant","Authorization"]
+          verificationMode: none
+          # ssl:
         #     certificateAuthorities: /usr/share/opensearch-dashboards/certs/dashboards-root-ca.pem
         #     if utilizing custom CA certs for connection to opensearch, provide the CA here
+        opensearch_security:
+          multitenancy:
+            enabled: false 
+            tenants:
+              preferred: ["Private", "Global"]
+          readonly_mode:
+            roles: ["kibana_read_only"]
+          cookie:
+            secure: false
 
     opensearchDashboardsYml:
       defaultMode:
