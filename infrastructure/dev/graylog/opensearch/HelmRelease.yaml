@@ -51,16 +51,14 @@ spec:
       # Values must be YAML literal style scalar / YAML multiline string.
       # <filename>: |
       #   <formatted-value(s)>
-      # log4j2.properties: |
-      #   status = error
-      #
-      #   appender.console.type = Console
-      #   appender.console.name = console
-      #   appender.console.layout.type = PatternLayout
-      #   appender.console.layout.pattern = [%d{ISO8601}][%-5p][%-25c{1.}] [%node_name]%marker %m%n
-      #
-      #   rootLogger.level = info
-      #   rootLogger.appenderRef.console.ref = console
+      log4j2.properties: |
+        status = error
+        appender.console.type = Console
+        appender.console.name = console
+        appender.console.layout.type = PatternLayout
+        appender.console.layout.pattern = [%d{ISO8601}][%-5p][%-25c{1.}] [%node_name]%marker %m%n
+        rootLogger.level = info
+        rootLogger.appenderRef.console.ref = console
       opensearch.yml: |
         cluster.name: opensearch-cluster
 
@@ -119,6 +117,8 @@ spec:
     # syntax here
     extraEnvs:
       - name: DISABLE_INSTALL_DEMO_CONFIG
+        value: "true"
+      - name: DISABLE_SECURITY_PLUGIN
         value: "true"
     #  - name: MY_ENVIRONMENT_VAR
     #    value: the_value_goes_here
@@ -398,7 +398,7 @@ spec:
     # Enabling this will publically expose your OpenSearch instance.
     # Only enable this if you have security enabled on your cluster
     ingress:
-      enabled: false
+      enabled: true
       # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
       # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
       # ingressClassName: nginx

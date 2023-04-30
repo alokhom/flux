@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
+  - dboard-HelmRelease.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
