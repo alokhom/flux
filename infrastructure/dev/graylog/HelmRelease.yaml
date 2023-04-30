@@ -404,7 +404,7 @@ spec:
       ## Graylog root password
       ## Defaults to a random 16-character alphanumeric string if not set
       ##
-      rootPassword: "admin123"
+      # rootPassword: "admin123"
 
       ## Graylog root email
       ##
