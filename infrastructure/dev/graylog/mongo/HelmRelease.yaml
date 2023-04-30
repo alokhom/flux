@@ -120,9 +120,11 @@ spec:
       customConfig: |
 
     ## Initializes a user database with name from dbName (default connected to test database if no dbName is specified)
-    initUserDatabase:
+    userDatabase:
       ## Database name for init
-      dbName: "graylog"
+      name: "graylog"
+      user: "mongo"
+      password: "mongo123"
       ## JavaScript for initialization of new database
       script: |
 
