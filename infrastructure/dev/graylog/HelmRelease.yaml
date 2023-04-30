@@ -288,7 +288,7 @@ spec:
 
       ## External URL to access Graylog at e.g. https://graylog.mycompany.com
       ##
-      externalUri: ""
+      externalUri: "http://graylog.systemtracker.no-ip.org"
 
       ingress:
         ## If true, Graylog server Ingress will be created
@@ -404,7 +404,7 @@ spec:
       ## Graylog root password
       ## Defaults to a random 16-character alphanumeric string if not set
       ##
-      # rootPassword: ""
+      rootPassword: "admin123"
 
       ## Graylog root email
       ##
@@ -583,7 +583,7 @@ spec:
         processbufferProcessors: 5
 
     opensearch:
-      enabled: true
+      enabled: false
       extraEnvs:
         - name: plugins.security.ssl.http.enabled
           value: "false"
