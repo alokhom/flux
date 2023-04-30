@@ -7,7 +7,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: graylog
+      chart: mongodb
       version: "0.5.13"
       sourceRef:
         kind: HelmRepository
