@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ./mongo
   - ./opensearch
-  #- HelmRelease.yaml
+  - HelmRelease.yaml
   - HelmRepository.yaml
   - namespace.yaml
 
