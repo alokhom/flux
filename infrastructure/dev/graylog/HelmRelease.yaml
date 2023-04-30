@@ -416,7 +416,7 @@ spec:
 
       ## Grayog existing root secret
       ##
-      existingRootSecret: "graylog-secret"
+      existingRootSecret: "gralog/graylog-secret"
 
       opensearch:
         ## Major version of the Elasticsearch version used.
