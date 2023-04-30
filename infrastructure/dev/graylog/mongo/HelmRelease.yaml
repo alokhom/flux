@@ -119,7 +119,7 @@ spec:
     ## Initializes a user database with name from dbName (default connected to test database if no dbName is specified)
     initUserDatabase:
       ## Database name for init
-      dbName: {}
+      dbName: graylog
       ## JavaScript for initialization of new database
       script: |
 
