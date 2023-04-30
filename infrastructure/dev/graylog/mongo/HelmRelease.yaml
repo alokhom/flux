@@ -134,4 +134,4 @@ spec:
       requestedSize: {}
       accessModes:
         - ReadWriteOnce
-      className: {}
+      className: "local-path"
