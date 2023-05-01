@@ -179,18 +179,18 @@ spec:
           enabled: false
           host: http://your.proxy.host:8080
 
-        locations:
-        - name: graylog-plugin-slack-notification-4.1.1.jar
-          url: https://github.com/KongZ/graylog-plugin-slack-notification/releases/download/v4.1.1/graylog-plugin-slack-notification-4.1.1.jar
-        - name: graylog-plugin-function-check-diff-1.0.1.jar
-          url: https://github.com/KongZ/graylog-plugin-function-check-diff/releases/download/v1.0.1/graylog-plugin-function-check-diff-1.0.1.jar
-        - name: graylog-plugin-google-cloud-pubsub-1.0.4.jar
-          url: https://github.com/KongZ/graylog-plugin-google-cloud-pubsub/releases/download/v1.0.4/graylog-plugin-google-cloud-pubsub-1.0.4.jar
-        - name: graylog-plugin-auth-sso-3.3.0.jar
-          url: https://github.com/Graylog2/graylog-plugin-auth-sso/releases/download/3.3.0/graylog-plugin-auth-sso-3.3.0.jar
-        - name: graylog-plugin-collector-2.4.0-beta.2.jar
-          url: https://github.com/Graylog2/graylog-plugin-collector/releases/download/2.4.0-beta.2/graylog-plugin-collector-2.4.0-beta.2.jar
-          
+        locations: []
+        #- name: graylog-plugin-slack-notification-4.1.1.jar
+        #  url: https://github.com/KongZ/graylog-plugin-slack-notification/releases/download/v4.1.1/graylog-plugin-slack-notification-4.1.1.jar
+        #- name: graylog-plugin-function-check-diff-1.0.1.jar
+        #  url: https://github.com/KongZ/graylog-plugin-function-check-diff/releases/download/v1.0.1/graylog-plugin-function-check-diff-1.0.1.jar
+        #- name: graylog-plugin-google-cloud-pubsub-1.0.4.jar
+        #  url: https://github.com/KongZ/graylog-plugin-google-cloud-pubsub/releases/download/v1.0.4/graylog-plugin-google-cloud-pubsub-1.0.4.jar
+        #- name: graylog-plugin-auth-sso-3.3.0.jar
+        #  url: https://github.com/Graylog2/graylog-plugin-auth-sso/releases/download/3.3.0/graylog-plugin-auth-sso-3.3.0.jar
+        #- name: graylog-plugin-collector-2.4.0-beta.2.jar
+        #  url: https://github.com/Graylog2/graylog-plugin-collector/releases/download/2.4.0-beta.2/graylog-plugin-collector-2.4.0-beta.2.jar
+
 
       ## Sidecar containers
       ##

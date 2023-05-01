@@ -15,7 +15,7 @@ spec:
         namespace: graylog
       interval: 5m
   values:
-    clusterName: "opensearch-cluster"
+    clusterName: "graylog"
     nodeGroup: "master"
 
     # If discovery.type in the opensearch configuration is set to "single-node",
@@ -25,7 +25,7 @@ spec:
 
     # The service that non master groups will try to connect to when joining the cluster
     # This should be set to clusterName + "-" + nodeGroup for your master group
-    masterService: "opensearch-cluster-master"
+    masterService: "graylog-master"
 
     # OpenSearch roles that will be applied to this nodeGroup
     # These will be set as environment variable "node.roles". E.g. node.roles=master,ingest,data,remote_cluster_client
@@ -60,7 +60,7 @@ spec:
         rootLogger.level = info
         rootLogger.appenderRef.console.ref = console
       opensearch.yml: |
-        cluster.name: opensearch-cluster
+        cluster.name: graylog
 
         # Bind to all interfaces because we don't know what IP address Docker will assign to us.
         network.host: 0.0.0.0
@@ -69,6 +69,7 @@ spec:
         # Implicitly done if ".singleNode" is set to "true".
         # discovery.type: single-node
         bootstrap.memory_lock: false
+        action.auto_create_index: false
         ############## OpenSearch Security configuration ###############
 
         ###########################################################
