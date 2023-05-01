@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: graylog
+  name: graylog-main
   namespace: graylog
 spec:
   interval: 30m
