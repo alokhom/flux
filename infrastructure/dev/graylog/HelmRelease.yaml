@@ -272,7 +272,7 @@ spec:
         udp:
           service:
             name: udp-12222-syslog
-            type: NodePort
+            type: ClusterIP
           ports:
             - name: syslog
               port: 12222
