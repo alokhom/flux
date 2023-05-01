@@ -264,7 +264,7 @@ spec:
         tcp:
           service:
             name: tcp-12222-gelf
-            type: NodePort
+            type: ClusterIP
             # loadBalancerIP:
           ports:
             - name: gelf
