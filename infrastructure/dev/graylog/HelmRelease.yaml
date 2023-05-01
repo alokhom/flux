@@ -188,6 +188,9 @@ spec:
           url: https://github.com/KongZ/graylog-plugin-google-cloud-pubsub/releases/download/v1.0.4/graylog-plugin-google-cloud-pubsub-1.0.4.jar
         - name: graylog-plugin-auth-sso-3.3.0.jar
           url: https://github.com/Graylog2/graylog-plugin-auth-sso/releases/download/3.3.0/graylog-plugin-auth-sso-3.3.0.jar
+        - name: graylog-plugin-collector-2.4.0-beta.2.jar
+          url: https://github.com/Graylog2/graylog-plugin-collector/releases/download/2.4.0-beta.2/graylog-plugin-collector-2.4.0-beta.2.jar
+          
 
       ## Sidecar containers
       ##
