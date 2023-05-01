@@ -753,3 +753,7 @@ Click [here](http://slack.k8s.io) to sign up to the Kubernetes Slack org.
 ##############
 
 using sealed secrets
+
+```
+kubectl -n cert-manager create secret tls ssl-ingress-secret-ca --cert /tmp/CAcert.crt --key /tmp/CAkey.crt --dry-run=client -o yaml  | kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets -o yaml
+```
