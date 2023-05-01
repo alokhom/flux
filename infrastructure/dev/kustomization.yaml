@@ -9,4 +9,4 @@ resources:
   #- splunk-ent
   #- splunk-collector
   - ./graylog
-  - ./keycloak
+  #- ./keycloak
