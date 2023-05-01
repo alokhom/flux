@@ -478,10 +478,10 @@ spec:
             nodePorts:
               http: 32080
               https: 32443
-              tcp:
-                12222: 32060
-              udp:
-                12222: 30233
+              #tcp:
+              #  12222: 32060
+              #udp:
+              #  12222: 30233
             #nodePorts:
             #    http: ""
             #    https: ""
@@ -890,14 +890,14 @@ spec:
     # -- TCP service key-value pairs
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
-    tcp: {}
-    #  8080: "default/example-tcp-svc:9000"
+    tcp:
+      12222: "graylog/tcp-12222:12222"
 
     # -- UDP service key-value pairs
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
-    udp: {}
-    #  53: "kube-system/kube-dns:53"
+    udp:
+      12222: "graylog/udp-12222:12222"
 
     # -- Prefix for TCP and UDP ports names in ingress controller service
     ## Some cloud providers, like Yandex Cloud may have a requirements for a port name regex to support cloud load balancer integration
