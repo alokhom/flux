@@ -8,4 +8,5 @@ resources:
   #- ./spark
   #- splunk-ent
   #- splunk-collector
-  - graylog
+  - ./graylog
+  - ./keycloak
