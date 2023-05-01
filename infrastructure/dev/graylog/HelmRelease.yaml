@@ -263,7 +263,7 @@ spec:
       input:
         tcp:
           service:
-            name: tcp-12222
+            name: tcp-12222-gelf
             type: NodePort
             # loadBalancerIP:
           ports:
@@ -271,7 +271,7 @@ spec:
               port: 12222
         udp:
           service:
-            name: udp-12222
+            name: udp-12222-syslog
             type: NodePort
           ports:
             - name: syslog
