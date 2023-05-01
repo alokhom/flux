@@ -308,7 +308,7 @@ spec:
         #  traffic-type: public
 
         ## Specify the Ingress class name
-        ingressClassName: "nginx"
+        #ingressClassName: "nginx"
 
         ## Graylog server Ingress hostnames with optional path
         ## Must be provided if Ingress is enabled
