@@ -371,7 +371,7 @@ spec:
       ## Set Graylog Java heapsize. If this value empty, chart will allocate heapsize using `-XX:+UseCGroupMemoryLimitForHeap`
       ## ref: https://blogs.oracle.com/java-platform-group/java-se-support-for-docker-cpu-and-memory-limits
       ##
-      heapSize: "1g"
+      heapSize: "2g"
 
       ## RollingUpdate update strategy
       ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
