@@ -263,12 +263,14 @@ spec:
       input:
         tcp:
           service:
-            name: tcp-12222-gelf
+            name: tcp-gelf
             type: ClusterIP
             # loadBalancerIP:
           ports:
             - name: gelf
               port: 12222
+            - name: gelf-5556
+              port: 5556
         udp:
           service:
             name: udp-12222-syslog
