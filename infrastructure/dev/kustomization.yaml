@@ -10,3 +10,4 @@ resources:
   #- splunk-collector
   #- ./graylog
   #- ./keycloak
+  - storage-class
