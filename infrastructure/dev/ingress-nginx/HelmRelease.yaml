@@ -891,8 +891,8 @@ spec:
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
     tcp:
-      "12222": "graylog/tcp-12222-gelf:12222"
-      "5556": "graylog/tcp-5556-gelf:5556"
+      "12222": "graylog/tcp-gelf:12222"
+      "5556": "graylog/tcp-gelf:5556"
     # -- UDP service key-value pairs
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
