@@ -1080,10 +1080,10 @@ spec:
       path: /
       hosts:
         - opensearch.systemtracker.no-ip.org
-      tls:
-        - secretName: opensearch-tls
-          hosts:
-            - opensearch.systemtracker.no-ip.org
+      tls: []
+        # - secretName: opensearch-tls
+        #   hosts:
+        #     - opensearch.systemtracker.no-ip.org
 
     nameOverride: ""
     fullnameOverride: ""
