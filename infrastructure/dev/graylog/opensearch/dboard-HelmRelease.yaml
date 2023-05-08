@@ -201,10 +201,10 @@ spec:
               backend:
                 serviceName: ""
                 servicePort: ""
-      tls:
-        - secretName: opensearch-dashboard-tls
-          hosts:
-            - opensearch-dashboard.systemtracker.no-ip.org
+      tls: []
+        # - secretName: opensearch-dashboard-tls
+        #   hosts:
+        #     - opensearch-dashboard.systemtracker.no-ip.org
 
     resources:
       requests:
