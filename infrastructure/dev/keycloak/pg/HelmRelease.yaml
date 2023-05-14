@@ -71,7 +71,7 @@ spec:
     ## Default node type for the image
     ## use arm64v8 for the arm64v8/postgres image
     nodeSelector:
-      kubernetes.io/arch: arm64v8
+      kubernetes.io/arch: arm64
 
     tolerations: []
 
