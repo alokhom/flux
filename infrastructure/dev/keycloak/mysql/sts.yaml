@@ -50,15 +50,21 @@ spec:
                 name: mysql-creds
                 key: ROOT_PASSWORD
         volumeMounts:
-          - name: mysql-storage
-            mountPath: "/var/lib/mysql"
-            subPath: "mysql" 
-          - name: mysql
-            mountPath: /etc/mysql/conf.d
+        - name: mysql-storage
+          mountPath: "/var/lib/mysql"
+          subPath: "mysql" 
+        - name: mysql
+          mountPath: /etc/mysql/conf.d
     volumes:
-      - name: mysql-storage
-        persistentVolumeClaim:
-          claimName: mysql-storage
-      - name: mysql
-        configMap:
-          name: mysql
+    - name: mysql
+      configMap:
+        name: mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-storage
+    spec:
+      storageClassName: "local-path"
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi

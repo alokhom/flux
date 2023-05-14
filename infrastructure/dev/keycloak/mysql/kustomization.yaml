@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   #- namespace.yaml
   - configMap.yaml
-  - pvc.yaml
   - service.yaml
   - sts.yaml
   - sealedsecrets.yaml
