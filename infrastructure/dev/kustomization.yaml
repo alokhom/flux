@@ -9,6 +9,6 @@ resources:
   #- splunk-ent
   #- splunk-collector
   - ./graylog
-  #- ./keycloak
   #- storage-class
   - ./crunchy
+  - ./keycloak
