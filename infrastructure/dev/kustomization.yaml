@@ -11,3 +11,4 @@ resources:
   - ./graylog
   #- ./keycloak
   #- storage-class
+  - ./crunchy
