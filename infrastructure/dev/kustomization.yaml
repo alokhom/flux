@@ -10,5 +10,5 @@ resources:
   #- splunk-collector
   - ./graylog
   #- storage-class
-  - ./crunchy
+  - ./zalando
   - ./keycloak
