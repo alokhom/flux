@@ -5,7 +5,6 @@ resources:
   - sealedsecrets.yaml
   - HelmRelease.yaml
   - HelmRepository.yaml
-  - sealedsecrets.yaml
   #- Certificate.yaml
 patches:
   # Hacky way to disable the default secret
