@@ -19,7 +19,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - image: quay.io/keycloak/keycloak:21.1.1
+      - image: quay.io/keycloak/keycloak:20.0.5
         args: ["start-dev"]
         name: keycloak
         resources:
