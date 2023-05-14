@@ -15,7 +15,6 @@ spec:
         namespace: crunchy
       interval: 5m
   values:
-    ---
     # controllerImages are used to run the PostgresCluster and PGUpgrade controllers.
     controllerImages:
       cluster: registry.developers.crunchydata.com/crunchydata/postgres-operator:ubi8-5.3.1-0
