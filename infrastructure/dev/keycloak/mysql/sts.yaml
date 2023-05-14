@@ -53,12 +53,13 @@ spec:
         - name: mysql-storage
           mountPath: "/var/lib/mysql"
           subPath: "mysql" 
-        - name: mysql
+        - name: mysql-conf
           mountPath: /etc/mysql/conf.d
     volumes:
-    - name: mysql
+    - name: mysql-conf
       configMap:
         name: mysql
+        namespace: keycloak
   volumeClaimTemplates:
   - metadata:
       name: mysql-storage
