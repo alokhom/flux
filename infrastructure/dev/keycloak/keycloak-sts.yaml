@@ -24,11 +24,11 @@ spec:
         name: keycloak
         resources:
           requests:
-            cpu: "1000m"
-            memory: "800Mi"
+            cpu: "1500m"
+            memory: "900Mi"
           limits:
-            cpu: "1200m"
-            memory: "1200Mi"
+            cpu: "1700m"
+            memory: "1500Mi"
         env:
         - name: KEYCLOAK_ADMIN
           value: "admin"
