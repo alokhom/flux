@@ -22,6 +22,13 @@ spec:
       - image: quay.io/keycloak/keycloak:20.0
         args: ["start", "--cache-stack=kubernetes"]
         name: keycloak
+        resources:
+          requests:
+            cpu: "800m"
+            memory: "200Mi"
+          limits:
+            cpu: "900m"
+            memory: "400Mi"
         env:
         - name: KEYCLOAK_ADMIN
           value: "admin"
@@ -61,6 +68,6 @@ spec:
             scheme: HTTPS
             path: /health/ready
             port: 8443
-          initialDelaySeconds: 60
-          periodSeconds: 1
+          initialDelaySeconds: 120
+          periodSeconds: 5
 
