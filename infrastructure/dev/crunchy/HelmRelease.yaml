@@ -7,7 +7,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: install
+      chart: pgo
       version: "5.3.1"
       sourceRef:
         kind: HelmRepository

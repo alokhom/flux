@@ -5,4 +5,4 @@ metadata:
   namespace: crunchy
 spec:
   interval: 5m
-  url: https://github.com/CrunchyData/postgres-operator-examples/
+  url: https://github.com/CrunchyData/postgres-operator-examples/helm/install
