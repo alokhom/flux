@@ -97,6 +97,7 @@ spec:
 
     ## Additional environment variables
     env: []
+      
 
     ## Arguments for the container entrypoint process
     arguments:
@@ -104,7 +105,7 @@ spec:
     ## Database configuration
     settings:
       ## The superuser password (default: a 10 char. alpahnumerical random password will be generated)
-      superuserPassword:
+      superuserPassword: "postgresAdmin123"
 
       ## Postgres database authentication method (default: md5)
       authMethod: md5
