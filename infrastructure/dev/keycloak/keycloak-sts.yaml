@@ -39,7 +39,9 @@ spec:
         - name: KC_HEALTH_ENABLED
           value: "true"
         - name: KC_HOSTNAME
-          value: localhost
+          value: keycloak.systemtracker.no-ip.org
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
         - name: KC_PROXY
           value: "edge"
         - name: KC_DB

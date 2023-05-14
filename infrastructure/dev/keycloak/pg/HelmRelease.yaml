@@ -23,7 +23,7 @@ spec:
       repository: arm64v8/postgres
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "13.11"
+      tag: "12.15"
 
     ## Pull secrets and name override options
     imagePullSecrets: []
