@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - image: quay.io/keycloak/keycloak:19.0
-        args: ["start", "--cache-stack=kubernetes"]
+        args: ["start", "--optimized"]
         name: keycloak
         resources:
           requests:
