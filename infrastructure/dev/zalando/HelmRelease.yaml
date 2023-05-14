@@ -16,7 +16,7 @@ spec:
       interval: 5m
   values:
     image:
-      registry: kiddouk
+      registry: docker.io
       repository: kiddouk/postgres-operator-arm
       tag: latest
       pullPolicy: "IfNotPresent"
