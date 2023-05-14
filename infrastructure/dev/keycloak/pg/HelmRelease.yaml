@@ -133,10 +133,10 @@ spec:
       # persistentVolumeClaimName: <own-pvc-name>
 
       ## Alternative set requestedSize to define a size for a dynmaically created PVC
-      # requestedSize: <volume-size>
+      requestedSize: 10Gi
 
       ## the storage class name
-      # className:
+      className: local-path
 
       ## Default access mode (ReadWriteOnce)
       accessModes:
