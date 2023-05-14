@@ -21,9 +21,10 @@ spec:
         version: "5.7"
     spec:
       terminationGracePeriodSeconds: 10
+      restartPolicy: Always
       containers:
       - name: mysql
-        image: mysql:5.7
+        image: "mysql:5.7"
         livenessProbe:
           tcpSocket:
             port: 3306
@@ -32,6 +33,9 @@ spec:
           successThreshold: 1
           failureThreshold: 2
           timeoutSeconds: 3
+        ports:
+        - containerPort: 3306
+          name: mysql
         resources:
           limits:
             cpu: 900m
@@ -39,22 +43,22 @@ spec:
           requests:
             cpu: 300m
             memory: 400Mi
-        volumeMounts:
-          - name: mysql-storage
-            mountPath: "/var/lib/mysql"
-            subPath: "mysql" 
-          - name: mysql-conf
-            mountPath: /etc/mysql/conf.d
         env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: mysql-creds
                 key: ROOT_PASSWORD
+        volumeMounts:
+          - name: mysql-storage
+            mountPath: "/var/lib/mysql"
+            subPath: "mysql" 
+          - name: mysql
+            mountPath: /etc/mysql/conf.d
     volumes:
       - name: mysql-storage
         persistentVolumeClaim:
           claimName: mysql-storage
-      - name: mysql-conf
+      - name: mysql
         configMap:
           name: mysql
