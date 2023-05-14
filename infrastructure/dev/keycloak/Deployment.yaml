@@ -16,33 +16,47 @@ spec:
     spec:
       containers:
       - image: quay.io/keycloak/keycloak:latest
+        args: ["start", "--cache-stack=kubernetes"]
         name: keycloak
         env:
-        - name: DB_VENDOR
-          value: "postgres"
-        - name: DB_ADDR
-          value: "pg-postgres"
-        - name: DB_PORT
-          value: "5432"
-        - name: DB_DATABASE
-          value: "keycloak"
-        - name: DB_USER
-          valueFrom: { secretKeyRef: { name: pg-postgres, key: USERDB_USER } }
-        - name: DB_PASSWORD
-          valueFrom: { secretKeyRef: { name: pg-postgres, key: USERDB_PASSWORD } }
-        - name: KEYCLOAK_USER
+        - name: KEYCLOAK_ADMIN
           value: "admin"
-        - name: KEYCLOAK_PASSWORD
+        - name: KEYCLOAK_ADMIN_PASSWORD
           value: "admin"
-        - name: PROXY_ADDRESS_FORWARDING
+        - name: KC_METRICS_ENABLED
           value: "true"
+        - name: KC_HEALTH_ENABLED
+          value: "true"
+        - name: KC_HOSTNAME
+          value: localhost
+        - name: KC_PROXY
+          value: "edge"
+        - name: KC_DB
+          value: "postgres"
+        - name: KC_DB_URL
+          value: "jdbc:postgresql://pg-postgres/keycloak"
+        - name: KC_DB_URL_DATABASE
+          value: "keycloak"
+        - name: KC_DB_URL_PORT
+          value: "5432"
+        - name: KC_DB_USERNAME
+          valueFrom: { secretKeyRef: { name: pg-postgres, key: USERDB_USER } }
+        - name: KC_DB_PASSWORD
+          valueFrom: { secretKeyRef: { name: pg-postgres, key: USERDB_PASSWORD } }
+        - name: jgroups.dns.query
+          value: keycloak
         ports:
+        - name: jgroups
+          containerPort: 7600
         - name: http
           containerPort: 8080
         - name: https
           containerPort: 8443
         readinessProbe:
           httpGet:
-            path: /auth/realms/master
-            port: 8080
+            scheme: HTTPS
+            path: /health/ready
+            port: 8443
+          initialDelaySeconds: 60
+          periodSeconds: 1
       restartPolicy: Always
