@@ -6,3 +6,4 @@ resources:
   - namespace.yaml
   - keycloak-sts.yaml
   - keycloak-Service.yaml
+  - ingress.yaml
