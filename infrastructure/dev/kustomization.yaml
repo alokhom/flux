@@ -10,5 +10,4 @@ resources:
   #- splunk-collector
   - ./graylog
   #- storage-class
-  - ./zalando
-  #- ./keycloak
+  - ./keycloak
