@@ -11,4 +11,4 @@ resources:
   - ./graylog
   #- storage-class
   - ./zalando
-  - ./keycloak
+  #- ./keycloak
