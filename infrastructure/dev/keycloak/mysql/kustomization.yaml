@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   #- namespace.yaml
   - sealedsecrets.yaml
-  - HelmRelease.yaml
-  - HelmRepository.yaml
+  #- HelmRelease.yaml
+  #- HelmRepository.yaml
   #- cluster.yaml
   #- Certificate.yaml
