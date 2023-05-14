@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - image: quay.io/keycloak/keycloak:latest
-        args: ["start", "--optimized"]
+        args: ["start", "--cache-stack=kubernetes"]
         name: keycloak
         env:
         - name: KEYCLOAK_ADMIN
