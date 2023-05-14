@@ -10,7 +10,6 @@ patches:
   # Hacky way to disable the default secret
   - target:
       kind: Secret
-      name: pg-postgres
     patch: |
       $patch: delete
       apiVersion: v1
