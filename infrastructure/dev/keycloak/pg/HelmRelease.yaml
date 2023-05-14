@@ -20,10 +20,10 @@ spec:
     ## PostgreSQL docker image
     ## use arm64v8/postgres for the same image on ARM64v8
     image:
-      repository: postgres
+      repository: arm64v8/postgres
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
+      tag: "14.8"
 
     ## Pull secrets and name override options
     imagePullSecrets: []
