@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: keycloak
+  labels:
+    app: mysql
+    version: "5.7"
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+      version: "5.7"
+  serviceName: "mysql-service"
+  replicas: 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: mysql
+        version: "5.7"
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 2
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 900m
+            memory: 1200Mi
+          requests:
+            cpu: 300m
+            memory: 400Mi
+        volumeMounts:
+          - name: mysql-storage
+            mountPath: "/var/lib/mysql"
+            subPath: "mysql" 
+          - name: mysql-conf
+            mountPath: /etc/mysql/conf.d
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-creds
+                key: ROOT_PASSWORD
+    volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mysql-storage
