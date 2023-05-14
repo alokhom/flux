@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - ./pg
   - namespace.yaml
-  #- Deployment.yaml
+  - Deployment.yaml
