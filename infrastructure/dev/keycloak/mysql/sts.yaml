@@ -24,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: mysql
-        image: "mysql:5.7"
+        image: "mysql"
         livenessProbe:
           tcpSocket:
             port: 3306
