@@ -21,11 +21,11 @@ spec:
         - name: DB_VENDOR
           value: "postgres"
         - name: DB_ADDR
-          valueFrom: "pg-postgres"
+          value: "pg-postgres"
         - name: DB_PORT
-          valueFrom: "5432"
+          value: "5432"
         - name: DB_DATABASE
-          valueFrom: "keycloak"
+          value: "keycloak"
         - name: DB_USER
           valueFrom: { secretKeyRef: { name: pg-postgres, key: USERDB_USER } }
         - name: DB_PASSWORD
