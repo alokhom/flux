@@ -19,15 +19,15 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - image: quay.io/keycloak/keycloak:20.0
-        args: ["start", "--optimized"]
+      - image: quay.io/keycloak/keycloak:21.1.1
+        args: ["start-dev"]
         name: keycloak
         resources:
           requests:
-            cpu: "1500m"
+            cpu: "1000m"
             memory: "800Mi"
           limits:
-            cpu: "1800m"
+            cpu: "1200m"
             memory: "1200Mi"
         env:
         - name: KEYCLOAK_ADMIN
