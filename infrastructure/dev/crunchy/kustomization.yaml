@@ -1,7 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - HelmRelease.yaml
-  - HelmRepository.yaml
+  - CRD.yaml
   - namespace.yaml
   #- Certificate.yaml

@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: crunchydata
-  namespace: crunchy
-spec:
-  interval: 5m
-  url: https://github.com/CrunchyData/postgres-operator-examples/helm/install/
