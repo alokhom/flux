@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - ./pg
   - namespace.yaml
-  - keycloak-Deployment.yaml
+  - keycloak-sts.yaml
   - keycloak-Service.yaml
