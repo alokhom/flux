@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - CRD.yaml
   - namespace.yaml
+  - Operator.yaml
   #- Certificate.yaml
