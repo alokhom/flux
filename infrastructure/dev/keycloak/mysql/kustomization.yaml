@@ -5,5 +5,5 @@ resources:
   - sealedsecrets.yaml
   - HelmRelease.yaml
   - HelmRepository.yaml
-  - cluster.yaml
+  #- cluster.yaml
   #- Certificate.yaml
