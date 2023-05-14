@@ -4,5 +4,5 @@ resources:
   #- ./pg
   - ./mysql
   - namespace.yaml
-  #- keycloak-sts.yaml
-  #- keycloak-Service.yaml
+  - keycloak-sts.yaml
+  - keycloak-Service.yaml
