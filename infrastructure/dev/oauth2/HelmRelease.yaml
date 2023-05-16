@@ -306,7 +306,7 @@ spec:
     # Configure the session storage type, between cookie and redis
     sessionStorage:
       # Can be one of the supported session storage cookie|redis
-      type: redis
+      type: cookie
       redis:
         # Name of the Kubernetes secret containing the redis & redis sentinel password values (see also `sessionStorage.redis.passwordKey`)
         existingSecret: ""
@@ -337,7 +337,7 @@ spec:
     # Enables and configure the automatic deployment of the redis subchart
     redis:
       # provision an instance of the redis sub-chart
-      enabled: true
+      enabled: false
       # Redis specific helm chart settings, please see:
       # https://github.com/bitnami/charts/tree/master/bitnami/redis#parameters
       redisPort: 6379
