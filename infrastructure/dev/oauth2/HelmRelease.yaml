@@ -107,9 +107,9 @@ spec:
       http-address: 0.0.0.0:4180
       https_address: ":443"
       oidc-issuer-url: https://keycloak.systemtracker.no-ip.org/auth/realms/Alok
-      session-store-type: redis # <- Redis setting, can be removed if default cookie storage is used
-      redis-use-cluster: true # <- Redis setting, can be removed if default cookie storage is used
-      redis-cluster-connection-urls: redis://oauth2-proxy-redis-master:6379 # Redis setting, can be removed if default cookie storage is used
+      session-store-type: cookie # <- Redis setting, can be removed if default cookie storage is used
+      redis-use-cluster: false # <- Redis setting, can be removed if default cookie storage is used
+      # redis-cluster-connection-urls: redis://oauth2-proxy-redis-master:6379 # Redis setting, can be removed if default cookie storage is used
 
     extraEnv: []
 
