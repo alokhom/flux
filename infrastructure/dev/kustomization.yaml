@@ -11,3 +11,4 @@ resources:
   - ./graylog
   #- storage-class
   - ./keycloak
+  - ./oauth2-proxy
