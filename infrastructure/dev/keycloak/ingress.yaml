@@ -5,7 +5,7 @@ metadata:
   namespace: keycloak
   annotations:
     cert-manager.io/cluster-issuer: ca-issuer
-    nginx.ingress.kubernetes.io/configuration-snippet: |
+    kubernetes.io/configuration-snippet: |
       proxy_set_header Host $host;
       proxy_set_header X-Forwarded-Proto: https;
 spec:
