@@ -41,7 +41,7 @@ spec:
         - name: KC_HOSTNAME
           value: keycloak.systemtracker.no-ip.org
         - name: KC_HOSTNAME_STRICT
-          value: "false"
+          value: "true"
         - name: KC_HOSTNAME_STRICT_HTTPS
           value: "true"
         - name: KC_PROXY
