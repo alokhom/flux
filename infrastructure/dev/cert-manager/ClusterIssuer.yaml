@@ -7,8 +7,13 @@ spec:
   #ca:
   #  secretName: ssl-ingress-secret-ca
   acme: 
-    email: "alok.hom@gmail.com"
-    http01: {}
-    privateKeySecretRef: 
-      name: letsencrypt-prod
     server: "https://acme-v02.api.letsencrypt.org/directory"
+    email: "alok.hom@gmail.com"
+    privateKeySecretRef: 
+      name: letsencrypt-staging
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+
+    
