@@ -100,8 +100,8 @@ spec:
       provider: keycloak-oidc
       # azure-tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
       pass-access-token: true
-      pass_user_headers: true
-      pass_host_header: true
+      pass-user-headers: true
+      pass-host-header: true
       email-domain: "*"
       upstream: file:///dev/null
       http-address: 0.0.0.0:4180
