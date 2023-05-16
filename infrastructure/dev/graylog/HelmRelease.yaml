@@ -291,8 +291,7 @@ spec:
         certFile: /etc/graylog/server/server.cert
 
       ## External URL to access Graylog at e.g. https://graylog.mycompany.com
-      ##
-      externalUri: "http://graylog.systemtracker.no-ip.org"
+      externalUri: "https://graylog.systemtracker.no-ip.org"
 
       ingress:
         ## If true, Graylog server Ingress will be created
