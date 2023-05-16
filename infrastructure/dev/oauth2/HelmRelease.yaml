@@ -194,6 +194,9 @@ spec:
         kubernetes.io/proxy-buffer-size: "32k"
         kubernetes.io/ssl-redirect: "true"
         kubernetes.io/rewrite-target: /
+        kubernetes.io/configuration-snippet: |
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-Proto: https;
       #   kubernetes.io/tls-acme: "true"
       tls:
         # Secrets must be manually created in the namespace.
