@@ -4,13 +4,14 @@ metadata:
   name: minimal-ingress
   namespace: app
   annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: true
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: ca-issuer
-    nginx.ingress.kubernetes.io/auth-signin: "http://oauth2-proxy.systemtracker.no-ip.org/oauth2/start?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/auth-signin: "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/start?rd=$escaped_request_uri"
     # That's what will be used in REAL LIFE
     # nginx.ingress.kubernetes.io/auth-url: http://oauth2-proxy.localtest.me/oauth2/auth
     # but because of https://github.com/kubernetes/ingress-nginx/issues/3665
-    nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.systemtracker.no-ip.org/oauth2/"
+    nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/"
     nginx.ingress.kubernetes.io/auth-response-headers: "x-auth-request-user, x-auth-request-email, Authorization"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header Authorization $http_authorization;
