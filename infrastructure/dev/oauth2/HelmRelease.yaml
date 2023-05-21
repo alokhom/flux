@@ -110,7 +110,7 @@ spec:
       cookie-secure: true
       email-domain: "*"
       cookie-domain: ".systemtracker.no-ip.org"
-      whitelist-domains: ".systemtracker.no-ip.org"
+      whitelist-domain: ".systemtracker.no-ip.org"
       scope: "openid profile email"
       upstream: static://200
       http-address: 0.0.0.0:4180
