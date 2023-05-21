@@ -31,7 +31,7 @@ spec:
       # OAuth client ID
       clientID: "oauth2-proxy"
       # OAuth client secret
-      clientSecret: "3hJilYEZxIsUrPXyZ87xeoOj82QrT751"
+      clientSecret: "RZmf6yQqsC9BzwXZQEeux43Jlr0bG9Me"
       # Create a new secret with the following command
       # openssl rand -base64 32 | head -c 32 | base64
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
@@ -56,8 +56,7 @@ spec:
       # Default configuration, to be overridden
       configFile: |-
         email_domains = [ "*" ]
-        upstreams = [ "file:///dev/null" ]
-        pass_basic_auth = true
+      # upstreams = [ "file:///dev/null" ]
       # Custom configuration file: oauth2_proxy.cfg
       # configFile: |-
       #   pass_basic_auth = false
@@ -99,16 +98,28 @@ spec:
     extraArgs:
       provider: keycloak-oidc
       # azure-tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
+      pass_basic_auth: true
+      pass-host-header: true
       pass-access-token: true
+      set-xauthrequest: true
       pass-user-headers: true
       pass-host-header: true
+      pass-authorization-header: true
+      set-authorization-header: true
+      cookie-refresh: "1m"
+      cookie-expire: "30m"
+      cookie-secure: true
       email-domain: "*"
+      cookie-domain: ".systemtracker.no-ip.org"
+      whitelist-domains: ".systemtracker.no-ip.org"
+      scope: "openid profile email"
       upstream: file:///dev/null
       http-address: 0.0.0.0:4180
       https-address: ":443"
-      oidc-issuer-url: https://keycloak.systemtracker.no-ip.org/auth/realms/Alok
+      oidc-issuer-url: "https://keycloak.systemtracker.no-ip.org/auth/realms/oauth2-proxy"
+      redirect-url: "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
       session-store-type: cookie # <- Redis setting, can be removed if default cookie storage is used
-      redis-use-cluster: false # <- Redis setting, can be removed if default cookie storage is used
+      # redis-use-cluster: false # <- Redis setting, can be removed if default cookie storage is used
       # redis-cluster-connection-urls: redis://oauth2-proxy-redis-master:6379 # Redis setting, can be removed if default cookie storage is used
 
     extraEnv: []
