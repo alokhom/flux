@@ -113,7 +113,7 @@ spec:
       cookie-domain: ".systemtracker.no-ip.org"
       whitelist-domains: ".systemtracker.no-ip.org"
       scope: "openid profile email"
-      upstream: file:///dev/null
+      upstream: static://200
       http-address: 0.0.0.0:4180
       https-address: ":443"
       oidc-issuer-url: "https://keycloak.systemtracker.no-ip.org/auth/realms/oauth2-proxy"
