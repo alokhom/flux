@@ -98,7 +98,7 @@ spec:
     extraArgs:
       provider: keycloak-oidc
       # azure-tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
-      pass_basic_auth: true
+      pass-basic-auth: true
       pass-access-token: true
       set-xauthrequest: true
       pass-user-headers: true
