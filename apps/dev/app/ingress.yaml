@@ -6,7 +6,7 @@ metadata:
   annotations:
     kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: ca-issuer
-    kubernetes.io/auth-signin: http://oauth2-proxy.localtest.me/oauth2/start
+    kubernetes.io/auth-signin: "http://oauth2-proxy.localtest.me/oauth2/start?rd=$escaped_request_uri"
     # That's what will be used in REAL LIFE
     # nginx.ingress.kubernetes.io/auth-url: http://oauth2-proxy.localtest.me/oauth2/auth
     # but because of https://github.com/kubernetes/ingress-nginx/issues/3665
