@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: oauth2-proxy
+  name: oauth2-proxy-oauth2
   namespace: oauth2-proxy
   annotations:
     cert-manager.io/cluster-issuer: ca-issuer
