@@ -6,7 +6,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: ca-issuer
 spec:
-  ingressClasseName: nginx
+  ingressClassName: nginx
   rules:
   - host: oauth2-proxy.systemtracker.no-ip.org
     http:
