@@ -512,7 +512,7 @@ spec:
         tag: 0.9.0
       env:
         PHPLDAPADMIN_LDAP_CLIENT_TLS_REQCERT: "never"
-        PHPLDAPADMIN_LDAP_HOSTS: openldap
+        # PHPLDAPADMIN_LDAP_HOSTS: openldap
       ingress:
         enabled: true
         annotations: {}
