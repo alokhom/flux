@@ -16,14 +16,8 @@ patches:
     labelSelector: "app.kubernetes.io/name=openldap-stack-ha"
   patch: |-
     - op: replace #action 
-      path: "/spec/template/spec/containers/0/ports/0" #resouirce we want to change
-      value:
-        name: ldap-port
-        containerPort: 389
-        protocol: TCP
+      path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
+      value: 389
     - op: replace #action 
-      path: "/spec/template/spec/containers/0/ports/1" #resouirce we want to change
-      value:
-        name: ssl-ldap-port
-        containerPort: 636
-        protocol: TCP
+      path: "/spec/template/spec/containers/0/ports/1//containerPort" #resouirce we want to change
+      value: 636
