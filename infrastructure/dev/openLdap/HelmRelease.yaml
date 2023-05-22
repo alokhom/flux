@@ -67,8 +67,8 @@ spec:
 
     image:
       # From repository https://hub.docker.com/r/bitnami/openldap/
-      repository: bitnami/openldap
-      tag: 2.6.3
+      repository: osixia/openldap
+      tag: stable-arm64v8
       pullPolicy: Always
       pullSecrets: []
 
