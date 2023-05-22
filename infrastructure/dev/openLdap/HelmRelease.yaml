@@ -108,14 +108,14 @@ spec:
     # Use the env variables from https://hub.docker.com/r/bitnami/openldap/
     # Be careful, do not modify the following values unless you know exactly what your are doing
     env:
-    BITNAMI_DEBUG: "true"
-    LDAP_LOGLEVEL: "256"
-    LDAP_TLS_ENFORCE: "false"
-    LDAPTLS_REQCERT: "never"
-    LDAP_ENABLE_TLS: "yes"
-    LDAP_CONFIG_ADMIN_ENABLED: "yes"
-    LDAP_CONFIG_ADMIN_USERNAME: "admin"
-    LDAP_SKIP_DEFAULT_TREE: "no"
+      BITNAMI_DEBUG: "true"
+      LDAP_LOGLEVEL: "256"
+      LDAP_TLS_ENFORCE: "false"
+      LDAPTLS_REQCERT: "never"
+      LDAP_ENABLE_TLS: "yes"
+      LDAP_CONFIG_ADMIN_ENABLED: "yes"
+      LDAP_CONFIG_ADMIN_USERNAME: "admin"
+      LDAP_SKIP_DEFAULT_TREE: "no"
 
     # Pod Disruption Budget for Stateful Set
     # Disabled by default, to ensure backwards compatibility
@@ -153,19 +153,19 @@ spec:
     customLdifFiles:
       00-root.ldif: |-
         # Root creation
-        dn: dc=systemtracker.no-ip,dc=org
+        dn: dc=systemtracker,dc=no-ip,dc=org
         objectClass: dcObject
         objectClass: organization
         objectclass: top
         o: systemtracker.no-ip, Inc
       01-default-group.ldif: |-
-        dn: cn=myGroup,dc=systemtracker.no-ip,dc=org
+        dn: cn=myGroup,dc=systemtracker,dc=no-ip,dc=org
         cn: myGroup
         gidnumber: 500
         objectclass: posixGroup
         objectclass: top
       02-default-user.ldif: |-
-        dn: cn=Alok Hom,dc=systemtracker.no-ip,dc=org
+        dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
         cn: Alok Hom
         gidnumber: 500
         givenname: Alok
@@ -482,11 +482,11 @@ spec:
         ## Ingress Host
         hosts:
         - "ssl-ldap2.systemtracker.no-ip.org"
-      # ldap:
+      ldap:
         # if you want to restrict search base tree for users instead of complete domain
-        # searchBase: "ou=....,dc=mydomain,dc=com"
+        searchBase: "ou=alokhom,dc=systemtracker,dc=no-ip,dc=org"
         # if you want to use a dedicated bindDN for the search with less permissions instead of cn=admin one
-        # bindDN: "cn=....,dc=mydomain,dc=com"
+        bindDN: "cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org"
         # if you want to use a specific key of the credentials secret instead of the default one (LDAP_ADMIN_PASSWORD)
         # passKey: LDAP_MY_KEY
 
