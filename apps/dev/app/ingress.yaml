@@ -11,7 +11,7 @@ metadata:
     # That's what will be used in REAL LIFE
     # nginx.ingress.kubernetes.io/auth-url: http://oauth2-proxy.localtest.me/oauth2/auth
     # but because of https://github.com/kubernetes/ingress-nginx/issues/3665
-    nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/"
     nginx.ingress.kubernetes.io/auth-response-headers: "x-auth-request-user, x-auth-request-email, x-auth-request-access-token, Authorization"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       auth_request_set $name_upstream_1 $upstream_cookie__oauth2_proxy_1;
