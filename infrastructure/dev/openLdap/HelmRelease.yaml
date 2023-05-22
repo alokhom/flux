@@ -31,7 +31,7 @@ spec:
               kind: StatefulSet
               name: openldap
               labelSelector: "app.kubernetes.io/name=openldap-stack-ha"           
-            patch: |-
+            patch: |
               - op: replace #action 
                 path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
                 value: 389
