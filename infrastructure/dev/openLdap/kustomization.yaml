@@ -5,3 +5,10 @@ resources:
   - HelmRepository.yaml
   - namespace.yaml
   #- ingress.yaml
+
+patches:
+  - path: patch.yaml
+    target:
+      version: v1
+      kind: StatefulSet
+      name: openldap
