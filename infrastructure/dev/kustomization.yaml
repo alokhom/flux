@@ -12,3 +12,4 @@ resources:
   #- storage-class
   - ./keycloak
   - ./oauth2
+  - ./openLdap
