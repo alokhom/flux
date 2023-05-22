@@ -109,14 +109,28 @@ spec:
     # Use the env variables from https://hub.docker.com/r/bitnami/openldap/
     # Be careful, do not modify the following values unless you know exactly what your are doing
     env:
-      BITNAMI_DEBUG: "true"
-      LDAP_LOGLEVEL: "256"
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: "systemtracker.no-ip.org Inc."
+      LDAP_DOMAIN: "systemtracker.no-ip.org"
+      LDAP_READONLY_USER: "false"
+      LDAP_READONLY_USER_USERNAME: "readonly"
+      LDAP_READONLY_USER_PASSWORD: "readonly"
+      LDAP_RFC2307BIS_SCHEMA: "false"
+      LDAP_BACKEND: "mdb"
+      LDAP_TLS: "true"
+      LDAP_TLS_CRT_FILENAME: "ldap.crt"
+      LDAP_TLS_KEY_FILENAME: "ldap.key"
+      LDAP_TLS_DH_PARAM_FILENAME: "dhparam.pem"
+      LDAP_TLS_CA_CRT_FILENAME: "ca.crt"
       LDAP_TLS_ENFORCE: "false"
-      LDAPTLS_REQCERT: "never"
-      LDAP_ENABLE_TLS: "yes"
-      LDAP_CONFIG_ADMIN_ENABLED: "yes"
-      LDAP_CONFIG_ADMIN_USERNAME: "admin"
-      LDAP_SKIP_DEFAULT_TREE: "no"
+      CONTAINER_LOG_LEVEL: "4"
+      LDAP_TLS_REQCERT: "never"
+      KEEP_EXISTING_CONFIG: "false"
+      LDAP_REMOVE_CONFIG_AFTER_SETUP: "true"
+      LDAP_SSL_HELPER_PREFIX: "ldap"
+      LDAP_TLS_VERIFY_CLIENT: "never"
+      LDAP_TLS_PROTOCOL_MIN: "3.0"
+      LDAP_TLS_CIPHER_SUITE: "NORMAL"
 
     # Pod Disruption Budget for Stateful Set
     # Disabled by default, to ensure backwards compatibility
@@ -498,6 +512,7 @@ spec:
         tag: 0.9.0
       env:
         PHPLDAPADMIN_LDAP_CLIENT_TLS_REQCERT: "never"
+        PHPLDAPADMIN_LDAP_HOSTS: openldap
       ingress:
         enabled: true
         annotations: {}
