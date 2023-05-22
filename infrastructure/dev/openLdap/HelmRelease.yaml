@@ -83,7 +83,8 @@ spec:
     customTLS:
       enabled: false
       image:
-        repository: alpine/openssl
+        #repository: alpine/openssl
+        repository: shamelesscookie/openssl
         tag: latest
       secret: ""  # The name of a kubernetes.io/tls type secret to use for TLS
     ## Add additional labels to all resources
