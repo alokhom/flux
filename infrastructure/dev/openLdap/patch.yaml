@@ -1,7 +1,6 @@
 - op: replace #action 
   path: /spec/template/spec/containers/0/ports/0/containerPort #resouirce we want to change
   value: 389 #value we want to use for patching 
-
 - op: replace #action 
   path: /spec/template/spec/containers/0/ports/1/containerPort #resouirce we want to change
   value: 636 #value we want to use for patching 

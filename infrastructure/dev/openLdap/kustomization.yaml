@@ -6,15 +6,11 @@ resources:
   - namespace.yaml
   #- ingress.yaml
 
-patches:
-- patch: |-
-    - op: replace #action 
-      path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
-      value: 389 #value we want to use for patching 
-    - op: replace #action 
-      path: "/spec/template/spec/containers/0/ports/1/containerPort" #resouirce we want to change
-      value: 636 #value we want to use for patching 
-  target:
-    kind: StatefulSet
-    name: openldap
-    namespace: openldap
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: StatefulSet
+      name: openldap
+      namespace: openldap
+    path: patch.yaml
