@@ -14,6 +14,30 @@ spec:
         name: openldap
         namespace: openldap
       interval: 5m
+  upgrade:
+    # crds: CreateReplace
+    # Force recreation due to Helm not properly patching Deployment with e.g. added port,
+    # causing spurious drift detection
+    force: true
+  postRenderers:
+    # Instruct helm-controller to use built-in "kustomize" post renderer.
+    - kustomize:
+        # Array of inline JSON6902 patch definitions as YAML object.
+        # Note, this is a YAML object and not a string, to avoid syntax
+        # indention errors.
+        patchesJson6902:
+          - target:
+              version: v1
+              kind: StatefulSet
+              name: openldap
+              labelSelector: "app.kubernetes.io/name=openldap-stack-ha"           
+            patch: |-
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
+                value: 389
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/ports/1/containerPort" #resouirce we want to change
+                value: 636
   values:
     # Default values for openldap.
     # This is a YAML-formatted file.
