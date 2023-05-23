@@ -62,6 +62,7 @@ spec:
                 path: "/spec/template/spec/volumes/1/configMap" #resouirce we want to change
                 value:
                   name: openldap-customldif
+                  defaultMode: 0777
           - target:
               version: v1
               kind: ConfigMap
