@@ -236,7 +236,7 @@ spec:
         by * none
       olcAccess: {2}to *
         by dn="{{ include "global.bindDN" . }}" write
-        by self read
+        by users read
         by * none
 
     replication:
