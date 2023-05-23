@@ -200,116 +200,35 @@ spec:
         # o: systemtracker.no-ip, Inc
         # dc: systemtracker
 
+        # Entry 9: ou=groups,dc=systemtracker,dc=no-ip,dc=org
+        dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
+        objectclass: organizationalUnit
+        objectclass: top
+        ou: groups
+
         # Entry 9: ou=users,dc=systemtracker,dc=no-ip,dc=org
         dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
         objectclass: organizationalUnit
         objectclass: top
         ou: users
 
-        # Entry 4: ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        objectclass: organizationalUnit
-        objectclass: top
-        ou: groups
-
-        # Entry 5: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        cn: admin
-        gidnumber: 500
-        memberuid: alokhom
-        objectclass: posixGroup
-        objectclass: top
-
-        # Entry 6: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        cn: developers
-        gidnumber: 501
-        memberuid: 1001
-        memberuid: dev
-        objectclass: posixGroup
-        objectclass: top
-    
-        # Entry 8: cn=viewers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=viewers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        cn: viewers
-        gidnumber: 502
-        memberuid: viewer
-        objectclass: posixGroup
-        objectclass: top
-
-        # Entry 12: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        cn: ldapadmin
-        gidnumber: 503
-        givenname: ldapadmin
-        homedirectory: /home/users/lldapadmin
-        loginshell: /bin/sh
-        objectclass: inetOrgPerson
-        objectclass: posixAccount
-        objectclass: top
-        sn: ldapadmin
-        uid: lldapadmin
-        uidnumber: 1002
-        userpassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
-        
-        # Entry 3: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
-        cn: Administrators
-        member: cn=admin,dc=systemtracker,dc=no-ip,dc=org
-        member: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        objectclass: groupOfNames
-        objectclass: top
-
-        # Entry 14: cn=viewer,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=viewer,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        cn: viewer
-        gidnumber: 502
-        givenname: admin
-        homedirectory: /home/users/admin
-        loginshell: /bin/sh
-        objectclass: inetOrgPerson
-        objectclass: posixAccount
-        objectclass: top
-        sn: admin
-        uid: viewer
-        uidnumber: 1003
-        userpassword: foo
-        # userpassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
-
-        # Entry 10: cn=alok hom,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=alok hom,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        cn: alok hom
-        gidnumber: 500
-        givenname: Alok
-        homedirectory: /home/users/alokhom
-        loginshell: /bin/sh
-        objectclass: inetOrgPerson
-        objectclass: posixAccount
-        objectclass: top
-        sn: hom
+        dn: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: top
+        objectClass: person
+        objectClass: organizationalPerson
+        objectClass: inetOrgPerson
+        cn: ICP Test User
         uid: alokhom
-        uidnumber: 10001
-        userpassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
-        
-      
-        # Entry 11: cn=dev,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=dev,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        cn: dev
-        gidnumber: 501
-        givenname: Test1
-        homedirectory: /home/users/taccount
-        loginshell: /bin/sh
-        objectclass: inetOrgPerson
-        objectclass: posixAccount
-        objectclass: top
-        sn: Account
-        uid: dev
-        uidnumber: 1001
-        userpassword: foo
-        
+        givenName: ICP Test User
+        sn: alokhom
+        userPassword: password
 
-
-        
+        dn: cn=unityadmins,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+        cn: unityadmins
+        owner: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        description: Unity Admins group
+        objectClass: groupOfNames
+        member: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
 
 
     # Custom openldap ACLs
