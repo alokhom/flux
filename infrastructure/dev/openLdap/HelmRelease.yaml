@@ -217,9 +217,13 @@ spec:
         homeDirectory: /home/users/alokhom
         loginShell: /bin/bash
         mail: alok.hom@accenture.com
-        userPassword: {SSHA}sZg1B746jAvwYTZDwauSM0b0JxxIXfAr
+        userPassword: foo
 
-
+        dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
+        changetype: modify
+        replace: userPassword
+        userPassword: {SSHA}DFo9//UauZXe6BOR8zNQR3hV/68eO64d
+        
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
     customAcls: |-
