@@ -222,7 +222,7 @@ spec:
         dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
         changetype: modify
         replace: userPassword
-        userPassword: {SSHA}DFo9//UauZXe6BOR8zNQR3hV/68eO64d
+        userPassword: {SHA}0Jw+b/kiLk4qZgh9BVljzI6n16o=
         
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
