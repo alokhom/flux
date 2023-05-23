@@ -220,7 +220,6 @@ spec:
         # Group
         dn: cn=unityadmins,ou=groups,dc=systemtracker,dc=no-ip,dc=org
         cn: unityadmins
-        owner: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
         gidNumber: 5159
         description: Unity Admins group
         objectClass: top
