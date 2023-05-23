@@ -259,6 +259,7 @@ spec:
         sn: admin
         uid: viewer
         uidnumber: 1003
+        userpassword: foo
         # userpassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
 
         # Entry 10: cn=alok hom,ou=users,dc=systemtracker,dc=no-ip,dc=org
@@ -274,6 +275,7 @@ spec:
         sn: hom
         uid: alokhom
         uidnumber: 10001
+        userpassword: foo
         
       
         # Entry 11: cn=dev,ou=users,dc=systemtracker,dc=no-ip,dc=org
@@ -289,6 +291,7 @@ spec:
         sn: Account
         uid: dev
         uidnumber: 1001
+        userpassword: foo
         
 
         # Entry 12: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
@@ -304,6 +307,7 @@ spec:
         sn: ldapadmin
         uid: lldapadmin
         uidnumber: 1002
+        userpassword: foo
         
         
 
