@@ -193,10 +193,10 @@ spec:
     customLdifFiles:
       00-root.ldif: |-
         # Root creation
-        dn: dc=example,dc=org
+        dn: dc=systemtracker,dc=no-ip,dc=org
         objectClass: dcObject
         objectClass: organization
-        o: Example, Inc
+        o: systemtracker, Inc
       01-default-group.ldif: |-
         dn: cn=unityadmins,ou=groups,dc=systemtracker,dc=no-ip,dc=org
         cn: unityadmins
