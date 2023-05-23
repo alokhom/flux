@@ -215,7 +215,7 @@ spec:
         sn: Hom
         uid: alokhom
         uidnumber: 1000
-        userpassword: {SSHA}8ch9E1JH6iiw6SYW2SCKh/g1TeJDaPTI
+        userpassword: {SSHA}i3B2i5NfPQJ+VPvvroMQ4qGcSz9U9r2L
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
