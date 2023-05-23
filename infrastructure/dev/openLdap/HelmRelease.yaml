@@ -190,7 +190,7 @@ spec:
     # Custom openldap configuration files used to override default settings
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
-      custom.ldif: |-
+      01-default-users.ldif: |-
         # Root creation org
         dn: dc=systemtracker,dc=no-ip,dc=org
         objectClass: dcObject
