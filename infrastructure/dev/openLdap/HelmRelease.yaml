@@ -38,15 +38,14 @@ spec:
               - op: replace #action 
                 path: "/spec/template/spec/containers/0/ports/1/containerPort" #resouirce we want to change
                 value: 636
-              - op: add #action 
-                path: "/spec/template/spec/containers/0/volumeMounts/0/" #resouirce we want to change
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/0" #resouirce we want to change
                 value:
+                  name: data
+                  mountPath: /var/lib/ldap
                   subPath: data
               - op: replace #action 
-                path: "/spec/template/spec/containers/0/volumeMounts/0/mountPath" #resouirce we want to change
-                value: "/var/lib/ldap"
-              - op: replace #action 
-                path: "/spec/template/spec/containers/0/volumeMounts/1/" #resouirce we want to change
+                path: "/spec/template/spec/containers/0/volumeMounts/1" #resouirce we want to change
                 value:
                   name: data
                   mountPath: /container/service/slapd/assets/certs
@@ -54,7 +53,7 @@ spec:
                 path: "/spec/template/spec/containers/0/volumeMounts/9/mountPath" #resouirce we want to change
                 value: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
               - op: replace #action 
-                path: "/spec/template/spec/containers/0/volumeMounts/2/" #resouirce we want to change
+                path: "/spec/template/spec/containers/0/volumeMounts/2" #resouirce we want to change
                 value:
                   name: data
                   mountPath: /etc/ldap/slapd.d
