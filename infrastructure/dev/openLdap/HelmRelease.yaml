@@ -200,6 +200,10 @@ spec:
         # o: systemtracker.no-ip, Inc
         # dc: systemtracker
 
+        dn: cn=Manager,dc=systemtracker,dc=no-ip,dc=org
+        objectclass: organizationalRole
+        cn: Manager
+
         # Entry 9: ou=groups,dc=systemtracker,dc=no-ip,dc=org
         dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
         objectclass: organizationalUnit
@@ -212,30 +216,33 @@ spec:
         objectclass: top
         ou: users
 
-        dn: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        objectClass: top
-        objectClass: person
-        objectClass: organizationalPerson
-        objectClass: inetOrgPerson
-        cn: ICP Test User
-        uid: alokhom
-        givenName: ICP Test User
-        sn: alokhom
-        userPassword: password
 
+        # Group
         dn: cn=unityadmins,ou=groups,dc=systemtracker,dc=no-ip,dc=org
         cn: unityadmins
         owner: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        gidNumber: 5159
         description: Unity Admins group
-        objectClass: groupOfNames
-        member: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: top
+        objectclass: posixGroup
 
-        dn: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
-        cn: Administrators
-        owner: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        description: Default Admins group
-        objectClass: groupOfNames
-        member: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        dn: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: top
+        objectClass: inetOrgPerson
+        objectClass: posixAccount
+        objectClass: shadowAccount
+        uidNumber: 5159
+        gidNumber: 5159
+        cn: Alok Hom
+        uid: alokhom
+        givenName: Alok
+        sn: Hom
+        userPassword: password
+        homeDirectory: /home/alokhom
+        loginShell: /bin/bash
+        mail: alok.hom@accenture.com
+        userPassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
+
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
