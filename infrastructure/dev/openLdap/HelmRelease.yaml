@@ -59,7 +59,7 @@ spec:
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
               - op: replace #action 
-                path: "/spec/volumes/1/configMap" #resouirce we want to change
+                path: "/spec/template/spec/volumes/1/configMap" #resouirce we want to change
                 value:
                   name: openldap-customldif
           - target:
