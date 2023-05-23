@@ -271,7 +271,7 @@ spec:
         objectclass: inetOrgPerson
         objectclass: posixAccount
         objectclass: top
-        sn: Watkins
+        sn: hom
         uid: alokhom
         uidnumber: 10001
         
