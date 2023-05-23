@@ -212,14 +212,6 @@ spec:
         objectclass: top
         ou: groups
 
-        # Entry 3: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
-        cn: Administrators
-        member: cn=admin,dc=systemtracker,dc=no-ip,dc=org
-        member: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        objectclass: groupOfNames
-        objectclass: top
-
         # Entry 5: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
         dn: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
         cn: admin
@@ -227,7 +219,6 @@ spec:
         memberuid: alokhom
         objectclass: posixGroup
         objectclass: top
-
 
         # Entry 6: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
         dn: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
@@ -244,6 +235,29 @@ spec:
         gidnumber: 502
         memberuid: viewer
         objectclass: posixGroup
+        objectclass: top
+
+        # Entry 12: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        dn: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        cn: ldapadmin
+        gidnumber: 503
+        givenname: ldapadmin
+        homedirectory: /home/users/lldapadmin
+        loginshell: /bin/sh
+        objectclass: inetOrgPerson
+        objectclass: posixAccount
+        objectclass: top
+        sn: ldapadmin
+        uid: lldapadmin
+        uidnumber: 1002
+        userpassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
+        
+        # Entry 3: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
+        dn: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
+        cn: Administrators
+        member: cn=admin,dc=systemtracker,dc=no-ip,dc=org
+        member: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        objectclass: groupOfNames
         objectclass: top
 
         # Entry 14: cn=viewer,ou=users,dc=systemtracker,dc=no-ip,dc=org
@@ -275,7 +289,7 @@ spec:
         sn: hom
         uid: alokhom
         uidnumber: 10001
-        userpassword: foo
+        userpassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
         
       
         # Entry 11: cn=dev,ou=users,dc=systemtracker,dc=no-ip,dc=org
@@ -294,21 +308,7 @@ spec:
         userpassword: foo
         
 
-        # Entry 12: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        dn: cn=ldapadmin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-        cn: ldapadmin
-        gidnumber: 503
-        givenname: ldapadmin
-        homedirectory: /home/users/lldapadmin
-        loginshell: /bin/sh
-        objectclass: inetOrgPerson
-        objectclass: posixAccount
-        objectclass: top
-        sn: ldapadmin
-        uid: lldapadmin
-        uidnumber: 1002
-        userpassword: foo
-        
+
         
 
 
