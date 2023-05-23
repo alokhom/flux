@@ -240,7 +240,7 @@ spec:
         homeDirectory: /home/alokhom
         loginShell: /bin/bash
         mail: alok.hom@accenture.com
-        userPassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
+        userPassword: {SSHA}sZg1B746jAvwYTZDwauSM0b0JxxIXfAr
 
 
     # Custom openldap ACLs
