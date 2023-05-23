@@ -38,6 +38,142 @@ spec:
               - op: replace #action 
                 path: "/spec/template/spec/containers/0/ports/1/containerPort" #resouirce we want to change
                 value: 636
+              - op: add #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/0/" #resouirce we want to change
+                value:
+                  subPath: data
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/0/mountPath" #resouirce we want to change
+                value: "/var/lib/ldap"
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/1/" #resouirce we want to change
+                value:
+                  name: data
+                  mountPath: /container/service/slapd/assets/certs
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/9/mountPath" #resouirce we want to change
+                value: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/2/" #resouirce we want to change
+                value:
+                  name: data
+                  mountPath: /etc/ldap/slapd.d
+                  subPath: config-data
+          - target:
+              version: v1
+              kind: ConfigMap
+              name: openldap-replication-acls
+              labelSelector: "app=openldap"       
+            patch: |
+              - op: replace #action 
+                path: "/data" #resouirce we want to change
+                value:
+                  # replication
+                  syncprov.ldif: |
+                    # Load syncprov module
+                    dn: cn=module{0},cn=config
+                    objectClass: olcModuleList
+                    cn: module{0}
+                    olcModuleLoad: syncprov
+                  serverid.ldif: |
+                    # Set server ID
+                    dn: cn=config
+                    changeType: modify
+                    add: olcServerID
+                    olcServerID: 1 ldap://openldap-0.openldap-headless.openldap.svc.cluster.local:389
+                    olcServerID: 2 ldap://openldap-1.openldap-headless.openldap.svc.cluster.local:389
+                    olcServerID: 3 ldap://openldap-2.openldap-headless.openldap.svc.cluster.local:389
+                  csyncprov.ldif: |
+                    # Add syncprov on config
+                    dn: olcOverlay=syncprov,olcDatabase={0}config,cn=config
+                    changetype: add
+                    objectClass: olcOverlayConfig
+                    objectClass: olcSyncProvConfig
+                    olcOverlay: syncprov
+                  rep.ldif: |
+                    # Add sync replication on config
+                    dn: olcDatabase={0}config,cn=config
+                    changetype: modify
+                    add: olcSyncRepl
+                    olcSyncRepl: rid=001 provider=ldap://openldap-0.openldap-headless.openldap.svc.cluster.local:389 binddn="cn=admin,cn=config" bindmethod=simple credentials=config@Password searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical tls_reqcert=never
+                    olcSyncRepl: rid=002 provider=ldap://openldap-1.openldap-headless.openldap.svc.cluster.local:389 binddn="cn=admin,cn=config" bindmethod=simple credentials=config@Password searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical tls_reqcert=never
+                    olcSyncRepl: rid=003 provider=ldap://openldap-2.openldap-headless.openldap.svc.cluster.local:389 binddn="cn=admin,cn=config" bindmethod=simple credentials=config@Password searchbase="cn=config" type=refreshAndPersist retry="60 +" timeout=1 starttls=critical tls_reqcert=never
+                    -
+                    add: olcMirrorMode
+                    olcMirrorMode: TRUE
+                  bsyncprov.ldif: |
+                    dn: olcOverlay=syncprov,olcDatabase={2}mdb,cn=config
+                    objectClass: olcOverlayConfig
+                    objectClass: olcSyncProvConfig
+                    olcOverlay: syncprov
+                    olcSpSessionLog: 100
+                  brep.ldif: |
+                    dn: olcDatabase={2}mdb,cn=config
+                    changetype: modify
+                    add: olcSyncrepl
+                    olcSyncrepl:
+                      rid=101
+                      provider=ldap://openldap-0.openldap-headless.openldap.svc.cluster.local:389
+                      binddn=cn=admin,dc=systemtracker,dc=no-ip,dc=org
+                      bindmethod=simple
+                      credentials=admin@Password
+                      searchbase=dc=systemtracker,dc=no-ip,dc=org
+                      type=refreshAndPersist
+                      interval=00:00:00:10
+                      network-timeout=0
+                      retry="60 +"
+                      timeout=1
+                      starttls=critical
+                      tls_reqcert=never
+                    olcSyncrepl:
+                      rid=102
+                      provider=ldap://openldap-1.openldap-headless.openldap.svc.cluster.local:389
+                      binddn=cn=admin,dc=systemtracker,dc=no-ip,dc=org
+                      bindmethod=simple
+                      credentials=admin@Password
+                      searchbase=dc=systemtracker,dc=no-ip,dc=org
+                      type=refreshAndPersist
+                      interval=00:00:00:10
+                      network-timeout=0
+                      retry="60 +"
+                      timeout=1
+                      starttls=critical
+                      tls_reqcert=never
+                    olcSyncrepl:
+                      rid=103
+                      provider=ldap://openldap-2.openldap-headless.openldap.svc.cluster.local:389
+                      binddn=cn=admin,dc=systemtracker,dc=no-ip,dc=org
+                      bindmethod=simple
+                      credentials=admin@Password
+                      searchbase=dc=systemtracker,dc=no-ip,dc=org
+                      type=refreshAndPersist
+                      interval=00:00:00:10
+                      network-timeout=0
+                      retry="60 +"
+                      timeout=1
+                      starttls=critical
+                      tls_reqcert=never
+
+                    dn: olcDatabase={2}mdb,cn=config
+                    changetype: modify
+                    add: olcMirrorMode
+                    olcMirrorMode: TRUE
+                  # acls
+                  acls.ldif: |
+                    dn: olcDatabase={2}mdb,cn=config
+                    changetype: modify
+                    replace: olcAccess
+                    olcAccess: {0}to *
+                      by dn.exact=gidNumber=0+uidNumber=1001,cn=peercred,cn=external,cn=auth manage
+                      by * break
+                    olcAccess: {1}to attrs=userPassword,shadowLastChange
+                      by self write
+                      by dn="cn=admin,dc=systemtracker,dc=no-ip,dc=org" write
+                      by anonymous auth by * none
+                    olcAccess: {2}to *
+                      by dn="cn=admin,dc=systemtracker,dc=no-ip,dc=org" write
+                      by self read
+                      by * none
   values:
     # Default values for openldap.
     # This is a YAML-formatted file.
