@@ -191,53 +191,30 @@ spec:
     # Custom openldap configuration files used to override default settings
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
-      01-default-users.ldif: |-
-        # Root creation org made by LDAP variables 
-        # dn: dc=systemtracker,dc=no-ip,dc=org
-        # objectClass: dcObject
-        # objectClass: organization
-        # objectclass: top
-        # o: systemtracker.no-ip, Inc
-        # dc: systemtracker
-
-        dn: cn=Manager,dc=systemtracker,dc=no-ip,dc=org
-        objectclass: organizationalRole
-        cn: Manager
-
-        # Entry 9: ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
-        objectclass: organizationalUnit
-        objectclass: top
-        ou: groups
-
-        # Entry 9: ou=users,dc=systemtracker,dc=no-ip,dc=org
-        dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-        objectclass: organizationalUnit
-        objectclass: top
-        ou: users
-
-
-        # Group
+      00-root.ldif: |-
+        # Root creation
+        dn: dc=example,dc=org
+        objectClass: dcObject
+        objectClass: organization
+        o: Example, Inc
+      01-default-group.ldif: |-
         dn: cn=unityadmins,ou=groups,dc=systemtracker,dc=no-ip,dc=org
         cn: unityadmins
-        gidNumber: 5159
-        description: Unity Admins group
-        objectClass: top
+        gidnumber: 500
         objectclass: posixGroup
-
-        dn: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        objectclass: top
+      02-default-users.ldif: |-
+        dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
         objectClass: top
         objectClass: inetOrgPerson
         objectClass: posixAccount
-        objectClass: shadowAccount
-        uidNumber: 5159
-        gidNumber: 5159
+        uidNumber: 1000
+        gidNumber: 500
         cn: Alok Hom
         uid: alokhom
         givenName: Alok
         sn: Hom
-        userPassword: password
-        homeDirectory: /home/alokhom
+        homeDirectory: /home/users/alokhom
         loginShell: /bin/bash
         mail: alok.hom@accenture.com
         userPassword: {SSHA}sZg1B746jAvwYTZDwauSM0b0JxxIXfAr
@@ -245,21 +222,22 @@ spec:
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
-    # customAcls: |-
-    #   dn: olcDatabase={2}mdb,cn=config
-    #   changetype: modify
-    #   replace: olcAccess
-    #   olcAccess: {0}to *
-    #     by dn.exact=gidNumber=0+uidNumber=1001,cn=peercred,cn=external,cn=auth manage
-    #     by * break
-    #   olcAccess: {1}to attrs=userPassword,shadowLastChange
-    #     by self write
-    #     by dn="{{ include "global.bindDN" . }}" write
-    #     by anonymous auth by * none
-    #   olcAccess: {2}to *
-    #     by dn="{{ include "global.bindDN" . }}" write
-    #     by self read
-    #     by * none
+    customAcls: |-
+      dn: olcDatabase={2}mdb,cn=config
+      changetype: modify
+      replace: olcAccess
+      olcAccess: {0}to *
+        by dn.exact=gidNumber=0+uidNumber=1001,cn=peercred,cn=external,cn=auth manage
+        by * break
+      olcAccess: {1}to attrs=userPassword,shadowLastChange
+        by self write
+        by dn="{{ include "global.bindDN" . }}" write
+        by anonymous auth 
+        by * none
+      olcAccess: {2}to *
+        by dn="{{ include "global.bindDN" . }}" write
+        by self read
+        by * none
 
     replication:
       enabled: true
