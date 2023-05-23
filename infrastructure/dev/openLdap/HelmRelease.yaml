@@ -191,30 +191,36 @@ spec:
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
       00-root.ldif: |-
-        # Root creation
+        # Root creation org
         dn: dc=systemtracker,dc=no-ip,dc=org
         objectClass: dcObject
         objectClass: organization
         objectclass: top
         o: systemtracker.no-ip, Inc
+        dc: systemtracker
       01-default-group.ldif: |-
-        dn: cn=myGroup,dc=systemtracker,dc=no-ip,dc=org
-        cn: myGroup
-        gidnumber: 500
-        objectclass: posixGroup
-        objectclass: top
+        # OU
+        dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: organizationalUnit
+        ou: People
+        # OU
+        dn: ou=Groups,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: organizationalUnit
+        ou: Groups
       02-default-user.ldif: |-
-        dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
-        cn: Alok Hom
+        #
+        dn: cn=alok hom,ou=People,dc=systemtracker,dc=no-ip,dc=org
+        cn: alok hom
         gidnumber: 500
         givenname: Alok
-        homedirectory: /home/users/alokhom
+        mail: foo@test.com
+        homedirectory: /home/Alok
         objectclass: inetOrgPerson
         objectclass: posixAccount
         objectclass: top
         sn: Hom
-        uid: alokhom
-        uidnumber: 1000
+        uid: alok
+        uidnumber: 10001
         userpassword: {SSHA}T6piNhQZjjUwgb7qxhlXPrAOXmgP8b/6
 
     # Custom openldap ACLs
