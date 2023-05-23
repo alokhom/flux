@@ -198,7 +198,7 @@ spec:
         objectclass: top
         o: systemtracker.no-ip, Inc
         dc: systemtracker
-      # 01-default-group.ldif: |-
+        # 01-default-group.ldif: |-
         # OU
         dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
         objectClass: organizationalUnit
@@ -207,7 +207,7 @@ spec:
         dn: ou=Groups,dc=systemtracker,dc=no-ip,dc=org
         objectClass: organizationalUnit
         ou: Groups
-      # 02-default-user.ldif: |-
+        # 02-default-user.ldif: |-
         #
         dn: cn=alok hom,ou=People,dc=systemtracker,dc=no-ip,dc=org
         cn: alok hom
