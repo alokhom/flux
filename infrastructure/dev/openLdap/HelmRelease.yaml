@@ -230,6 +230,12 @@ spec:
         objectClass: groupOfNames
         member: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
 
+        dn: cn=Administrators,dc=systemtracker,dc=no-ip,dc=org
+        cn: Administrators
+        owner: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        description: Default Admins group
+        objectClass: groupOfNames
+        member: uid=alokhom,ou=users,dc=systemtracker,dc=no-ip,dc=org
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
