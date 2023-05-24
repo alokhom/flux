@@ -673,12 +673,18 @@ spec:
         tag: 5.2.3
       ingress:
         enabled: true
-        annotations: {}
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: ca-issuer
         path: /
         pathType: Prefix
         ## Ingress Host
         hosts:
         - "ssl-ldap2.systemtracker.no-ip.org"
+        tls:
+          - secretName: ssl-ldap2-tls
+            hosts:
+              - ssl-ldap2.systemtracker.no-ip.org
       ldap:
         # if you want to restrict search base tree for users instead of complete domain
         # searchBase: "ou=alokhom,dc=systemtracker,dc=no-ip,dc=org"
