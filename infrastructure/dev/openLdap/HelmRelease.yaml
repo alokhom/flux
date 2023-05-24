@@ -330,27 +330,8 @@ spec:
 
     # Custom openldap configuration files used to override default settings
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
-    customLdifFiles:
-      01-default-users.ldif: |-
-        dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
-        objectClass: top
-        objectClass: inetOrgPerson
-        objectClass: posixAccount
-        uidNumber: 1000
-        cn: Alok Hom
-        uid: alokhom
-        givenName: Alok
-        sn: Hom
-        homeDirectory: /home/users/alokhom
-        loginShell: /bin/bash
-        mail: alok.hom@accenture.com
-        userPassword: foo
-
-        dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
-        changetype: modify
-        replace: userPassword
-        userPassword: {SHA}0Jw+b/kiLk4qZgh9BVljzI6n16o=
-        
+    # customLdifFiles:
+    #   01-default-users.ldif: |-
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
     customAcls: |-
