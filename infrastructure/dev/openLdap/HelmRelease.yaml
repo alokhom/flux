@@ -32,6 +32,11 @@ spec:
               name: openldap
               labelSelector: "app.kubernetes.io/name=openldap-stack-ha"           
             patch: |
+              - op: add #action 
+                path: "/spec/template/spec/volumes/4" #resouirce we want to change
+                value:
+                  name: check
+                  emptyDir: {}
               - op: replace #action 
                 path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
                 value: 389
@@ -55,11 +60,6 @@ spec:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              - op: add #action 
-                path: "/spec/template/spec/volumes/4" #resouirce we want to change
-                value:
-                  name: check
-                  emptyDir: {}
               - op: add #action 
                 path: "/spec/template/spec/containers/0/volumeMounts" #resouirce we want to change
                 value: 
