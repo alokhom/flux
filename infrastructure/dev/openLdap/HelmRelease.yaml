@@ -50,19 +50,26 @@ spec:
                   name: data
                   mountPath: /container/service/slapd/assets/certs
               - op: replace #action 
-                path: "/spec/template/spec/containers/0/volumeMounts/9/mountPath" #resouirce we want to change
-                value: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
-              - op: replace #action 
                 path: "/spec/template/spec/containers/0/volumeMounts/2" #resouirce we want to change
                 value:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              - op: replace #action 
-                path: "/spec/template/spec/volumes/1/configMap" #resouirce we want to change
+              - op: add #action 
+                path: "/spec/template/spec/volumes/4" #resouirce we want to change
                 value:
-                  name: openldap-customldif
-                  defaultMode: 0777
+                  name: check
+                  emptyDir: {}
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/9" #resouirce we want to change
+                value: 
+                  name: check 
+                  mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
+              - op: add #action 
+                path: "/spec/template/spec/containers/0" #resouirce we want to change
+                value:
+                  command: ["/bin/sh"]
+                  args: ["-c", "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/"]
           - target:
               version: v1
               kind: ConfigMap
