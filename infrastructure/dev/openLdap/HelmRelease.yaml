@@ -71,7 +71,7 @@ spec:
                   name: init-2
                   image: alpine
                   command: ["/bin/sh"]
-                  args: ["-c", "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/"]
+                  args: ["-c", "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && sleep 5 && echo copied;"]
                   volumeMounts:
                   - name: custom-ldif-files
                     mountPath: /ldifs/
