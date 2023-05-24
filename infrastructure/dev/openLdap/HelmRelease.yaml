@@ -61,7 +61,7 @@ spec:
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
               - op: add #action 
-                path: "/spec/template/spec/containers/0/volumeMounts" #resouirce we want to change
+                path: "/spec/template/spec/containers/0/volumeMounts/10" #resouirce we want to change
                 value: 
                   name: check 
                   mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
