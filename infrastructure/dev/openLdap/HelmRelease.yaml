@@ -36,7 +36,8 @@ spec:
                 path: "/spec/template/spec/volumes/4" #resouirce we want to change
                 value:
                   name: check
-                  emptyDir: {}
+                  emptyDir:
+                    medium: Memory
               - op: replace #action 
                 path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
                 value: 389
