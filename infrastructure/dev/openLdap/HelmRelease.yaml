@@ -331,19 +331,13 @@ spec:
     # Custom openldap configuration files used to override default settings
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
-      00-root.ldif: |-
-        # Root creation
-        dn: dc=systemtracker,dc=no-ip,dc=org
-        objectClass: dcObject
-        objectClass: organization
-        o: systemtracker, Inc
-      01-default-group.ldif: |-
+      01-default-users.ldif: |-
         dn: cn=unityadmins,dc=systemtracker,dc=no-ip,dc=org
         cn: unityadmins
         gidnumber: 500
         objectclass: posixGroup
         objectclass: top
-      02-default-users.ldif: |-
+
         dn: cn=Alok Hom,dc=systemtracker,dc=no-ip,dc=org
         objectClass: top
         objectClass: inetOrgPerson
