@@ -358,7 +358,6 @@ spec:
         objectClass: organizationalUnit
         ou: People
 
-
         dn: cn=mainuser,ou=People,dc=systemtracker,dc=no-ip,dc=org
         changetype: add
         objectClass: posixAccount
@@ -374,48 +373,6 @@ spec:
         uidNumber: 25065
         userPassword: {SHA}0Jw+b/kiLk4qZgh9BVljzI6n16o=
         mail:mainuser@gmail.com
-
-
-        dn: cn=usergeneric,ou=People,dc=systemtracker,dc=no-ip,dc=org
-        changetype: add
-        objectClass: posixAccount
-        objectClass: top
-        objectClass: inetOrgPerson
-        gidNumber: 0
-        givenName: generic
-        sn: user
-        uid: usergeneric
-        homeDirectory: /home/usergeneric
-        uidNumber: 59035
-        userPassword: {SHA}SCmHw2etfEYO/GkT2cLUHMlkUVw=
-        cn: usergeneric
-        mail: usergeneric@gmail.com
-
-        dn: cn=Admins,ou=Group,dc=systemtracker,dc=no-ip,dc=org
-        changetype: add
-        objectClass: groupOfUniqueNames
-        uniqueMember: cn=mainuser,ou=People,dc=systemtracker,dc=no-ip,dc=org
-        cn: Admins
-
-        dn: cn=Users,ou=Group,dc=systemtracker,dc=no-ip,dc=org
-        objectClass: groupOfUniqueNames
-        uniqueMember: cn=mainuser,ou=People,dc=systemtracker,dc=no-ip,dc=org
-        uniqueMember: cn=usergeneric,ou=People,dc=systemtracker,dc=no-ip,dc=org
-        cn: Users
-
-        dn: cn=Alok Hom,ou=People,dc=systemtracker,dc=no-ip,dc=org
-        objectClass: posixAccount
-        objectClass: top
-        objectClass: inetOrgPerson
-        uidNumber: 1000
-        cn: Alok Hom
-        uid: alokhom
-        givenName: Alok
-        sn: Hom
-        homeDirectory: /home/alokhom
-        loginShell: /bin/bash
-        mail: alok.hom@accenture.com
-        userPassword: {SHA}0Jw+b/kiLk4qZgh9BVljzI6n16o=
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
