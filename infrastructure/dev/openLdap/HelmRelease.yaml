@@ -59,8 +59,7 @@ spec:
                 path: "/spec/template/spec/containers/0/volumeMounts/9" #resouirce we want to change
                 value:
                   name: custom-ldif-files
-                  mountPath: /container/service/slapd/assets/config/bootstrap/ldif
-                  subPath: custom
+                  mountPath: /container/service/slapd/assets/config/bootstrap/ldif/custom
           - target:
               version: v1
               kind: ConfigMap
