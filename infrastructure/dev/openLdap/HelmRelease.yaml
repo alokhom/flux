@@ -32,6 +32,27 @@ spec:
               name: openldap
               labelSelector: "app.kubernetes.io/name=openldap-stack-ha"           
             patch: |
+              - op: add #action 
+                path: "/spec/template/spec/volumes/4" #resouirce we want to change
+                value:
+                  name: check
+                  emptyDir: {}
+              #####
+              # Initcontainer 1
+              - op: add #action 
+                path: "/spec/template/spec/initContainers/1" #resouirce we want to change
+                value:
+                  name: init-2
+                  image: alpine
+                  command: ["/bin/sh"]
+                  args: ["-c", "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;"]
+                  volumeMounts:
+                  - name: custom-ldif-files
+                    mountPath: /ldifs/
+                  - name: check
+                    mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
+              #####
+              # container 0 
               - op: replace #action 
                 path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
                 value: 389
@@ -55,11 +76,11 @@ spec:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              - op: replace #action 
-                path: "/spec/template/spec/containers/0/volumeMounts/9" #resouirce we want to change
-                value:
-                  name: custom-ldif-files
-                  mountPath: /container/service/slapd/assets/config/bootstrap/ldif/custom
+              - op: add #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/10" #resouirce we want to change
+                value: 
+                  name: check 
+                  mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
           - target:
               version: v1
               kind: ConfigMap
@@ -224,7 +245,7 @@ spec:
     ##
     extraDeploy: []
 
-    replicaCount: 3
+    replicaCount: 1
 
     image:
       # From repository https://hub.docker.com/r/bitnami/openldap/
