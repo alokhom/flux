@@ -44,7 +44,11 @@ spec:
                 value:
                   name: init-2
                   image: busybox
-                  command: ['sh', '-c', 'cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;']
+                  command: ['sh', '-c']
+                  args:
+                  - >
+                    chmod -R 777 /container/service/slapd/assets/config/bootstrap/ldif/custom/;
+                    cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;
                   volumeMounts:
                   - name: custom-ldif-files
                     mountPath: /ldifs
