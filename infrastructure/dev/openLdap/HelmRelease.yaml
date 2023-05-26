@@ -43,12 +43,11 @@ spec:
                 path: "/spec/template/spec/initContainers/1" #resouirce we want to change
                 value:
                   name: init-2
-                  image: alpine
-                  command: ["/bin/sh"]
-                  args: ["-c", "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;"]
+                  image: busybox
+                  command: ['sh', '-c', 'cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;']
                   volumeMounts:
                   - name: custom-ldif-files
-                    mountPath: /ldifs/
+                    mountPath: /ldifs
                   - name: check
                     mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
               #####
