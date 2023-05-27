@@ -31,7 +31,7 @@ data:
 
     # Add John Smith to the organization
     dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
+    changetype: modify
     objectClass: inetOrgPerson
     description: John Smith from Accounting
     cn: John Smith
@@ -44,8 +44,6 @@ data:
     uid: bassa
     cn: bassa
     sn: 3
-    objectClass: top
-    objectClass: posixAccount
     objectClass: inetOrgPerson
     loginShell: /bin/bash
     homeDirectory: /home/bassa
