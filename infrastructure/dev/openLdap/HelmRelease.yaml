@@ -670,10 +670,10 @@ spec:
         ## Ingress Host
         hosts:
         - "ssl-ldap2.systemtracker.no-ip.org"
-        tls:
-          - secretName: ssl-ldap2-tls
-            hosts:
-              - ssl-ldap2.systemtracker.no-ip.org
+        #tls:
+        #  - secretName: ssl-ldap2-tls
+        #    hosts:
+        #      - ssl-ldap2.systemtracker.no-ip.org
       ldap:
         # if you want to restrict search base tree for users instead of complete domain
         searchBase: "dc=systemtracker,dc=no-ip,dc=org"
@@ -700,7 +700,7 @@ spec:
         ## Ingress Host
         hosts:
         - phpldapadmin.systemtracker.no-ip.org
-        tls:
-          - secretName: phpldapadmin-tls
-            hosts:
-              - phpldapadmin.systemtracker.no-ip.org
+        #tls:
+        #  - secretName: phpldapadmin-tls
+        #    hosts:
+        #      - phpldapadmin.systemtracker.no-ip.org
