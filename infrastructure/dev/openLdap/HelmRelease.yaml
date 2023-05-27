@@ -79,11 +79,17 @@ spec:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              - op: add #action 
-                path: "/spec/template/spec/containers/0/-" #resouirce we want to change
+              #- op: add #action 
+              #  path: "/spec/template/spec/containers/0/-" #resouirce we want to change
+              #  value:
+              #    command: ['sh', '-c']
+              #    args: "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;"
+              - op: replace #action 
+                path: "/spec/template/spec/containers/0/volumeMounts/10" #resouirce we want to change
                 value:
-                  command: ['sh', '-c']
-                  args: "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;"
+                  name: custom-ldif-files
+                  mountPath: /container/service/slapd/assets/config/bootstrap/ldif
+                  subPath: custom
           - target:
               version: v1
               kind: ConfigMap
