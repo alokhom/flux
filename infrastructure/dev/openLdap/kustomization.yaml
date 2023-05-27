@@ -4,3 +4,20 @@ resources:
   - namespace.yaml
   - ./core
 
+patches:
+  - target:
+      version: v1
+      kind: StatefulSet
+      name: openldap
+      labelSelector: "app.kubernetes.io/name=openldap-stack-ha"           
+    patch: |
+      - op: add #action 
+        path: "/spec/template/spec/containers/0" #resouirce we want to change
+        value:
+          name: openldap-stack-ha
+          image: osixia/openldap:stable-arm64v8
+          command: ['sh', '-c']
+          args:
+          - >
+            chmod -R 777 /container/service/slapd/assets/config/bootstrap/ldif/custom/;
+            cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;
