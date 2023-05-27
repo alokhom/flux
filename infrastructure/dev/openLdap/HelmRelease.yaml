@@ -80,12 +80,9 @@ spec:
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
               - op: add
-                path: "/spec/template/spec/containers/0/"
+                path: "/spec/template/spec/containers/0/-"
                 value: 
                   command: "['sh', '-c']"
-              - op: add
-                path: "/spec/template/spec/containers/0/"
-                value: 
                   args: "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;"
           - target:
               version: v1
