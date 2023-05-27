@@ -79,11 +79,17 @@ spec:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              - op: add
-                path: "/spec/template/spec/containers/0"
-                value: 
-                  command: "['sh', '-c']"
-                  args: "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;"
+              - |-
+                apiVersion: v1
+                kind: StatefulSet
+                metadata:
+                  name: openldap
+                spec:
+                  containers:
+                    - name: openldap-stack-ha
+                      image: osixia/openldap:stable-arm64v8
+                      command: "['sh', '-c']"
+                      args: "cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;"
           - target:
               version: v1
               kind: ConfigMap
