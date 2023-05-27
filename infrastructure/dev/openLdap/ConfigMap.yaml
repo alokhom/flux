@@ -6,7 +6,7 @@ metadata:
 data:
   configure.sh: |
     #!/bin/sh
-    curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x kubectl && mv ./kubectl /usr/bin/kubectl;
+    curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" && chmod +x kubectl && mv ./kubectl /usr/bin/kubectl;
     echo "kubectl installed";
     sleep 2;
     kubectl get nodes;sleep 2;
