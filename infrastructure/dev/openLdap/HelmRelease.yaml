@@ -56,7 +56,7 @@ spec:
               #      mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
               #####
               # container 0
-              - op: add
+              - op: replace
                 path: "/spec/template/spec/containers/0/"
                 value:
                   name: openldap-stack-ha
