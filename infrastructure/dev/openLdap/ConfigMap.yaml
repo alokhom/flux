@@ -37,18 +37,4 @@ data:
     cn: John Smith
     sn: Smith
     uid: jsmith1
-    userPassword: {SSHA}9eRx9GK6tD9tI3sjJqhEkuduFWVvNr3Rv3e2QA==
-
-    dn: uid=bassa,ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    uid: bassa
-    cn: bassa
-    sn: 3
-    objectClass: inetOrgPerson
-    loginShell: /bin/bash
-    homeDirectory: /home/bassa
-    uidNumber: 14583102
-    gidNumber: 14564100
-    userPassword: {SSHA}9eRx9GK6tD9tI3sjJqhEkuduFWVvNr3Rv3e2QA==
-    mail: bassa@rahasak.com
-    gecos: Bassa User
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
