@@ -10,9 +10,8 @@ data:
     echo "kubectl installed";
     sleep 2;
     PODNAME=$(kubectl -n openldap get pod -l app.kubernetes.io/name=openldap-stack-ha --field-selector=status.phase==Running -o jsonpath="{.items[0].metadata.name}")
-    echo ${PODNAME};
-    #kubectl cp /cache/01-default-users.ldif openldap/${PODNAME}:/tmp && echo "copied ldif..";
-    #sleep 3;
+    kubectl cp /cache/01-default-users.ldif openldap/${PODNAME}:/tmp && echo "copied ldif..";
+    sleep 3;
     #kubectl -n openldap exec -i -t ${PODNAME} -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif;
     #sleep 3;
     #echo "ldif executed...";
