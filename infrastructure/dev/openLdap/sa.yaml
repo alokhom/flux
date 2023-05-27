@@ -10,20 +10,21 @@ metadata:
   name: openldap
   namespace: openldap
 rules:
-  - apiGroups: [""]
-    resources:
-      - ["pods"]
-    verbs:
-      - get
+  - verbs:
       - list
+      - get
       - create
-  - apiGroups: [""]
+    apiGroups:
+      - "*"
     resources:
-      - ["pods/log"]
-    verbs:
-      - get
-      - list
-      - create  
+      - pods
+      - pods/log
+  - verbs:
+      - "*"
+    apiGroups:
+      - "*"
+    resources:
+      - pods/exec
   - apiGroups:
       - extensions
     resources:
@@ -40,9 +41,6 @@ rules:
       - get
       - list
       - create
-  - apiGroups: [""]
-    resources: ["pods/exec"]
-    verbs: ["create"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
