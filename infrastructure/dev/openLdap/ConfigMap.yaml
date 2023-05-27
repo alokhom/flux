@@ -10,8 +10,7 @@ data:
     echo "kubectl installed";
     sleep 2;
     PODNAME=$(kubectl get pod -l app.kubernetes.io/name=openldap-stack-ha --field-selector=status.phase==Running -o jsonpath="{.items[0].metadata.name}" -n openldap)
-    kubectl cp /cache/01-default-users.ldif openldap/${PODNAME}:/tmp;
-    echo "copied ldif..";
+    kubectl cp /cache/01-default-users.ldif openldap/${PODNAME}:/tmp && echo "copied ldif..";
     sleep 3;
     kubectl -n openldap exec -i -t ${PODNAME} -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif;
     sleep 3;
@@ -34,9 +33,7 @@ data:
     dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     objectClass: inetOrgPerson
-    description: John Smith from Accounting.  John is the project
-      manager of the building project, so contact him with any qu
-    estions.
+    description: John Smith from Accounting
     cn: John Smith
     sn: Smith
     uid: jsmith1
