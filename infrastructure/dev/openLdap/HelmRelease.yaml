@@ -79,11 +79,6 @@ spec:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              #- op: add #action 
-              #  path: "/spec/template/spec/containers/0/volumeMounts/10" #resouirce we want to change
-              #  value: 
-              #    name: check 
-              #    mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
           - target:
               version: v1
               kind: ConfigMap
@@ -378,7 +373,7 @@ spec:
         displayName: mainuser
         cn: mainuser
         uidNumber: 25065
-        userPassword: {SHA}0Jw+b/kiLk4qZgh9BVljzI6n16o=
+        userPassword: {SSHA}AEjfk6ao0ASWz1OL8FeyS6rxvHDDWotT
         mail:mainuser@gmail.com
 
     # Custom openldap ACLs
