@@ -248,7 +248,7 @@ spec:
     ##
     extraDeploy: []
 
-    replicaCount: 1
+    replicaCount: 3
 
     image:
       # From repository https://hub.docker.com/r/bitnami/openldap/
