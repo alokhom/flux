@@ -59,6 +59,8 @@ spec:
               - op: add
                 path: "/spec/template/spec/containers/0/"
                 value:
+                  name: openldap-stack-ha
+                  image: osixia/openldap:stable-arm64v8
                   command: ['sh', '-c']
                   args:
                   - cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/
