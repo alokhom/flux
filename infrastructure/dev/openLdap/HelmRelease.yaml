@@ -55,7 +55,14 @@ spec:
               #    - name: check
               #      mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
               #####
-              # container 0 
+              # container 0
+              - op: add
+                path: "/spec/template/spec/containers/0/"
+                value:
+                  command: ['sh', '-c']
+                  args:
+                  - cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/
+                  - echo copied;
               - op: replace #action 
                 path: "/spec/template/spec/containers/0/ports/0/containerPort" #resouirce we want to change
                 value: 389
@@ -79,13 +86,6 @@ spec:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              - op: add
-                path: "/spec/template/spec/containers/0/"
-                value:
-                  command: ['sh', '-c']
-                  args:
-                  - cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/
-                  - echo copied;
           - target:
               version: v1
               kind: ConfigMap
