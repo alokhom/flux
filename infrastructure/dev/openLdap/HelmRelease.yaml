@@ -348,13 +348,13 @@ spec:
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
       01-default-users.ldif: |-
-        dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-        changetype: add
-        objectClass: organizationalUnit
-        objectClass: top
-        ou: users
+        #dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
+        #changetype: add
+        #objectClass: organizationalUnit
+        #objectClass: top
+        #ou: users
 
-        dn: uid=testuser2,ou=users,dc=systemtracker,dc=no-ip,dc=org
+        dn: uid=testuser2,dc=systemtracker,dc=no-ip,dc=org
         changetype: add
         objectClass: person
         objectClass: inetOrgPerson
