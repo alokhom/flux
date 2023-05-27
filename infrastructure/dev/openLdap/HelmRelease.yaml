@@ -347,14 +347,14 @@ spec:
     # Custom openldap configuration files used to override default settings
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
-      01-default-group.ldif: |-
+      01-default-users.ldif: |-
         dn: cn=users,dc=systemtracker,dc=no-ip,dc=org
         cn: users
         changetype: add
         gidnumber: 500
         objectclass: posixGroup
         objectclass: top
-      01-default-users.ldif: |-
+
         dn: cn=Jean Dupond,dc=systemtracker,dc=no-ip,dc=org
         cn: Jean Dupond
         changetype: add
