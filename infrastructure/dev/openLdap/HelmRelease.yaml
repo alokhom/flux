@@ -377,6 +377,7 @@ spec:
         mail:mainuser@gmail.com
 
         dn: cn=Jean,dc=systemtracker,dc=no-ip,dc=org
+        changetype: add
         cn: Jean
         gidnumber: 500
         givenname: Jean
