@@ -39,21 +39,21 @@ spec:
                   emptyDir: {}
               #####
               # Initcontainer 1
-              #- op: add #action 
-              #  path: "/spec/template/spec/initContainers/1" #resouirce we want to change
-              #  value:
-              #    name: init-2
-              #    image: busybox
-              #    command: ['sh', '-c']
-              #    args:
-              #    - >
-              #      chmod -R 777 /container/service/slapd/assets/config/bootstrap/ldif/custom/;
-              #      cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;
-              #    volumeMounts:
-              #    - name: custom-ldif-files
-              #      mountPath: /ldifs
-              #    - name: check
-              #      mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
+              - op: add #action 
+                path: "/spec/template/spec/initContainers/1" #resouirce we want to change
+                value:
+                  name: init-2
+                  image: busybox
+                  command: ['sh', '-c']
+                  args:
+                  - >
+                    chmod -R 777 /container/service/slapd/assets/config/bootstrap/ldif/custom/;
+                    cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;
+                  volumeMounts:
+                  - name: custom-ldif-files
+                    mountPath: /ldifs
+                  - name: check
+                    mountPath: "/container/service/slapd/assets/config/bootstrap/ldif/custom"
               #####
               # container 0 
               - op: replace #action 
@@ -79,13 +79,6 @@ spec:
                   name: data
                   mountPath: /etc/ldap/slapd.d
                   subPath: config-data
-              - op: add #action 
-                path: "/spec/template/spec/containers/0" #resouirce we want to change
-                value:
-                  command: ['sh', '-c']
-                  args:
-                  - >
-                    cp /ldifs/* /container/service/slapd/assets/config/bootstrap/ldif/custom/ && echo copied;
           - target:
               version: v1
               kind: ConfigMap
