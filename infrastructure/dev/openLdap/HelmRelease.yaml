@@ -347,14 +347,14 @@ spec:
     # Custom openldap configuration files used to override default settings
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
-      01-default-users.ldif: |-
-        dn: cn=Manager,dc=systemtracker,dc=no-ip,dc=org
-        objectClass: person
-        objectClass: top
-        cn: Manager
-        sn: Manager
-        userPassword: {SSHA}5A+qOOYW+8pyDdUh6MQwRGl4uT30UAIWbVAChA==
-        changetype: add
+      initial-ous.ldif: |-
+        dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: organizationalUnit
+        ou: People
+
+        dn: ou=Group,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: organizationalUnit
+        ou: Group
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
