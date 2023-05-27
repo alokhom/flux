@@ -9,14 +9,10 @@ data:
     curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x kubectl && mv ./kubectl /usr/bin/kubectl;
     echo "kubectl installed";
     sleep 1;
-    kubectl cp ./cache/01-default-users.ldif openldap/openldap-2:/tmp || \
-    kubectl cp ./cache/01-default-users.ldif openldap/openldap-1:/tmp || \
-    kubectl cp ./cache/01-default-users.ldif openldap/openldap-0:/tmp;
-    echo "copoed ldif..";
+    kubectl cp /cache/01-default-users.ldif openldap/openldap-2:/tmp || kubectl cp /cache/01-default-users.ldif openldap/openldap-1:/tmp || kubectl cp /cache/01-default-users.ldif openldap/openldap-0:/tmp;
+    echo "copied ldif..";
     sleep 2;
-    kubectl -n openldap exec -i -t openldap-2 -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif || \
-    kubectl -n openldap exec -i -t openldap-1 -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif || \
-    kubectl -n openldap exec -i -t openldap-0 -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif;
+    kubectl -n openldap exec -i -t openldap-2 -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif || kubectl -n openldap exec -i -t openldap-1 -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif || kubectl -n openldap exec -i -t openldap-0 -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif;
     sleep 1;
     echo "ldif executed...";
     kubectl -n openldap exec -i -t openldap-2 -- ldapsearch -x -W -D "cn=ramesh,dc=tgs,dc=com" -b "uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org" "(objectclass=*)";
