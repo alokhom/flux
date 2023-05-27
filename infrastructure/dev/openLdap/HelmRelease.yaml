@@ -348,26 +348,13 @@ spec:
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
     customLdifFiles:
       01-default-users.ldif: |-
-        dn: cn=users,dc=systemtracker,dc=no-ip,dc=org
-        cn: users
+        dn: cn=Manager,dc=systemtracker,dc=no-ip,dc=org
+        objectClass: person
+        objectClass: top
+        cn: Manager
+        sn: Manager
+        userPassword: {SSHA}5A+qOOYW+8pyDdUh6MQwRGl4uT30UAIWbVAChA==
         changetype: add
-        gidnumber: 500
-        objectclass: posixGroup
-        objectclass: top
-
-        dn: cn=Jean Dupond,dc=systemtracker,dc=no-ip,dc=org
-        cn: Jean Dupond
-        changetype: add
-        gidnumber: 500
-        givenname: Jean
-        homedirectory: /home/users/jdupond
-        objectclass: inetOrgPerson
-        objectclass: posixAccount
-        objectclass: top
-        sn: Dupond
-        uid: jdupond
-        uidnumber: 1000
-        userPassword: {MD5}KOULhzfBhPTq9k7a9XfCGw==
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
