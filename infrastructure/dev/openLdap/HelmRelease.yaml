@@ -349,10 +349,12 @@ spec:
     customLdifFiles:
       initial-ous.ldif: |-
         dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
+        changetype: add
         objectClass: organizationalUnit
         ou: People
 
         dn: ou=Group,dc=systemtracker,dc=no-ip,dc=org
+        changetype: add
         objectClass: organizationalUnit
         ou: Group
 
