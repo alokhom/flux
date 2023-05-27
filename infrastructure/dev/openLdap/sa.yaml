@@ -12,11 +12,18 @@ metadata:
 rules:
   - apiGroups: [""]
     resources:
-      - ["pods", "pods/log"]
+      - ["pods"]
     verbs:
       - get
       - list
-      - create 
+      - create
+  - apiGroups: [""]
+    resources:
+      - ["pods/log"]
+    verbs:
+      - get
+      - list
+      - create  
   - apiGroups:
       - extensions
     resources:
