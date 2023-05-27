@@ -376,6 +376,19 @@ spec:
         userPassword: {SSHA}AEjfk6ao0ASWz1OL8FeyS6rxvHDDWotT
         mail:mainuser@gmail.com
 
+        dn: cn=Jean,dc=systemtracker,dc=no-ip,dc=org
+        cn: Jean
+        gidnumber: 500
+        givenname: Jean
+        homedirectory: /home/jdupond
+        objectclass: inetOrgPerson
+        objectclass: posixAccount
+        objectclass: top
+        sn: Dupond
+        uid: jdupond
+        uidnumber: 1000
+        userpassword: {SSHA}AEjfk6ao0ASWz1OL8FeyS6rxvHDDWotT
+
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
     customAcls: |-
