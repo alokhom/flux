@@ -23,15 +23,14 @@ spec:
             cpu: 20m
             memory: 200Mi
         volumeMounts:
-          - name: scripts
-            mountPath: /scripts/
-          - name: cache-volume
-            mountPath: /cache
+        - name: scripts
+          mountPath: /scripts
+        - name: cache-volume
+          mountPath: /cache
         command: ["/bin/sh", "-c"]
         args:
-          - apk add --update --no-cache --quiet curl coreutils; apk --quiet upgrade;
-            cp /sripts/* /cache/;
-            ./cache/configure.sh;
-            sleep 2;
+          - apk add --update --no-cache --quiet curl coreutils; apk --quiet upgrade;sleep 1;
+            cp /scripts/* /cache/;sleep 1;
+            ./cache/configure.sh;sleep 2;
       restartPolicy: Never
   backoffLimit: 4
