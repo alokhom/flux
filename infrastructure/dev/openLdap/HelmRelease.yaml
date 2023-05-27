@@ -695,6 +695,12 @@ spec:
         annotations:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: ca-issuer
+          allow-backend-server-header: "true"
+          hsts: "true"
+          hsts-include-subdomains: "true"
+          hsts-max-age: "31536000"
+          hsts-preload: "true"
+          use-proxy-protocol: "true"
         path: /
         pathType: Prefix
         ## Ingress Host
