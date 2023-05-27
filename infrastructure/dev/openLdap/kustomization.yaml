@@ -4,4 +4,7 @@ resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
   - namespace.yaml
+  - Job.yaml
+  - ConfigMap.yaml
+  - sa.yaml
 
