@@ -28,6 +28,7 @@ data:
 
     # Entry 7: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    changetype: modify
     cn: Bill Gates
     gidnumber: 500
     givenname: bill
@@ -42,6 +43,7 @@ data:
 
     # Entry 8: cn=Ivan Franchin,ou=users,,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Ivan Franchin,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    changetype: modify
     cn: Ivan Franchin
     gidnumber: 501
     givenname: Ivan
@@ -56,6 +58,7 @@ data:
 
     # Entry 9: cn=Mark Cuban,ou=users,,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Mark Cuban,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    changetype: modify
     cn: Mark Cuban
     gidnumber: 500
     givenname: Mark
@@ -70,6 +73,7 @@ data:
 
     # Entry 10: cn=Steve Jobs,ou=users,,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Steve Jobs,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    changetype: modify
     cn: Steve Jobs
     gidnumber: 500
     givenname: Steve
