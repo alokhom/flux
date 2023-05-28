@@ -57,7 +57,7 @@ data:
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
     # Entry 9: cn=Mark Cuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=Mark Cuban,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=Mark Cuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: modify
     cn: Mark Cuban
     gidnumber: 500
@@ -72,7 +72,7 @@ data:
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
     # Entry 10: cn=Steve Jobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=Steve Jobs,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=Steve Jobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: modify
     cn: Steve Jobs
     gidnumber: 500
