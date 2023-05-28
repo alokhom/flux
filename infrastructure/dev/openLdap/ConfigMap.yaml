@@ -86,17 +86,3 @@ data:
     uid: sjobs
     uidnumber: 1001
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    ##### 
-    dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    objectClass: organizationalUnit
-    objectclass: top
-    ou: People
-
-    #####
-    dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    objectClass: organizationalUnit
-    objectclass: top
-    ou: groups
