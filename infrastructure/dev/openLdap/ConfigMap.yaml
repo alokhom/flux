@@ -26,20 +26,3 @@ data:
 
     dn: cn=Robert Smith,ou=nation,dc=systemtracker,dc=no-ip,dc=org
     changetype: delete
-
-    dn: cn=Robert Smith,ou=nation,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    objectclass: inetOrgPerson
-    cn: Robert Smith
-    cn: Robert J Smith
-    cn: bob  smith
-    sn: smith
-    uid: rjsmith
-    carlicense: HISCAR 123
-    homephone: 555-111-2222
-    mail: r.smith@example.com
-    mail: rsmith@example.com
-    mail: bob.smith@example.com
-    description: swell guy
-    ou: Human Resources
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
