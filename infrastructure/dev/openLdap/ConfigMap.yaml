@@ -22,8 +22,9 @@ data:
     #####
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: add
     objectclass: organizationalUnit
+    objectclass: top
     ou: users
 
     # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
@@ -34,6 +35,8 @@ data:
     givenname: bill
     homedirectory: /home/users/bgates
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: gates
     uid: bgates
     uidnumber: 1000
@@ -47,6 +50,8 @@ data:
     givenname: Ivan
     homedirectory: /home/users/ifranchin
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: Franchin
     uid: ifranchin
     uidnumber: 1003
@@ -60,6 +65,8 @@ data:
     givenname: Mark
     homedirectory: /home/users/mcuban
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: Cuban
     uid: mcuban
     uidnumber: 1002
@@ -73,6 +80,8 @@ data:
     givenname: Steve
     homedirectory: /home/users/sjobs
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: Jobs
     uid: sjobs
     uidnumber: 1001
@@ -82,10 +91,12 @@ data:
     dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     objectClass: organizationalUnit
+    objectclass: top
     ou: People
 
     #####
     dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     objectClass: organizationalUnit
+    objectclass: top
     ou: groups
