@@ -31,7 +31,6 @@ data:
     cn: bob  smith
     sn: smith
     uid: rjsmith
-    userpassword: rJsmitH
     carlicense: HISCAR 123
     homephone: 555-111-2222
     mail: r.smith@example.com
