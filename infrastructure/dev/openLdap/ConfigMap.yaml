@@ -19,57 +19,12 @@ data:
     sleep 5;
   
   01-default-users.ldif: |
-    ##### 
-    dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    objectClass: organizationalUnit
-    ou: People
-
-    # Add John Smith to the organization
-    dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    objectClass: inetOrgPerson
-    description: John Smith from Accounting
-    cn: John Smith
-    sn: Smith
-    uid: jsmith1
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    objectClass: organizationalUnit
-    ou: groups
-
-    ##### groups users
-    # Entry 4: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: admin
-    sn: admin
-    uid: admin
-    gidnumber: 501
-    memberuid: 1003
-    objectClass: inetOrgPerson
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    # Entry 5: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: developers
-    sn: developers
-    uid: developers
-    gidnumber: 500
-    memberuid: 1000
-    memberuid: 1001
-    memberuid: 1002
-    objectClass: inetOrgPerson
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
     #####
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     objectclass: organizationalUnit
+    objectclass: top
     ou: users
 
     # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
@@ -80,6 +35,8 @@ data:
     givenname: bill
     homedirectory: /home/users/bgates
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: gates
     uid: bgates
     uidnumber: 1000
@@ -93,6 +50,8 @@ data:
     givenname: Ivan
     homedirectory: /home/users/ifranchin
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: Franchin
     uid: ifranchin
     uidnumber: 1003
@@ -106,6 +65,8 @@ data:
     givenname: Mark
     homedirectory: /home/users/mcuban
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: Cuban
     uid: mcuban
     uidnumber: 1002
@@ -119,7 +80,62 @@ data:
     givenname: Steve
     homedirectory: /home/users/sjobs
     objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
     sn: Jobs
     uid: sjobs
     uidnumber: 1001
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    ##### 
+    dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    objectClass: organizationalUnit
+    objectclass: top
+    ou: People
+
+    # Add John Smith to the organization
+    dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    objectClass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
+    description: John Smith from Accounting
+    cn: John Smith
+    sn: Smith
+    uid: jsmith1
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    #####
+    dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    objectClass: organizationalUnit
+    objectclass: top
+    ou: groups
+
+    ##### groups users
+    # Entry 4: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    cn: admin
+    sn: admin
+    uid: admin
+    gidnumber: 501
+    memberuid: 1003
+    objectclass: posixGroup
+    objectclass: top
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    # Entry 5: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    cn: developers
+    sn: developers
+    uid: developers
+    gidnumber: 500
+    memberuid: 1000
+    memberuid: 1001
+    memberuid: 1002
+    objectclass: posixGroup
+    objectclass: top
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
