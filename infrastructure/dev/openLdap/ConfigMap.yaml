@@ -21,7 +21,7 @@ data:
   01-default-users.ldif: |
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
+    changetype: modify
     objectclass: organizationalUnit
     objectclass: top
     ou: users
