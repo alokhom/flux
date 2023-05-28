@@ -12,7 +12,7 @@ data:
     PODNAME=$(kubectl -n openldap get pod -l app.kubernetes.io/name=openldap-stack-ha --field-selector=status.phase==Running -o jsonpath="{.items[0].metadata.name}")
     kubectl cp /cache/01-default-users.ldif openldap/${PODNAME}:/tmp && echo "copied ldif..";
     sleep 3;
-    kubectl -n openldap exec -i -t ${PODNAME} -- ldapmodify -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif;
+    kubectl -n openldap exec -i -t ${PODNAME} -- ldapmodify -a -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif;
     sleep 3;
     echo "ldif executed...";
     kubectl -n openldap exec -i -t ${PODNAME} -- ldapsearch -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -b "uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org" "(objectclass=*)";
@@ -22,67 +22,6 @@ data:
     #####
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     objectclass: organizationalUnit
     objectclass: top
     ou: users
-
-    # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: Bill Gates
-    gidnumber: 500
-    givenname: bill
-    homedirectory: /home/users/bgates
-    objectclass: inetOrgPerson
-    objectclass: posixAccount
-    objectclass: top
-    sn: gates
-    uid: bgates
-    uidnumber: 1000
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    # Entry 8: uid=ifranchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=ifranchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: Ivan Franchin
-    gidnumber: 501
-    givenname: Ivan
-    homedirectory: /home/users/ifranchin
-    objectclass: inetOrgPerson
-    objectclass: posixAccount
-    objectclass: top
-    sn: Franchin
-    uid: ifranchin
-    uidnumber: 1003
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    # Entry 9: uid=mcuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=mcuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: Mark Cuban
-    gidnumber: 500
-    givenname: Mark
-    homedirectory: /home/users/mcuban
-    objectclass: inetOrgPerson
-    objectclass: posixAccount
-    objectclass: top
-    sn: Cuban
-    uid: mcuban
-    uidnumber: 1002
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    # Entry 10: uid=sjobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=sjobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: Steve Jobs
-    gidnumber: 500
-    givenname: Steve
-    homedirectory: /home/users/sjobs
-    objectclass: inetOrgPerson
-    objectclass: posixAccount
-    objectclass: top
-    sn: Jobs
-    uid: sjobs
-    uidnumber: 1001
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
