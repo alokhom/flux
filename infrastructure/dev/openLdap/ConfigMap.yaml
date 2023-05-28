@@ -23,5 +23,17 @@ data:
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
     objectclass: organizationalUnit
-    objectclass: top
     ou: users
+
+    # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    cn: Bill Gates
+    gidnumber: 500
+    givenname: bill
+    homedirectory: /home/users/bgates
+    objectclass: inetOrgPerson
+    sn: gates
+    uid: bgates
+    uidnumber: 1000
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
