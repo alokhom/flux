@@ -19,20 +19,24 @@ data:
     sleep 5;
   
   01-default-users.ldif: |
-    #####
-    # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-    objectclass: organizationalUnit
-    ou: users
+    dn: ou=people,dc=systemtracker,dc=no-ip,dc=org
+    ou: people
+    description: All people in organisation
+    objectclass: organizationalunit
 
-    # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    cn: Bill Gates
-    gidnumber: 500
-    givenname: bill
-    homedirectory: /home/users/bgates
+    dn: cn=Robert Smith,ou=people,dc=systemtracker,dc=no-ip,dc=org
     objectclass: inetOrgPerson
-    sn: gates
-    uid: bgates
-    uidnumber: 1000
+    cn: Robert Smith
+    cn: Robert J Smith
+    cn: bob  smith
+    sn: smith
+    uid: rjsmith
+    userpassword: rJsmitH
+    carlicense: HISCAR 123
+    homephone: 555-111-2222
+    mail: r.smith@example.com
+    mail: rsmith@example.com
+    mail: bob.smith@example.com
+    description: swell guy
+    ou: Human Resources
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
