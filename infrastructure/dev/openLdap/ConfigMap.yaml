@@ -21,14 +21,14 @@ data:
   01-default-users.ldif: |
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     objectclass: organizationalUnit
     objectclass: top
     ou: users
 
     # Entry 7: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     cn: Bill Gates
     gidnumber: 500
     givenname: bill
@@ -43,7 +43,7 @@ data:
 
     # Entry 8: cn=Ivan Franchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Ivan Franchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     cn: Ivan Franchin
     gidnumber: 501
     givenname: Ivan
@@ -58,7 +58,7 @@ data:
 
     # Entry 9: cn=Mark Cuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Mark Cuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     cn: Mark Cuban
     gidnumber: 500
     givenname: Mark
@@ -73,7 +73,7 @@ data:
 
     # Entry 10: cn=Steve Jobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Steve Jobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     cn: Steve Jobs
     gidnumber: 500
     givenname: Steve
@@ -89,20 +89,20 @@ data:
 
     ##### 
     dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     objectClass: organizationalUnit
     objectclass: top
     ou: People
 
     dn: ou=Group,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     objectClass: organizationalUnit
     objectclass: top
     ou: Group
 
     # Add John Smith to the organization
     dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     objectClass: inetOrgPerson
     objectclass: top
     description: John Smith from Accounting
@@ -115,7 +115,7 @@ data:
     ##### groups users
     # Entry 4: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     cn: admin
     gidnumber: 501
     memberuid: 1003
@@ -125,7 +125,7 @@ data:
 
     # Entry 5: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
+    changetype: Modify
     cn: developers
     gidnumber: 500
     memberuid: 1000
