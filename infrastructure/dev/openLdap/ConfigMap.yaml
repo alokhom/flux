@@ -25,6 +25,8 @@ data:
     objectclass: organizationalunit
 
     dn: cn=Robert Smith,ou=nation,dc=systemtracker,dc=no-ip,dc=org
+    changetype: userPassword
+    replace: 
     objectclass: inetOrgPerson
     cn: Robert Smith
     cn: Robert J Smith
