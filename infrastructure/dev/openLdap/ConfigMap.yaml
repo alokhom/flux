@@ -27,7 +27,6 @@ data:
 
     # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     cn: Bill Gates
     gidnumber: 500
     givenname: bill
