@@ -20,8 +20,7 @@ data:
   
   01-default-users.ldif: |
     dn: ou=nation,dc=systemtracker,dc=no-ip,dc=org
-    changetype: modify
-    replace: description
+    changetype: add
     ou: nation
     description: All nation in organisation
     objectclass: organizationalunit
