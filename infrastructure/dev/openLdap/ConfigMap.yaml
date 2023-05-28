@@ -25,19 +25,55 @@ data:
     objectClass: organizationalUnit
     ou: People
 
-    dn: ou=Group,dc=systemtracker,dc=no-ip,dc=org
+    # Add John Smith to the organization
+    dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    objectClass: inetOrgPerson
+    description: John Smith from Accounting
+    cn: John Smith
+    sn: Smith
+    uid: jsmith1
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     objectClass: organizationalUnit
-    ou: Group
+    ou: groups
 
+    ##### groups users
+    # Entry 4: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    cn: admin
+    sn: admin
+    uid: admin
+    gidnumber: 501
+    memberuid: 1003
+    objectClass: inetOrgPerson
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    # Entry 5: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    changetype: add
+    cn: developers
+    sn: developers
+    uid: developers
+    gidnumber: 500
+    memberuid: 1000
+    memberuid: 1001
+    memberuid: 1002
+    objectClass: inetOrgPerson
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    #####
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     objectclass: organizationalUnit
     ou: users
 
-    # Entry 7: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     cn: Bill Gates
     gidnumber: 500
@@ -49,8 +85,8 @@ data:
     uidnumber: 1000
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
-    # Entry 8: cn=Ivan Franchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=Ivan Franchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 8: uid=ifranchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=ifranchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     cn: Ivan Franchin
     gidnumber: 501
@@ -62,8 +98,8 @@ data:
     uidnumber: 1003
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
-    # Entry 9: cn=Mark Cuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=Mark Cuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 9: uid=mcuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=mcuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     cn: Mark Cuban
     gidnumber: 500
@@ -75,8 +111,8 @@ data:
     uidnumber: 1002
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
-    # Entry 10: cn=Steve Jobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=Steve Jobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 10: uid=sjobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=sjobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     cn: Steve Jobs
     gidnumber: 500
@@ -86,35 +122,4 @@ data:
     sn: Jobs
     uid: sjobs
     uidnumber: 1001
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    # Add John Smith to the organization
-    dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    objectClass: inetOrgPerson
-    description: John Smith from Accounting
-    cn: John Smith
-    sn: Smith
-    uid: jsmith1
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    ##### groups users
-    # Entry 4: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: admin
-    gidnumber: 501
-    memberuid: 1003
-    objectClass: inetOrgPerson
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    # Entry 5: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: developers
-    gidnumber: 500
-    memberuid: 1000
-    memberuid: 1001
-    memberuid: 1002
-    objectClass: inetOrgPerson
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
