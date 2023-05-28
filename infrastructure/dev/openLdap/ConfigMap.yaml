@@ -22,14 +22,12 @@ data:
     #####
     # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     objectclass: organizationalUnit
     objectclass: top
     ou: users
 
     # Entry 7: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: uid=bgates,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     cn: Bill Gates
     gidnumber: 500
     givenname: bill
@@ -44,7 +42,6 @@ data:
 
     # Entry 8: uid=ifranchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: uid=ifranchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     cn: Ivan Franchin
     gidnumber: 501
     givenname: Ivan
@@ -59,7 +56,6 @@ data:
 
     # Entry 9: uid=mcuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: uid=mcuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     cn: Mark Cuban
     gidnumber: 500
     givenname: Mark
@@ -74,7 +70,6 @@ data:
 
     # Entry 10: uid=sjobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: uid=sjobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     cn: Steve Jobs
     gidnumber: 500
     givenname: Steve
@@ -89,14 +84,12 @@ data:
 
     ##### 
     dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     objectClass: organizationalUnit
     objectclass: top
     ou: People
 
     # Add John Smith to the organization
     dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     objectClass: inetOrgPerson
     objectclass: posixAccount
     objectclass: top
@@ -108,7 +101,6 @@ data:
 
     #####
     dn: ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
     objectClass: organizationalUnit
     objectclass: top
     ou: groups
