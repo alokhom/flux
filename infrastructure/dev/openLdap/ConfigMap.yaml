@@ -112,30 +112,3 @@ data:
     objectClass: organizationalUnit
     objectclass: top
     ou: groups
-
-    ##### groups users
-    # Entry 4: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: admin
-    sn: admin
-    uid: admin
-    gidnumber: 501
-    memberuid: 1003
-    objectclass: posixGroup
-    objectclass: top
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
-
-    # Entry 5: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    dn: uid=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
-    cn: developers
-    sn: developers
-    uid: developers
-    gidnumber: 500
-    memberuid: 1000
-    memberuid: 1001
-    memberuid: 1002
-    objectclass: posixGroup
-    objectclass: top
-    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
