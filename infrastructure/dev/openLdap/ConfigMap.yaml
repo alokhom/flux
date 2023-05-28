@@ -19,22 +19,114 @@ data:
     sleep 5;
   
   01-default-users.ldif: |
-    dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 3: ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
+    objectclass: organizationalUnit
+    objectclass: top
+    ou: users
+
+    # Entry 7: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=Bill Gates,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    cn: Bill Gates
+    gidnumber: 500
+    givenname: bill
+    homedirectory: /home/users/bgates
+    objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
+    sn: gates
+    uid: bgates
+    uidnumber: 1000
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    # Entry 8: cn=Ivan Franchin,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=Ivan Franchin,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    cn: Ivan Franchin
+    gidnumber: 501
+    givenname: Ivan
+    homedirectory: /home/users/ifranchin
+    objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
+    sn: Franchin
+    uid: ifranchin
+    uidnumber: 1003
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    # Entry 9: cn=Mark Cuban,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=Mark Cuban,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    cn: Mark Cuban
+    gidnumber: 500
+    givenname: Mark
+    homedirectory: /home/users/mcuban
+    objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
+    sn: Cuban
+    uid: mcuban
+    uidnumber: 1002
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    # Entry 10: cn=Steve Jobs,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=Steve Jobs,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    cn: Steve Jobs
+    gidnumber: 500
+    givenname: Steve
+    homedirectory: /home/users/sjobs
+    objectclass: inetOrgPerson
+    objectclass: posixAccount
+    objectclass: top
+    sn: Jobs
+    uid: sjobs
+    uidnumber: 1001
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+
+    ##### 
+    dn: ou=People,dc=systemtracker,dc=no-ip,dc=org
+    changetype: modify
     objectClass: organizationalUnit
+    objectclass: top
     ou: People
 
     dn: ou=Group,dc=systemtracker,dc=no-ip,dc=org
-    changetype: add
+    changetype: modify
     objectClass: organizationalUnit
+    objectclass: top
     ou: Group
 
     # Add John Smith to the organization
     dn: uid=jsmith1,ou=People,dc=systemtracker,dc=no-ip,dc=org
     changetype: modify
     objectClass: inetOrgPerson
+    objectclass: top
     description: John Smith from Accounting
     cn: John Smith
     sn: Smith
     uid: jsmith1
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+
+    ##### groups users
+    # Entry 4: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=admin,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    changetype: modify
+    cn: admin
+    gidnumber: 501
+    memberuid: 1003
+    objectclass: posixGroup
+    objectclass: top
+    userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
+
+    # Entry 5: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=developers,ou=groups,dc=systemtracker,dc=no-ip,dc=org
+    changetype: modify
+    cn: developers
+    gidnumber: 500
+    memberuid: 1000
+    memberuid: 1001
+    memberuid: 1002
+    objectclass: posixGroup
+    objectclass: top
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
