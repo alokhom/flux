@@ -41,8 +41,8 @@ data:
     uidnumber: 1000
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
-    # Entry 8: cn=Ivan Franchin,ou=users,,dc=systemtracker,dc=no-ip,dc=org
-    dn: cn=Ivan Franchin,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 8: cn=Ivan Franchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
+    dn: cn=Ivan Franchin,ou=users,dc=systemtracker,dc=no-ip,dc=org
     changetype: modify
     cn: Ivan Franchin
     gidnumber: 501
@@ -56,7 +56,7 @@ data:
     uidnumber: 1003
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
-    # Entry 9: cn=Mark Cuban,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 9: cn=Mark Cuban,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Mark Cuban,ou=users,,dc=systemtracker,dc=no-ip,dc=org
     changetype: modify
     cn: Mark Cuban
@@ -71,7 +71,7 @@ data:
     uidnumber: 1002
     userPassword:: e1NTSEF9a2xnWTRQQm5CYWptc2VncUNjMXdsWS9ZeHNyL200OFU=
 
-    # Entry 10: cn=Steve Jobs,ou=users,,dc=systemtracker,dc=no-ip,dc=org
+    # Entry 10: cn=Steve Jobs,ou=users,dc=systemtracker,dc=no-ip,dc=org
     dn: cn=Steve Jobs,ou=users,,dc=systemtracker,dc=no-ip,dc=org
     changetype: modify
     cn: Steve Jobs
