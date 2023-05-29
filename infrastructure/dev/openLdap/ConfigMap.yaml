@@ -19,7 +19,7 @@ data:
     sleep 5;
   
   01-default-users.ldif: |
-    dn: cn=Robert Smith,ou=nation,dc=systemtracker,dc=no-ip,dc=org
+    dn: uid=rjsmith,ou=nation,dc=systemtracker,dc=no-ip,dc=org
     changetype: add
     objectclass: inetOrgPerson
     cn: Robert Smith
