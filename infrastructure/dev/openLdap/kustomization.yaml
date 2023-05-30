@@ -7,4 +7,5 @@ resources:
   - Job.yaml
   - ConfigMap.yaml
   - sa.yaml
+  - Ingress.yaml
 
