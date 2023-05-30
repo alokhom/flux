@@ -32,11 +32,6 @@ spec:
               name: openldap
               labelSelector: "app.kubernetes.io/name=openldap-stack-ha"           
             patch: |
-              - op: add #action 
-                path: "/spec/template/spec/volumes/4" #resouirce we want to change
-                value:
-                  name: check
-                  emptyDir: {}
               #####
               # Initcontainer 1
               #- op: add #action 
