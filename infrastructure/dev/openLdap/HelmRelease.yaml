@@ -351,12 +351,12 @@ spec:
 
     # Custom openldap configuration files used to override default settings
     # DO NOT FORGET to put the Root Organisation object as it won't be created while using customLdifFiles
-    customLdifFiles:
-      01-default-users.ldif: |-
-        dn: ou=nation,dc=systemtracker,dc=no-ip,dc=org
-        changetype: add
-        objectClass: organizationalUnit
-        ou: nation
+    #customLdifFiles:
+    #  01-default-users.ldif: |-
+    #    dn: ou=nation,dc=systemtracker,dc=no-ip,dc=org
+    #    changetype: add
+    #    objectClass: organizationalUnit
+    #    ou: nation
 
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
