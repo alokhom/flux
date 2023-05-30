@@ -14,6 +14,7 @@ data:
     sleep 3;
     kubectl -n openldap exec -i -t ${PODNAME} -- ldapadd -a -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -H ldap://localhost -f /tmp/01-default-users.ldif;
     sleep 3;
+    kubectl -n openldap exec -i -t ${PODNAME} -- ldappasswd -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -s Anamika1978! "cn=Robert Smith,ou=nation,dc=systemtracker,dc=no-ip,dc=org"
     echo "ldif executed...";
     kubectl -n openldap exec -i -t ${PODNAME} -- ldapsearch -x -D "cn=admin,dc=systemtracker,dc=no-ip,dc=org" -w admin@Password -b "cn=Robert Smith,ou=nation,dc=systemtracker,dc=no-ip,dc=org" "(objectclass=*)";
     sleep 5;
