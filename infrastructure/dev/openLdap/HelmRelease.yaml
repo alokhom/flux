@@ -363,6 +363,11 @@ spec:
         objectClass: organizationalUnit
         ou: Group
 
+        dn: ou=nation,dc=systemtracker,dc=no-ip,dc=org
+        changetype: modify
+        objectClass: organizationalUnit
+        ou: nation
+
     # Custom openldap ACLs
     # If not defined, the following default ACLs are applied:
     customAcls: |-
