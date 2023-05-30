@@ -478,8 +478,8 @@ spec:
             nodePorts:
               http: 32080
               https: 32443
-              tcp:
-                389: 32389
+              #tcp:
+              #  389: 32389
               #udp:
               #  12222: 30233
             #nodePorts:
