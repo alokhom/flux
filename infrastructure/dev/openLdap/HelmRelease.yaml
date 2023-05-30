@@ -354,7 +354,7 @@ spec:
     customLdifFiles:
       01-default-users.ldif: |-
         dn: ou=nation,dc=systemtracker,dc=no-ip,dc=org
-        changetype: modify
+        changetype: add
         objectClass: organizationalUnit
         ou: nation
 
