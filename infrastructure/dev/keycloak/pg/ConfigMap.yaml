@@ -1,0 +1,19 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: scripts
+  namespace: keycloak
+data:
+  configure.sh: |
+    #!/bin/sh
+    curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" && chmod +x kubectl && mv ./kubectl /usr/bin/kubectl;
+    echo "kubectl installed";
+    sleep 2;
+    PODNAME=$(kubectl -n keycloak get pod -l app.kubernetes.io/name=postgres --field-selector=status.phase==Running -o jsonpath="{.items[0].metadata.name}")
+    kubectl cp /cache/pg.sql keycloak/${PODNAME}:/tmp && echo "sql file copied..";
+    sleep 3;
+    kubectl -n keycloak exec -i -t ${PODNAME} -- psql -a -f /tmp/pg.sql;
+    sleep 3;
+  
+  pg.sql: |
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO keycloak
