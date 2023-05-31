@@ -19,7 +19,8 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - image: quay.io/keycloak/keycloak:18.0.1
+      #- image: quay.io/keycloak/keycloak:18.0.1
+      - image: quay.io/keycloak/keycloak:21.1.0
         args: ["start-dev"]
         name: keycloak
         resources:
@@ -47,18 +48,19 @@ spec:
         - name: KC_PROXY
           value: "edge"
         - name: KC_DB
-          value: "mysql"
+          value: "postgres"
         - name: KC_DB_URL_HOST
-          value: "mysql-service"
+          value: "pg-postgres"
         - name: KC_DB_URL_DATABASE
-          value: "mysql"
+          value: "keycloak"
         - name: KC_DB_URL_PORT
-          value: "3306"
+          value: "5432"
         - name: KC_DB_USERNAME
           #valueFrom: { secretKeyRef: { name: pg-postgres-new, key: USERDB_USER } }
-          value: "root"
+          value: "keycloak"
         - name: KC_DB_PASSWORD
-          valueFrom: { secretKeyRef: { name: mysql-creds, key: ROOT_PASSWORD } }
+          #valueFrom: { secretKeyRef: { name: mysql-creds, key: ROOT_PASSWORD } }
+          value: "keyCloak123"
         - name: jgroups.dns.query
           value: keycloak
         ports:
