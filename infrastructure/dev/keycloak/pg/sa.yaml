@@ -48,8 +48,8 @@ metadata:
   namespace: keycloak
 subjects:
   - kind: ServiceAccount
-    name: openldap
+    name: kc
 roleRef:
   kind: Role
-  name: openldap
+  name: pg
   apiGroup: rbac.authorization.k8s.io
