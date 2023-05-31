@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: keycloak
+  namespace: keycloak
+  labels:
+    app.kubernetes.io/name: keycloak
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: keycloak
+  serviceName: "keycloak"
+  replicas: 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: keycloak
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      #- image: quay.io/keycloak/keycloak:18.0.1
+      - image: quay.io/keycloak/keycloak:21.1.0
+        args: ["start-dev"]
+        name: keycloak
+        resources:
+          requests:
+            cpu: "1200m"
+            memory: "1000Mi"
+          limits:
+            cpu: "1500m"
+            memory: "1500Mi"
+        env:
+        - name: KEYCLOAK_ADMIN
+          value: "admin"
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          value: "admin"
+        - name: KC_METRICS_ENABLED
+          value: "true"
+        - name: KC_HEALTH_ENABLED
+          value: "true"
+        - name: KC_HOSTNAME
+          value: keycloak.systemtracker.no-ip.org
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
+        - name: KC_HOSTNAME_STRICT_HTTPS
+          value: "false"
+        - name: KC_PROXY
+          value: "edge"
+        - name: KC_DB
+          value: "mysql"
+        - name: KC_DB_URL_HOST
+          value: "mysql-service"
+        - name: KC_DB_URL_DATABASE
+          value: "mysql"
+        - name: KC_DB_URL_PORT
+          value: "3306"
+        - name: KC_DB_USERNAME
+          #valueFrom: { secretKeyRef: { name: pg-postgres-new, key: USERDB_USER } }
+          value: "root"
+        - name: KC_DB_PASSWORD
+          valueFrom: { secretKeyRef: { name: mysql-creds, key: ROOT_PASSWORD } }
+        - name: jgroups.dns.query
+          value: keycloak
+        ports:
+        - name: jgroups
+          containerPort: 7600
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /realms/master
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /realms/master
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 300
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
