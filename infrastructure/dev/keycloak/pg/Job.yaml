@@ -6,7 +6,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: keycloak
+      serviceAccountName: pg
       volumes:
       - name: cache-volume
         emptyDir:
