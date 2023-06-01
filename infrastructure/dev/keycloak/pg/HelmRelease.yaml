@@ -18,9 +18,9 @@ spec:
     ## Default values for PostgreSQL deployment
 
     ## PostgreSQL docker image
-    ## use arm64v8/postgres for the same image on ARM64v8
     image:
-      repository: postgres
+      registry: "docker.io"
+      repository: "postgres"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: "15.2"
@@ -43,9 +43,17 @@ spec:
     ## Additional pod annotations
     podAnnotations: {}
 
+    ## Pod management policy
+    podManagementPolicy: OrderedReady
+
+    ## Pod update strategy
+    updateStrategyType: RollingUpdate
+
     ## Pod security context uses file system group 999 (postgres)
     podSecurityContext:
       fsGroup: 999
+      supplementalGroups:
+        - 999
 
     ## Default security options to run PostgreSQL as non-root (postgres user), read only container without privilege escalation
     securityContext:
@@ -55,10 +63,22 @@ spec:
       runAsNonRoot: true
       runAsGroup: 999
       runAsUser: 999
+      capabilities:
+        drop:
+          - ALL
 
     ## The postgres service configuration (Default is ClusterIP with port 5432)
     service:
+      type: ClusterIP
       port: 5432
+      ## The node port (only relevant for type LoadBalancer or NodePort)
+      nodePort:
+      ## The cluster ip address (only relevant for type LoadBalancer or NodePort)
+      clusterIP:
+      ## The loadbalancer ip address (only relevant for type LoadBalancer)
+      loadBalancerIP:
+      # Annotations to add to the service
+      annotations: {}
 
     resources: {}
       # limits:
@@ -68,14 +88,31 @@ spec:
       #   cpu: 100m
       #   memory: 128Mi
 
-    ## Default node type for the image
-    ## use arm64v8 for the arm64v8/postgres image
+    ## Additional node selector
     nodeSelector:
       kubernetes.io/arch: arm64
 
     tolerations: []
 
     affinity: {}
+
+    ## Maximum number of revisions maintained in revision history
+    revisionHistoryLimit:
+
+    ## Custom startup probe (overwrites default startup probe)
+    customStartupProbe: {}
+
+    ## Default startup check
+    startupProbe:
+      enabled: true
+      initialDelaySeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 30
+      successThreshold: 1
+      periodSeconds: 10
+
+    ## Custom liveness probe (overwrites default liveness probe)
+    customLivenessProbe: {}
 
     ## Default health check
     livenessProbe:
@@ -86,51 +123,98 @@ spec:
       successThreshold: 1
       periodSeconds: 10
 
+    ## Custom readiness probe (overwrites default readiness probe)
+    customReadinessProbe: {}
+
     ## Default readiness probe
     readinessProbe:
       enabled: true
-      initialDelaySeconds: 5
+      initialDelaySeconds: 10
       timeoutSeconds: 5
       failureThreshold: 3
       successThreshold: 1
       periodSeconds: 10
 
+    ## Extra init containers
+    extraInitContainers: []
+
+    ## Extra containers for usage as sidecars
+    extraContainers: []
+
     ## Additional environment variables
     env: []
-      
 
     ## Arguments for the container entrypoint process
-    arguments:
+    args: []
+
+    ## Use Kubernetes Deployment instead of StatefulSet
+    useDeployment: false
 
     ## Database configuration
     settings:
-      ## The superuser password (default: a 10 char. alpahnumerical random password will be generated)
-      superuserPassword: "postgresAdmin123"
+      ## The default postgres superuser (default when nothing is set: "postgres")
+      # superuser:
 
-      ## Postgres database authentication method (default: md5)
+      ## The superuser password
+      # superuserPassword: "postgresAdmin123"
+
+      ## Postgres database authentication method
+      ## For example: "md5"
       authMethod: md5
 
       ## Optional init database arguments
+      ## For example: "--auth-local=md5"
       initDbArgs:
 
     ## Optional user database which is created during first startup with user and password
     userDatabase:
       ## Name of the user database
-      name: keycloak
+      #name: keycloak
 
       ## Database user with full access rights
-      user: keycloak
+      #user: keycloak
 
       ## Password of the database user (default: a 10 char. alpahnumerical random password will be generated)
-      password: "keyCloak123"
+      #password: "keyCloak123"
 
     ## Optional custom configuration block that will be mounted as file in /etc/postgresql/postgresql.conf
-    customConfig: |-
+    ## For more flexible options see extraSecretConfigs: section
+    customConfig: |
+
+    ## Optional custom scripts that can be defined inline and will be mounted as files in /docker-entrypoint-initdb.d
+    customScripts: {}
+    #  01-a-script.sh: |
+    #    echo "hello"
+    #  02-another-script.sh: |
+    #    echo "hello 2"
+
+    ## A list of existing secrets that will be mounted into the container as environment variables
+    ## As an alternative these secrets can set the database superuser password or other options when settings.superuserPassword was not specified
+    ## For example: Setting POSTGRES_DB, USERDB_USER, USERDB_PASSWORD will allow creating a user database and grant access for the given user
+    extraEnvSecrets: "pg-postgres-new"
+
+    ## An existing secret with files that will be added to the postgres configuration in addition to /etc/postgresql/postgresql.conf
+    extraSecretConfigs: 
+
+    ## An existing configMap with files that will be mounted into the container as script files (*.sql, *.sh) in /docker-entrypoint-initdb.d
+    ## For more details see https://hub.docker.com/_/postgres
+    extraScripts: "scripts-init"
+
+    ## A list of additional existing secrets that will be mounted into the container
+    ## The mounted files of the secrets can be used for advanced configuration - f.e. TLS
+    extraSecrets: []
+        ## Name of the existing K8s secret
+    #  - name:
+        ## Mount path where the secret should be mounted into the container (f.e. /mysecretfolder)
+    #    mountPath:
 
     ## Storage parameters
     storage:
       ##  Set persistentVolumenClaimName to reference an existing PVC
-      # persistentVolumeClaimName: <own-pvc-name>
+      persistentVolumeClaimName:
+
+      ## Internal volume name and prefix of a created PVC
+      volumeName: "postgres-data"
 
       ## Alternative set requestedSize to define a size for a dynmaically created PVC
       requestedSize: 10Gi
@@ -141,3 +225,6 @@ spec:
       ## Default access mode (ReadWriteOnce)
       accessModes:
         - ReadWriteOnce
+
+      ## Keep a created Persistent volume claim when uninstalling the helm chart (only for option useDeployment: true)
+      keepPvc: false
