@@ -16,4 +16,5 @@ data:
     sleep 4;
   
   pg.sql: |
+    GRANT USAGE, CREATE ON SCHEMA public TO postgres;
     GRANT CREATE ON SCHEMA public TO keycloak;
