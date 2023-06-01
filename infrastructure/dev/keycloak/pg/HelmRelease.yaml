@@ -153,10 +153,10 @@ spec:
     ## Database configuration
     settings:
       ## The default postgres superuser (default when nothing is set: "postgres")
-      # superuser:
+      superuser:
 
       ## The superuser password
-      # superuserPassword: "postgresAdmin123"
+      superuserPassword: "postgresAdmin123"
 
       ## Postgres database authentication method
       ## For example: "md5"
@@ -169,13 +169,13 @@ spec:
     ## Optional user database which is created during first startup with user and password
     userDatabase:
       ## Name of the user database
-      #name: keycloak
+      name: keycloak
 
       ## Database user with full access rights
-      #user: keycloak
+      user: keycloak
 
       ## Password of the database user (default: a 10 char. alpahnumerical random password will be generated)
-      #password: "keyCloak123"
+      password: "keyCloak123"
 
     ## Optional custom configuration block that will be mounted as file in /etc/postgresql/postgresql.conf
     ## For more flexible options see extraSecretConfigs: section
@@ -191,7 +191,7 @@ spec:
     ## A list of existing secrets that will be mounted into the container as environment variables
     ## As an alternative these secrets can set the database superuser password or other options when settings.superuserPassword was not specified
     ## For example: Setting POSTGRES_DB, USERDB_USER, USERDB_PASSWORD will allow creating a user database and grant access for the given user
-    extraEnvSecrets: "pg-postgres-new"
+    extraEnvSecrets: 
 
     ## An existing secret with files that will be added to the postgres configuration in addition to /etc/postgresql/postgresql.conf
     extraSecretConfigs: 
