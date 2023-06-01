@@ -31,7 +31,7 @@ spec:
       # OAuth client ID
       clientID: "oauth2-proxy"
       # OAuth client secret
-      clientSecret: "RZmf6yQqsC9BzwXZQEeux43Jlr0bG9Me"
+      clientSecret: "Yxkt9QW5v1KZqWntg2kPGXKH9qqUcj5L"
       # Create a new secret with the following command
       # openssl rand -base64 32 | head -c 32 | base64
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)

@@ -6,9 +6,6 @@ resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
   #- Certificate.yaml
-  #- sa.yaml
-  #- Job.yaml
-  #- ConfigMap.yaml
   - ConfigMap-init.yaml
 patches:
   # Hacky way to disable the default secret
