@@ -16,4 +16,4 @@ data:
     sleep 4;
   
   pg.sql: |
-    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO keycloak
+    GRANT ALL ON SCHEMA public TO keycloak
