@@ -16,4 +16,4 @@ data:
     sleep 4;
   
   pg.sql: |
-    GRANT ALL ON SCHEMA public TO keycloak
+    GRANTCREATE ON SCHEMA public TO keycloak;
