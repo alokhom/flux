@@ -27,7 +27,7 @@ spec:
       name: mongodb-kubernetes-operator
 
       # Name of the operator image
-      operatorImageName: mongodb-kubernetes-operator
+      operatorImageName: mongodb-community-server
 
       # Name of the deployment of the operator pod
       deploymentName: mongodb-kubernetes-operator
@@ -75,10 +75,10 @@ spec:
       repo: docker.io
 
     registry:
-      agent: quay.io/mongodb
-      versionUpgradeHook: quay.io/mongodb
-      readinessProbe: quay.io/mongodb
-      operator: quay.io/mongodb
+      agent: docker.io/mongodb
+      versionUpgradeHook: docker.io/mongodb
+      readinessProbe: docker.io/mongodb
+      operator: docker.io/mongodb
       pullPolicy: Always
 
     # Set to false if CRDs have been installed already. The CRDs can be installed
