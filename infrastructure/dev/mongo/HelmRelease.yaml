@@ -33,7 +33,7 @@ spec:
       deploymentName: mongodb-kubernetes-operator
 
       # Version of mongodb-kubernetes-operator
-      version: 0.8.0
+      version: latest
 
       # Uncomment this line to watch all namespaces
       watchNamespace: "*"
