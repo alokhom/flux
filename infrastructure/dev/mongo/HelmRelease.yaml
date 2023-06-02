@@ -7,119 +7,131 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: enterprise-operator
-      version: "1.19.1"
+      chart: mongodb
+      version: "0.5.13"
       sourceRef:
         kind: HelmRepository
         name: mongo
         namespace: mongo
       interval: 5m
   values:
-    ## Operator
+    # Default values for mongodb.
 
-    # Set this to true if your cluster is managing SecurityContext for you.
-    # If running OpenShift (Cloud, Minishift, etc.), set this to true.
-    managedSecurityContext: false
+    ## MongoDB docker image
+    ## use arm64v8/redis for the same image on ARM64v8
+    image:
+      repository: mongo
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
 
-    operator:
-    # Execution environment for the operator, dev or prod. Use dev for more verbose logging
-    env: prod
+    ## Pull secrets and name override options
+    imagePullSecrets: []
+    nameOverride: ""
+    fullnameOverride: ""
 
-    # Name that will be assigned to most internal Kubernetes objects like Deployment, ServiceAccount, Role etc.
-    name: mongodb-enterprise-operator
+    ## Optional service account
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: false
+      # Annotations to add to the service account
+      annotations: {}
+      # The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: ""
 
-    # Name of the operator image
-    operator_image_name: mongodb-enterprise-operator
+    podAnnotations: {}
 
-    # Name of the deployment of the operator pod
-    deployment_name: mongodb-enterprise-operator
+    ## Pod security options
+    podSecurityContext:
+      fsGroup: 999
 
-    # Version of mongodb-enterprise-operator
-    version: 1.19.1
+    ## Don't touch - no other options supported in V0.1.0 of this chart
+    podManagementPolicy: OrderedReady
+    updateStrategyType: RollingUpdate
+    replicaCount: 1
 
-    # The Custom Resources that will be watched by the Operator. Needs to be changed if only some of the CRDs are installed
-    watchedResources:
-    - mongodb
-    - opsmanagers
-    - mongodbusers
+    ## Default security options to run Redis as non-root, read only container without privilege escalation
+    securityContext:
+      allowPrivilegeEscalation: false
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsGroup: 999
+      runAsUser: 999
 
-    nodeSelector: {}
+    service:
+      type: ClusterIP
+      port: 27017
 
+    ## Resource limits and requests
+    resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+    ## Default liveness probe
+    livenessProbe:
+      enabled: true
+      initialDelaySeconds: 30
+      timeoutSeconds: 20
+      periodSeconds: 30
+      failureThreshold: 6
+      successThreshold: 1
+
+    ## Default readiness probe
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 30
+      timeoutSeconds: 20
+      periodSeconds: 30
+      failureThreshold: 5
+      successThreshold: 1
+
+    ## Default node type for the image
+    ## use arm64v8 for the arm64v8/mongo image
+    nodeSelector:
+      kubernetes.io/arch: arm64
+
+    ## Pod tolerations
     tolerations: []
 
+    ## Pod affinity
     affinity: {}
 
-    # operator cpu requests and limits
-    resources:
-      requests:
-        cpu: 500m
-        memory: 200Mi
-      limits:
-        cpu: 900m
-        memory: 600Mi
+    ## Additional arguments for the container entrypoint process
+    args: {}
 
-    # Create operator-service account
-    createOperatorServiceAccount: true
+    ## Additional environment variables
+    env: []
 
-    vaultSecretBackend:
-    # set to true if you want the operator to store secrets in Vault
-      enabled: false
-      tlsSecretRef: ''
+    settings:
+      ## The root username (default: admin)
+      rootUsername: "admin"
+      ## The root user password (default: a 10 char. alpahnumerical random password will be generated)
+      rootPassword: "admin123"
+      ## Custom configuration (use instead of command args)
+      customConfig: |
 
-    replicas: 1
+    ## Initializes a user database with name from dbName (default connected to test database if no dbName is specified)
+    initUserDatabase:
+      ## Database name for init
+      dbName: "dev"
+      ## JavaScript for initialization of new database
+      script: |
 
-    ## Database
-    database:
-      name: mongodb-enterprise-database
-      version: 2.0.2
-
-    initDatabase:
-      name: mongodb-enterprise-init-database
-      version: 1.0.15
-
-    ## Ops Manager
-    opsManager:
-      name: mongodb-enterprise-ops-manager
-
-    initOpsManager:
-      name: mongodb-enterprise-init-ops-manager
-      version: 1.0.10
-
-    ## Application Database
-    initAppDb:
-      name: mongodb-enterprise-init-appdb
-      version: 1.0.15
-
-    agent:
-      name: mongodb-agent
-      version: 12.0.15.7646-1
-
-    mongodb:
-      name: mongodb-enterprise-appdb-database
-      repo: quay.io/mongodb
-
-
-    ## Registry
-    registry:
-      imagePullSecrets:
-      # TODO: specify for each image and move there?
-      pullPolicy: Always
-      # Specify if images are pulled from private registry
-      operator: quay.io/mongodb
-      database: quay.io/mongodb
-      initDatabase: quay.io/mongodb
-      initOpsManager: quay.io/mongodb
-      opsManager: quay.io/mongodb
-      initAppDb: quay.io/mongodb
-      appDb: quay.io/mongodb
-      agent: quay.io/mongodb
-
-    multiCluster:
-      # Specify if we want to deploy the operator in multi-cluster mode
-      clusters: []
-      kubeConfigSecretName: mongodb-enterprise-operator-multi-cluster-kubeconfig
-      performFailOver: true
-      clusterClientTimeout: 10
-      # Set this to false to disable subresource utilization
-      # It might be required on some versions of Openshift
-    subresourceEnabled: true
+    # Storage parameters
+    # When a persistentVolumenClaimName is configured the requestedSize and accessModes will be ignored and the existing PVC based on the name will be used
+    # otherwise a dynamic persistent volume will be created with PVC name of this chart and the configured requestedSize and accessModes
+    # If both parameters are missing a volatile emtpyDir volume will be used as RabbitMQ storage
+    storage:
+      # Set persistentVolumenClaimName to reference an existing PVC
+      persistentVolumeClaimName: {}
+      # Alternative set requestedSize to define a size for a dynamically created PVC
+      requestedSize: 5Gi
+      accessModes:
+        - ReadWriteOnce
+      className: "local-path"

@@ -5,4 +5,4 @@ metadata:
   namespace: mongo
 spec:
   interval: 5m
-  url: https://mongodb.github.io/helm-charts
+  url: https://groundhog2k.github.io/helm-charts/
