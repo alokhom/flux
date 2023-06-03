@@ -9,7 +9,7 @@ spec:
   isCA: false
   dnsNames:
   - actions-runner-controller-webhook.arc-runner.svc
-  - actions-runner-controller-webhook.actions-runner-system.svc.cluster.local
+  - actions-runner-controller-webhook.arc-runner.svc.cluster.local
   secretName: arc-runner-actions-runner-controller-serving-cert
   issuerRef:
     name: ca-issuer
