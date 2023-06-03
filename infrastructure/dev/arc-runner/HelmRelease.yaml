@@ -108,7 +108,7 @@ spec:
 
     runner:
       statusUpdateHook:
-        enabled: false
+        enabled: true
 
     rbac:
       {}
