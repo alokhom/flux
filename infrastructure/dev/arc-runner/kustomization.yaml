@@ -7,5 +7,5 @@ resources:
   #- sealed-secret.yaml
   #- Ingress.yaml
   #- RunnerDeployment.yaml its moved to apps.
-  - Certificate.yaml
+  #- Certificate.yaml
 
