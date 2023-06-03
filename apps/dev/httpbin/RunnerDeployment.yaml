@@ -35,7 +35,7 @@ spec:
       dockerdWithinRunnerContainer: true
       labels:
         - k8s-api
-      repository: prjmpkcopper/k8s-runner-test
+      repository: alokhom/flux
       workVolumeClaimTemplate:
         storageClassName: "local-path"
         accessModes:
