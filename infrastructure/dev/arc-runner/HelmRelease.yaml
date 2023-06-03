@@ -59,7 +59,7 @@ spec:
       #github_app_installation_id: ""
       #github_app_private_key: |
       ### GitHub PAT Configuration
-      github_token: "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"
+      github_token: "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"
       ### Basic auth for github API proxy
       #github_basicauth_username: ""
       #github_basicauth_password: ""
