@@ -8,8 +8,8 @@ spec:
   renewBefore: 360h # 15d
   isCA: false
   dnsNames:
-  - actions-runner-controller-webhook.arc-runner.svc
-  - actions-runner-controller-webhook.arc-runner.svc.cluster.local
+  - *.arc-runner.svc
+  - *.arc-runner.svc.cluster.local
   secretName: arc-runner-actions-runner-controller-serving-cert
   issuerRef:
     name: ca-issuer
