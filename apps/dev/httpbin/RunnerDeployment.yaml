@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: httpbin
+  name: github-runner-api-sa
+automountServiceAccountToken: true
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: github-runner-api-cluster-role-binding
+  namespace: httpbin
+subjects:
+  - kind: ServiceAccount
+    name: github-runner-api-sa
+    namespace: httpbin
+    apiGroup: ""
+roleRef:
+  kind: ClusterRole
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: example-runnerdeploy
+  namespace: httpbin
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: github-runner-api-sa
+      automountServiceAccountToken: true
+      image: summerwind/actions-runner-dind
+      dockerdWithinRunnerContainer: true
+      labels:
+        - k8s-api
+      repository: prjmpkcopper/k8s-runner-test
+      workVolumeClaimTemplate:
+        storageClassName: "local-path"
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+      env: []
