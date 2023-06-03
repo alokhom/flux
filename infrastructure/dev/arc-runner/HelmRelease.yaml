@@ -196,7 +196,7 @@ spec:
       # The default value is "", which means the namespace of the controller
       watchNamespace: ""
 
-    certManagerEnabled: true
+    certManagerEnabled: false
 
     admissionWebHooks:
       {}
