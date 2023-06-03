@@ -153,7 +153,7 @@ spec:
     # Metrics service resource
     metrics:
       serviceAnnotations: {}
-      serviceMonitor: false
+      serviceMonitor: true
       serviceMonitorLabels: {}
       port: 8443
       proxy:
