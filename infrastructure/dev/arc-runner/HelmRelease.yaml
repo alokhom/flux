@@ -223,7 +223,7 @@ spec:
       # The default value is "", which means the namespace of the controller
       watchNamespace: ""
 
-    certManagerEnabled: true
+    certManagerEnabled: false
 
     admissionWebHooks:
       {}
@@ -254,36 +254,37 @@ spec:
         github_webhook_secret_token: "a539c421d7e0ff4d6bf6"
         ### GitHub Apps Configuration
         ## NOTE: IDs MUST be strings, use quotes
-        github_app_id: "342511"
-        github_app_installation_id: "38228006"
+        github_app_id: "342520"
+        github_app_installation_id: "38229111"
         github_app_private_key: |
           -----BEGIN RSA PRIVATE KEY-----
-          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
+          MIIEpAIBAAKCAQEAqRC09jGw452J+KWtgNqZkOH97EqvGxLZ+D/sdP5A1Z0KFjgt
+          QvkB9pkkrzwjc053usTs1QhVBQZvyZYRKz6B8JsBdUlrVmtipPBsCmk1WpCpuqAO
+          D6N/R89xLU8pNeOK6ZTTKDs+Ue4bv4xCpAVehCKFcNZfx31e163sjZpi31jf+CaU
+          IU4HbuznJwgD28nu3Udhjpc+fUhXNkw2NP3GZDnPypTuW/Tm245IKW0TPqpQr7X4
+          Xt92eVkZVkQNXdW9+L3CnefUfagr0dKECLZg57DgTCqY2dH9meNVMO5Vm05qppl9
+          oZtUKUL+isisNsnkgLxOCHHbLH3WEyptHLriRQIDAQABAoIBAFX14qzS8yeoMEC2
+          rJM5kp8x6NO93W6clSs+BVIu/HQgVsKZaZoF1dO2ZgqbP0MfgIz8F5bxl5jofuo2
+          XSBptdPKXGFwJR1ZmFxYyfY5LCGSMFptivi0nsC6Xsc02rVFrpm5S+vGw5cQxBcO
+          j8up1zbD/qkytpxNyG1NR1twRhlc2WGJ1N/8VSqGKZpinktW9FRiTIHKGO2xdPnh
+          8CdAYaX+7PeDgxlIg+bY3Fluo8h2tniE9PQjn1JUQ9ZK01x5x+aZo77NlKxogqtY
+          hbt/x9OiyfeJ8jkviUKsVrnH6VwGcjJEcjZHrdpBXR5uhEVRi8NgOdnBd0EDSHgw
+          CJvH2TkCgYEA0nmyhnWvDnnVAbzf3NJkTeWfIgS/LNddvh2JxD8ccNz/csZt2GFc
+          NSydsH06phhEwc1O7eKTAEuhtMntwUxcjBP2Lj/042Ib0kUZ+UVYSX/QJUK7h4LY
+          l05w3F0ymFkPf83lIGv2MWIA+WL7Yit4X+MEg2oDXCdW4dO+E4aCLsMCgYEAzaIT
+          cvWYYye+BiNt1Bxk6L5TIiTjzW2ZknLarQPnkMIeVGx2qFt2OISiLK6ttSSYXR9Q
+          jOG8R0y2EfDCVSt6XBlY+l+RSNPoDnnvduVQJR20hyVeVjqM5v4CbvJCWGL1tzqv
+          A2jbsl3rgNzKq/fSRTJcd26DQx9wHKWg/C7bKlcCgYEAhn/uba5Wp9GDJRElnV91
+          abIK9xpBcM5PwWXu29HYwub29smG+Hd/DRvtyRK9n9ZyWcZxYeMgPVgXhghkPtol
+          af53myaTv5q6XKx75KdDu/RJdwYmAHrFHiuqQ6fq5SBEn09b1FQph3UxWiy+qAVP
+          bzcLc08Txpf9FWLSXHfgSTECgYEAqdERUryzjh9B9HvJtYOFahfTO71PS1UZoDGt
+          mXhCAe/tcDbqfvqZVO9jppbS6WdBVJYJxW6eOBuHuKUlN4TiVbCxJINLzeMCHwJf
+          2cZiO2Ses4UOtRNBTXmztL/oPmnrFdgmtCAiXtjlJdQwo3fTdEW0ywS+7e3GfkHi
+          AqEHaZ0CgYBLJA8PTAc4aufQnrgv+usPVy/C9jLRxJA/pyQI5g/y1RTh966+Mr2v
+          /RJ2oPimKs9kKvDYbJZZMoRQrKjXkGBr39EZ4fVUgmSAeGci2THHL3lptMRAOLoe
+          wBFoI+jqy4C/GdXU9vZhVhBUp5rlAE6eV2178jZR0Mz/GD1hlUN27A==
           -----END RSA PRIVATE KEY-----
+
         ### GitHub PAT Configuration
         #github_token: ""
       imagePullSecrets: []
@@ -401,36 +402,37 @@ spec:
         github_webhook_secret_token: ""
         ### GitHub Apps Configuration
         ## NOTE: IDs MUST be strings, use quotes
-        github_app_id: "342511"
-        github_app_installation_id: "38228006"
+        github_app_id: "342520"
+        github_app_installation_id: "38229111"
         github_app_private_key: |
           -----BEGIN RSA PRIVATE KEY-----
-          MIIEogIBAAKCAQEAl0EV092qqeInDT5r3ZgF9QMMc8xS0DSMhtiQkS9Q3uJmMnZK
-          uFNQkylGHR+YE1CjgcQl7uE+e11mFBXJbX9uD4tgTNYBp6YKM7y3iuYCSXY3p0qa
-          M/NDKAGt/etgVRzLvuARuBTszzNt5dbltuaKrpHoo0dU5jlw8WU5dQAUdYUI31ac
-          74orM2t4Nv632uJw+ksdhLrOWl2Gc3XrwlYyHvPMojeIWGPTx2MB9NWUcGw1wFEi
-          tTqQyA4iO4Hjvvv2RmSdSRRQdkSfQnkR3mE+SiZid4Yr1wG9L/l5htCkksTtNarW
-          4U93nbyw8a4/69kK4QHU7xxO8DeRyAHa75WYZwIDAQABAoIBAHAYgk7ER0kkHAEK
-          s/JESpXsrnvbf7xiVYtSUMHoqSyl6UuYs4Or61lFC3tmANS/vI3diqdhM2dGLvLP
-          urp16GGIz9Ph/tP6kDELuZMtJ6C+BjzrYyEBNlId/I7ktD4f2zgY48jjaSWeXeIq
-          w5Arh7gc1qa7pMYC6BtfA5gceQ0maVbzjZoqL62IlvK9voKObNfX8x+CMyistvYz
-          vODVl+p8T1gFkopprX+K0RI8NFtdZSLDhMbdzfZOwlhK2zPdOKB7OgG5p/M0DOqN
-          L2K1vW1alndhE4s7ueNN68VOKro4HRY6JSvhLLCNN8pHkKN6rABF5VmY6JT4SPQb
-          bW8C3sECgYEAyGYdPXHkXaGZ5wqfTTsuiWHBEMnnGKWn+kCr69N0K9ZLyyzAovcY
-          o9zRwHNPucy8/UT9Eg7yH6Fi/G3cQVX63Oe+B0IHKe0MMqrgJkF3XPAI4jNJtZMg
-          6x/jOVNddXN349o3faVyPMouncJvq29FY5cHJfocOib+jfephwoBQVECgYEAwThW
-          KK0zkNS+v3xQ0gt2pAYE2lrZruxQ8Q30E15d/79nqU8m32R/ReukFxzzSutF4zCT
-          Q3/orcOV1wK89yOLUQUR6AZWGW2s7ZXOBKZHb2ylp+RlOJXU4bYl4M36WMptTsVo
-          OE1XE2nIPbYoZVmiqCCYCcZM1+YnjwBm0x6jkDcCgYBspYgWxwejh7iT3VtumLZr
-          PzdX7c6/uxguAh/zVAn4tk8TUSkDcWnHdTG24A2KUyjnOx7lSnsUkP/EkZ9HQOEo
-          IPASqUaPAXiKg7/Qnc+j8HMwh9PfgGvpbblYXA0gX0DRpH5PPYKI2KibWU4HqOT6
-          0GfMvCPPl1KND4e2scLqcQKBgGwvthZKfF/wrukam0owfvpyIE9+pPoLeXqvPGWH
-          5gvnyQwEtJhKdfTZbuQ+In9lYplFvn8B5G8+3uwnrVSXg08XDqKiwZy1SykwQs1Z
-          qQ/bfpmWCZL4Wd0TlvvbePw0Q6XiZGt56nKFPUhIcS/mU2vd7CM09BvC041/RROa
-          ySxbAoGAUzdndh8pdz/fcd0cx0+QEzGXnCyGYIMh9pTLXVNIpRbORMCb5f/YciuZ
-          2H/XJV+03pNXVu1zMlfSqp+7m4brTo2PvhIZUHNOY5fgwXGgxY42cYoAIGuizTwJ
-          Z8ETaLhXYj3yW2nknBe05P2Mvn4f0LFAxnz2IMOE1Z/THoRUUko=
+          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
           -----END RSA PRIVATE KEY-----
+
         ### GitHub PAT Configuration
         #github_token: ""
       imagePullSecrets: []
