@@ -247,11 +247,11 @@ spec:
       ## specify log format for github webhook server.  Valid options are "text" and "json"
       logFormat: text
       secret:
-        enabled: false
-        create: false
+        enabled: true
+        create: true
         name: "github-webhook-server"
         ### GitHub Webhook Configuration
-        github_webhook_secret_token: ""
+        github_webhook_secret_token: "a539c421d7e0ff4d6bf6"
         ### GitHub Apps Configuration
         ## NOTE: IDs MUST be strings, use quotes
         github_app_id: "342511"
@@ -376,7 +376,7 @@ spec:
       # as a part of the helm release.
       # Do note that you also need actionsMetricsServer.enabled=true
       # to deploy the actions-metrics-server whose k8s service is referenced by the service monitor.
-      serviceMonitor: false
+      serviceMonitor: true
       serviceMonitorLabels: {}
       port: 8443
       proxy:
