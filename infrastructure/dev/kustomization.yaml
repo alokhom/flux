@@ -14,3 +14,4 @@ resources:
   - ./oauth2
   - ./openLdap
   - ./mongo
+  - ./arc-runner
