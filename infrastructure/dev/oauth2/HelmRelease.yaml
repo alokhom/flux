@@ -100,13 +100,17 @@ spec:
       # azure-tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
       pass-basic-auth: true
       pass-access-token: true
-      set-xauthrequest: true
       pass-user-headers: true
       pass-host-header: true
+      # return authenticated user to nginx
+      set-xauthrequest: true
+      # pass id token in authorization header
       pass-authorization-header: true
       set-authorization-header: true
+      #
       cookie-refresh: "1m"
       cookie-expire: "30m"
+      # make it true when using https
       cookie-secure: true
       email-domain: "*"
       cookie-domain: ".systemtracker.no-ip.org"
