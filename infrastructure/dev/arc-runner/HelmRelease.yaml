@@ -85,8 +85,6 @@ spec:
         qLZTrlxz1lpz0f3B9TtLQfs30oLROTCMqZL1/K+vCIRFYa1kWk7Hr/PFCVZnC8KZ
         qvbpfKyggliPD2TREjVR8jzlT6mzRXsHnHOkO2FxE9zjO4XyZvk=
         -----END RSA PRIVATE KEY-----
-
-
       ### GitHub PAT Configuration
       # github_token: "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"
       ### Basic auth for github API proxy
