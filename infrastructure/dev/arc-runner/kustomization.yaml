@@ -5,5 +5,5 @@ resources:
   - HelmRepository.yaml
   - namespace.yaml
   #- Ingress.yaml
-  - RunnerDeployment.yaml
+  #- RunnerDeployment.yaml its moved to apps.
 
