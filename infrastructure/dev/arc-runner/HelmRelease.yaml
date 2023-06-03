@@ -55,11 +55,39 @@ spec:
       annotations: {}
       ### GitHub Apps Configuration
       ## NOTE: IDs MUST be strings, use quotes
-      # github_app_id: "342494"
-      # github_app_installation_id: "38226811"
-      # github_app_private_key: 
+      github_app_id: "342502"
+      github_app_installation_id: "38227367"
+      github_app_private_key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        MIIEpQIBAAKCAQEA5hB1TwD4UbZZ9faw3Jb5oqlgHxai53iV4MekybZmuGUcZ5FK
+        0vXzhf6rpJGMOFUxf6LuRjeD0/aJfNEBa7RVAwT1DVttzdp/jCRDRfqNMVgI9NT5
+        Sy7rtsK/Yf18i/3qV+xtHTzPdt/Etleh6I2H3cn2KWfIIJiFDxcJCt/pkIeLlqQW
+        b7iTB0st3MjPxPnK37qXwd+rZgnjgPVGLXctRXQfIM/v8JVcfR5B+x5XNq/XS308
+        5yNg9hfjiHimJq/iveqXPjgkiD/0RvXDciT0QMMSiL3iSW9s875mobQ3taCipGkF
+        p1Zt+xvEIqiMHl8Kkb33t/GstL3eEDuyzuwqZQIDAQABAoIBAAXFa+vrbk8+b8tH
+        wPAHqYN3FD4zZyq/T6Mv3uZgePsvLiM69dGM8erulIewTwAqwu8cuzVvtxLeIFzN
+        MWfuQiOtQChxnrOHQ6PUVQuwWVJfjvn1TbuhFbCj+gEPRsyMNhC2kZYmLF4jBuA8
+        Goem5T2fD1nCjLaknNHgFg37x/QkJiEy3H8XQfc4y/EV1b+iuYpgjcvfTcBigzLS
+        whqj8Ibxd2vSusOOL3K3V/RIVXZQlo/iIaASLuWnJpWxYKCL/PMGkTQ1/EoqLSze
+        +cBvTyx5xmHq81lSa4hBxK4vMgltAruzRAZobEjFYZlpifkrTqryP3qMV+6OZAU+
+        19XEXxECgYEA+7QFBPusZMkVRg0AGw9apD/1PAXcdhZJNDWP5MQHegDazSGurSbz
+        0Cd6wFwfU8bUDG2r1iNPJeBsmqQHG3jgaRQ+Jn+BO6yaanzHWUldpUdMmhQLlxee
+        GrgAaiN3Qn82U/0IxlETotHhMDYJWzZkus/AxKbH6j6LdHntO3GpmGsCgYEA6f3f
+        lTKvNVTTn0P79oE6EAd22XzuZpEc7z4C0o59iHa9s5YnFjU9a84KfLJConrAP+SP
+        w9pIPtjuhI5+Qr/HJRschX1wcn01hjNsSxuIdaA+lwY9np3r+L73JPyzRNfjHpUA
+        XjhLGDYMvTi/DZqK19DLnXQ6MOGXigh4B8Z+PG8CgYEA3Q8P0X6Pu7x2+Jz2WM21
+        V8fsQ5kKNJQCGt5n0AzyXA5gHATW+q/ZNhlWT5cY1GUtWvT/FATSwHtIJtCkhVY2
+        EVN7+ifFgnlm7NtF4X7zxfLGrhOo0jwl2WV8x7r6ROag+kai7DnMuxUFZ2gt83Pk
+        J8XKkWvA7FOd+uASoECFKJ0CgYEAuLINk2Toa35DdEljTtX+ELzzkQRN4WPVpPob
+        nDug1uBzKJfyzlLD4p5GJNtIQZwGt+gfmoZn1EPDMZqQCvv5o05dGvlCkvxGDWH1
+        rutSsRYFkYv5g4Q/yJ5j0iwtDMAjo/YUzko87CVttMZf98ruoR9MOUKO1BqdVPUO
+        WYTSC70CgYEA93k6SmEQJ0z6F/oPIt+BLmf36ptqDA2S6GlFWBkaPdQlRykYRVOW
+        Q/iOGkBgfiMf7k2SerFNoJIHuZnahJClITo4BPuoGn8LePMp6arYeXG9fk0AKPx1
+        UnBCXYNY0MnmjKQPcE3Spjbfa2HxRiAKsedKvt6DLe8ZEzr+Yc8vqvc=
+        -----END RSA PRIVATE KEY-----
+
       ### GitHub PAT Configuration
-      github_token: "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"
+      # github_token: "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"
       ### Basic auth for github API proxy
       #github_basicauth_username: ""
       #github_basicauth_password: ""
