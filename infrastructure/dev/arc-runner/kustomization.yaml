@@ -4,6 +4,7 @@ resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
   - namespace.yaml
+  - sealed-secret.yaml
   #- Ingress.yaml
   #- RunnerDeployment.yaml its moved to apps.
 
