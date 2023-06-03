@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: arc-runner
+  namespace: arc-runner
+spec:
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  isCA: false
+  dnsNames:
+  - actions-runner-controller-webhook.arc-runner.svc
+  - actions-runner-controller-webhook.actions-runner-system.svc.cluster.local
+  secretName: arc-runner-actions-runner-controller-serving-cert
+  issuerRef:
+    name: ca-issuer
+    kind: ClusterIssuer
