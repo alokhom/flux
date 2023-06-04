@@ -5,4 +5,4 @@ resources:
   - HelmRepository.yaml
   - namespace.yaml
   #- ingress.yaml
-  - RunnerDeployment.yaml
+  #- RunnerDeployment.yaml
