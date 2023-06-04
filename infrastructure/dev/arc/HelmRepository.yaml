@@ -4,5 +4,6 @@ metadata:
   name: arc-runner
   namespace: arc-runner
 spec:
-  interval: 5m
-  url: https://actions-runner-controller.github.io/actions-runner-controller
+  type: oci
+  interval: 5m0s
+  url: oci://ghcr.io/actions/actions-runner-controller-charts

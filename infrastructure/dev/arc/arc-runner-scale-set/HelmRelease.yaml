@@ -10,8 +10,8 @@ spec:
       chart: gha-runner-scale-set
       version: "0.4.0"
       sourceRef:
-        kind: OCIRepository
-        name: gha-runner-scale-set
+        kind: HelmRepository
+        name: arc-runner
         namespace: arc-runner
       interval: 5m
   values:
