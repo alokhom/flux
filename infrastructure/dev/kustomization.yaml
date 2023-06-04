@@ -15,5 +15,5 @@ resources:
   - ./openLdap
   - ./mongo
   - ./kube-prometheus-stack
-  - ./arc-runner
+  - ./arc
   
