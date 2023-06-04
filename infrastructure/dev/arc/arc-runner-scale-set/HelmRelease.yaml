@@ -165,7 +165,7 @@ spec:
                   storageClassName: "local-path"
                   resources:
                     requests:
-                      storage: 5i
+                      storage: 5Gi
       #spec:
       #  containers:
       #  - name: runner
