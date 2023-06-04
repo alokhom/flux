@@ -135,10 +135,8 @@ spec:
         volumes:
         - name: work
           emptyDir: {}
-        - name: dind-cert
-          emptyDir: {}
-        - name: dind-externals
-          emptyDir: {}
+
+
       ######################################################################################################
       ## with containerMode.type=kubernetes, we will populate the template.spec with following pod spec
       ## template:
