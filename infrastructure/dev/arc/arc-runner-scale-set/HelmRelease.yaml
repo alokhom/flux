@@ -143,7 +143,7 @@ spec:
       spec:
         containers:
         - name: runner
-          image: ghcr.io/actions/arm-runner:latest
+          image: arm64v8/ubuntu:latest
           env:
             - name: ACTIONS_RUNNER_CONTAINER_HOOKS
               value: /home/runner/k8s/index.js
