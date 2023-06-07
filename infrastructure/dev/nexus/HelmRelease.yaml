@@ -128,7 +128,7 @@ spec:
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
         cert-manager.io/cluster-issuer: ca-issuer
       hostPath: /
-      hostRepo: repo.demo
+      hostRepo: nexus.systemtracker.no-ip.org
       tls:
         - secretName: nexus-local-tls
           hosts:
