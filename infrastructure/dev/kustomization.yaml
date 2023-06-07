@@ -16,4 +16,5 @@ resources:
   - ./mongo
   - ./kube-prometheus-stack
   - ./arc
+  - ./nexus
   
