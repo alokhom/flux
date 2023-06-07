@@ -62,8 +62,8 @@ spec:
           cpu: 1
           memory: 1000Mi
         limits:
-          cpu: 1
-          memory: 1500Mi
+          cpu: 2
+          memory: 2000Mi
 
       # The ports should only be changed if the nexus image uses a different port
       nexusPort: 8081
