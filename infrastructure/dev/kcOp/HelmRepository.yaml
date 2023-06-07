@@ -7,4 +7,4 @@ spec:
   interval: 5m
   url: https://nexus.systemtracker.no-ip.org/repository/keycloak/
   secretRef:
-    name: keycloak-operstor
+    name: keycloak-operator
