@@ -21,8 +21,8 @@ spec:
     deploymentStrategy: Recreate
     image:
       # Sonatype Official Public Image
-      repository: sonatype/nexus3
-      tag: 3.55.0
+      repository: klo2k/nexus3
+      tag: development
       pullPolicy: IfNotPresent
     imagePullSecrets:
     # for image registries that require login, specify the name of the existing
