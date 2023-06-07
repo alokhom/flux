@@ -4,6 +4,7 @@ resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
   - namespace.yaml
+  - sealedsecret.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
