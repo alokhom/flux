@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: keycloak-operator-crds
+  namespace: keycloak-operator
+spec:
+  interval: 5m
+  url: https://nexus.systemtracker.no-ip.org/repository/keycloak/
