@@ -15,7 +15,6 @@ spec:
         namespace: nexus
       interval: 5m
   values:
-    ---
     statefulset:
       # This is not supported
       enabled: false
@@ -29,7 +28,6 @@ spec:
     # for image registries that require login, specify the name of the existing
     # kubernetes secret
     #   - name: <pull-secret-name>
-
     nexus:
       docker:
         enabled: false
