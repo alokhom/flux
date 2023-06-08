@@ -145,6 +145,10 @@ spec:
         #kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: ca-issuer
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.org/client-max-body-size: "1G"
+        nginx.org/proxy-buffering: "off"
+        nginx.org/location-snippets: |
+          proxy_set_header X-Forwarded-Proto https;
       hostPath: /
       hostRepo: nexus.systemtracker.no-ip.org
       tls:
