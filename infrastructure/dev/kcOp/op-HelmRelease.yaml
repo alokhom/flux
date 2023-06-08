@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keycloak-operator
+  namespace: keycloak-operator
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: keycloak-operator
+      version: "0.1.2"
+      sourceRef:
+        kind: HelmRepository
+        name: keycloak-operator
+        namespace: keycloak-operator
+      interval: 5m
