@@ -57,31 +57,27 @@ spec:
       configFile: |-
         email_domains = "*"
         provider = "keycloak-oidc"
-        pass_basic_auth = true
-        pass_access_token = true
-        pass_user_headers = true
-        pass_host_header = true
-        # return authenticated user to nginx
-        set_xauthrequest = true
-        # pass id token in authorization header
-        pass_authorization_header = true
-        set_authorization_header = true
-        # cookie
+        # azure_tenant = [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
+        pass_basic_auth = "true"
+        pass_access_token = "true"
+        pass_user_headers = "true"
+        pass_host_header = "true"
+        set_xauthrequest = "true"
+        pass_authorization_header = "true"
+        set_authorization_header = "true"
         cookie_refresh = "1m"
         cookie_expire = "30m"
-        # make it true when using https
-        cookie_secure = true
+        cookie_secure = "true"
         cookie_domain = ".systemtracker.no-ip.org"
         whitelist_domain = ".systemtracker.no-ip.org"
         scope = "openid profile email"
         upstream = "static://200"
-        #http_address = "0.0.0.0:4180"
         https_address = ":443"
-        skip_provider_button = true
+        skip_provider_button = "true"
         oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
         redirect_url = "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
-        session_store_type = cookie # <- Redis setting, can be removed if default cookie storage is used
-        # redis_use_cluster = false # <- Redis setting, can be removed if default cookie storage is used
+        session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
+        # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
         # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
 
       # upstreams = [ "file:///dev/null" ]
