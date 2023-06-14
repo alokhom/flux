@@ -56,6 +56,36 @@ spec:
       # Default configuration, to be overridden
       configFile: |-
         email_domains = [ "*" ]
+        provider: keycloak-oidc
+        # azure-tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
+        pass-basic-auth: true
+        pass-access-token: true
+        pass-user-headers: true
+        pass-host-header: true
+        # return authenticated user to nginx
+        set-xauthrequest: true
+        # pass id token in authorization header
+        pass-authorization-header: true
+        set-authorization-header: true
+        #
+        cookie-refresh: "1m"
+        cookie-expire: "30m"
+        # make it true when using https
+        cookie-secure: true
+        email-domain: "*"
+        cookie-domain: ".systemtracker.no-ip.org"
+        whitelist-domain: ".systemtracker.no-ip.org"
+        scope: "openid profile email"
+        upstream: static://200
+        #http-address: 0.0.0.0:4180
+        https-address: ":443"
+        skip-provider-button: true
+        oidc-issuer-url: "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
+        redirect-url: "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
+        session-store-type: cookie # <- Redis setting, can be removed if default cookie storage is used
+        # redis-use-cluster: false # <- Redis setting, can be removed if default cookie storage is used
+        # redis-cluster-connection-urls: redis://oauth2-proxy-redis-master:6379 # Redis setting, can be removed if default cookie storage is used
+
       # upstreams = [ "file:///dev/null" ]
       # Custom configuration file: oauth2_proxy.cfg
       # configFile: |-
@@ -95,36 +125,7 @@ spec:
     # This will default to 4443 if this value is not set and the httpScheme set to https
     # containerPort: 4180
 
-    extraArgs:
-      provider: keycloak-oidc
-      # azure-tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
-      pass-basic-auth: true
-      pass-access-token: true
-      pass-user-headers: true
-      pass-host-header: true
-      # return authenticated user to nginx
-      set-xauthrequest: true
-      # pass id token in authorization header
-      pass-authorization-header: true
-      set-authorization-header: true
-      #
-      cookie-refresh: "1m"
-      cookie-expire: "30m"
-      # make it true when using https
-      cookie-secure: true
-      email-domain: "*"
-      cookie-domain: ".systemtracker.no-ip.org"
-      whitelist-domain: ".systemtracker.no-ip.org"
-      scope: "openid profile email"
-      upstream: static://200
-      #http-address: 0.0.0.0:4180
-      https-address: ":443"
-      skip-provider-button: true
-      oidc-issuer-url: "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
-      redirect-url: "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
-      session-store-type: cookie # <- Redis setting, can be removed if default cookie storage is used
-      # redis-use-cluster: false # <- Redis setting, can be removed if default cookie storage is used
-      # redis-cluster-connection-urls: redis://oauth2-proxy-redis-master:6379 # Redis setting, can be removed if default cookie storage is used
+    extraArgs: {}
 
     extraEnv: []
 
