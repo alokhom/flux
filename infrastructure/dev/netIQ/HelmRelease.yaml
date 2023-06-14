@@ -1,0 +1,138 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: netiq
+  namespace: netiq
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: aaf
+      version: "1.13.1"
+      sourceRef:
+        kind: HelmRepository
+        name: netiq
+        namespace: netiq
+      interval: 5m
+  values:
+    # Default values for aaf.
+
+    replicaCount: 1
+
+    image:
+      registry: mfsecurity
+      pullPolicy: IfNotPresent
+      pullSecretName:
+      # To create such secret:
+      # kubectl -n <namespace> create secret docker-registry regsecret --docker-server=<server> --docker-username=<username> --docker-password=<password> --docker-email=<email>
+
+    aucore:
+      listenBacklog: 1024
+      resources: {}
+      #  requests:
+      #    memory: 1Gi
+      #    cpu: 1
+      externalDBSecret:
+      externalDBConfigMap:
+      externalESHost:
+      riskBootstrapService: "http://rbadataaccess:3000"
+      riskConfigService: "http://rbadataaccess:8888"
+      riskCollectorService: "http://rbacollector:8080"
+      riskUIService: "http://rbaui:8090"
+      encKeySecret:
+      awsSecret:
+      awsMarketPlaceSecret:
+      awsBillingS3:
+      appVersion: "6.4.1.1"
+      logToFile: true
+      baseName: aaf-aucore
+
+    audb:
+      resources: {}
+      #  requests:
+      #    memory: 256Mi
+      #    cpu: 100m
+      storage: 1Gi
+      storageClass: local-path
+      enabled: true
+      appVersion: "6.4.1.1"
+
+    webd:
+      resources: {}
+      #  requests:
+      #    memory: 256Mi
+      #    cpu: 100m
+      appVersion: "6.4.1.1"
+      baseName: aaf-webd
+
+    radiusd:
+      resources: {}
+      #  requests:
+      #    memory: 256Mi
+      #    cpu: 100m
+      appVersion: "6.4.1.1"
+      enabled: true
+
+    searchd:
+      resources: {}
+      #  requests:
+      #    memory: 512Mi
+      #    cpu: 25m
+      storage: 1Gi
+      storageClass:
+      javaOpts: "-Xms512m -Xmx512m"
+      memoryLock: true
+      enabled: true
+      appVersion: "6.4.1.1"
+
+    webauth:
+      resources: {}
+      #  requests:
+      #    memory: 1Gi
+      #    cpu: 100m
+      javaOpts: "-XX:MaxRAM=4g -XX:+ExitOnOutOfMemoryError -Dfile.encoding=UTF-8"
+      appVersion: "6.4.1.1"
+
+    afisd:
+      resources: {}
+      appVersion: "6.4.1.1"
+
+    fipsd:
+      resources: {}
+      appVersion: "6.4.1.1"
+
+    repldb:
+      resources: {}
+      #  requests:
+      #    memory: 256Mi
+      #    cpu: 100m
+      enabled: true
+      appVersion: "6.4.1.1"
+
+    redis:
+      resources: {}
+      #  requests:
+      #    memory: 256Mi
+      #    cpu: 100m
+      storage: 100Mi
+      appVersion: "6.4.1.1"
+
+    lb:
+      enabled: false
+      type: LoadBalancer
+
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: ca-issuer
+      hosts: aaf.systemtracker.no-ip.org
+      tls:
+        - secretName: aaf-local-tls
+          hosts:
+            - aaf.systemtracker.no-ip.org
+
+
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
