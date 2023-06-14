@@ -67,12 +67,11 @@ spec:
         # pass id token in authorization header
         pass-authorization-header: true
         set-authorization-header: true
-        #
+        # cookie
         cookie-refresh: "1m"
         cookie-expire: "30m"
         # make it true when using https
         cookie-secure: true
-        email-domain: "*"
         cookie-domain: ".systemtracker.no-ip.org"
         whitelist-domain: ".systemtracker.no-ip.org"
         scope: "openid profile email"
