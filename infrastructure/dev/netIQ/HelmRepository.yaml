@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: netiq
+  namespace: netiq
+spec:
+  interval: 5m
+  url: https://nexus.systemtracker.no-ip.org/repository/keycloak/
+  secretRef:
+    name: netiq
