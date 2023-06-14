@@ -57,7 +57,7 @@ spec:
       configFile: |-
         email_domains = [ "*" ]
         provider = keycloak-oidc
-        # azure_tenant: [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
+        # azure_tenant = [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
         pass_basic_auth = true
         pass_access_token = true
         pass_user_headers = true
