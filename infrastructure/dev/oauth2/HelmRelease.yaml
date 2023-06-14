@@ -117,7 +117,7 @@ spec:
       whitelist-domain: ".systemtracker.no-ip.org"
       scope: "openid profile email"
       upstream: static://200
-      http-address: 0.0.0.0:4180
+      #http-address: 0.0.0.0:4180
       https-address: ":443"
       skip-provider-button: true
       oidc-issuer-url: "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
