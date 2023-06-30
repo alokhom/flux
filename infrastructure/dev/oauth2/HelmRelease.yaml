@@ -78,8 +78,8 @@ spec:
         skip_provider_button = "true"
         oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
         redirect_url = "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
-        session_store_type = cookie # <- Redis setting, can be removed if default cookie storage is used
-        # redis_use_cluster = false # <- Redis setting, can be removed if default cookie storage is used
+        session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
+        # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
         # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
 
       # upstreams = [ "file:///dev/null" ]
