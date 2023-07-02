@@ -76,7 +76,7 @@ spec:
         http_address = "0.0.0.0:4180"
         https_address = ":443"
         skip_provider_button = "true"
-        oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
+        oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/master"
         redirect_url = "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
         session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
         # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
