@@ -36,9 +36,9 @@ spec:
     group: cert-manager.io
 ---
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
-  name: my-ca-issuer
+  name: ca-issuer
   namespace: sandbox
 spec:
   ca:
