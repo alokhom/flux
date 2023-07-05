@@ -82,6 +82,7 @@ spec:
         session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
         # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
         # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
+        insecure_oidc_allow_unverified_email = "true"
 
       # upstreams = [ "file:///dev/null" ]
       # Custom configuration file: oauth2_proxy.cfg
