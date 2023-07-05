@@ -75,7 +75,6 @@ spec:
         providers:
         - clientID: "oauth2-proxy"
           clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
-          id: keycloak-id
           provider: oidc
           loginURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/auth
           #redeemURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/token
