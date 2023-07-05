@@ -135,7 +135,6 @@ spec:
     # containerPort: 4180
 
     extraArgs:
-      code-challenge-method: "S256"
       pass-basic-auth: "true"
       pass-access-token: "true"
       pass-user-headers: "true"
