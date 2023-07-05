@@ -17,5 +17,5 @@ resources:
   - ./kube-prometheus-stack
   - ./arc
   - ./nexus
-  - ./kcOp
-  - ./powerdns
+  #- ./kcOp
+  #- ./powerdns

@@ -71,8 +71,6 @@ spec:
         cookie_expire = "30m"
         reverse_proxy = "true"
         cookie_secure = "true"
-        http_address = "0.0.0.0:4180"
-        https_address = ":443"
         cookie_domains = [ ".systemtracker.no-ip.org" ]
         whitelist_domains = [ ".systemtracker.no-ip.org" ]
         scope = "openid profile email"
