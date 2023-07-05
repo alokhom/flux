@@ -56,10 +56,34 @@ spec:
       # Default configuration, to be overridden
       # upstreams = [ "file:///dev/null" ]
       # Custom configuration file: oauth2_proxy.cfg
-      # configFile: |-
+      configFile: |-
+        email_domains = [ "*" ]
+        provider = "keycloak-oidc"
+        pass_basic_auth =  "true"
+        pass_access_token = "true"
+        pass_user_headers = "true"
+        pass_host_header = "true"
+        set_xauthrequest = "true"
+        pass_authorization_header = "true"
+        set_authorization_header = "true"
+        cookie_refresh = "1m"
+        cookie_expire = "30m"
+        reverse_proxy = "true"
+        cookie_secure = "true"
+        cookie_domains = [".systemtracker.no-ip.org"]
+        whitelist_domains = [".systemtracker.no-ip.org"]
+        scope = "openid profile email"
+        upstreams = "static://200"
+        skip_provider_button = "true"
+        oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
+        redirect_url = "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
+        session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
+        # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
+        # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
+        # insecure_oidc_allow_unverified_email = "true"
       # Use an existing config map (see configmap.yaml for required fields)
       # Example:
-      existingConfig: oauth2-proxy
+      # existingConfig: oauth2-proxy
 
     alphaConfig:
       enabled: false
@@ -71,6 +95,9 @@ spec:
       metricsConfigData: {}
       # Arbitrary configuration data to append
       configData: {}
+      # Arbitrary configuration to append
+      # This is treated as a Go template and rendered with the root context
+      configFile: ""
       # Use an existing config map (see configmap-alpha.yaml for required fields)
       existingConfig: ~
 
