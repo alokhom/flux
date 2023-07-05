@@ -29,9 +29,9 @@ spec:
       # Add config annotations
       annotations: {}
       # OAuth client ID
-      clientID: "oauth2-proxy"
+      #clientID: "oauth2-proxy"
       # OAuth client secret
-      clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
+      #clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
       # Create a new secret with the following command
       # openssl rand -base64 32 | head -c 32 | base64
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
@@ -58,37 +58,12 @@ spec:
       # Custom configuration file: oauth2_proxy.cfg
       configFile: |
         email_domains = [ "*" ]
-        provider = "oidc"
-        code_challenge_method = "S256"
-        pass_basic_auth = "true"
-        pass_access_token = "true"
-        pass_user_headers = "true"
-        pass_host_header = "true"
-        set_xauthrequest = "true"
-        pass_authorization_header = "true"
-        set_authorization_header = "true"
-        cookie_refresh = "1m"
-        cookie_expire = "30m"
-        reverse_proxy = "true"
-        cookie_secure = "true"
-        cookie_domains = [ ".systemtracker.no-ip.org" ]
-        whitelist_domains = [ ".systemtracker.no-ip.org" ]
-        scope = "openid profile email"
-        upstreams = "static://200"
-        skip_provider_button = "true"
-        oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
-        # redirect_url = "https://nginx.systemtracker.no-ip.org/oauth2/callback"
-        session_store_type = "cookie"
-        standard_logging = "true"
-        auth_logging = "true"
-        silence_ping_logging = "true"
-
       # Use an existing config map (see configmap.yaml for required fields)
       # Example:
       # existingConfig: oauth2-proxy
 
     alphaConfig:
-      enabled: false
+      enabled: true
       # Add config annotations
       annotations: {}
       # Arbitrary configuration data to append to the server section
@@ -96,7 +71,46 @@ spec:
       # Arbitrary configuration data to append to the metrics section
       metricsConfigData: {}
       # Arbitrary configuration data to append
-      configData: {}
+      configData:
+        providers:
+        - clientID: "oauth2-proxy"
+          clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
+          provider: oidc
+          loginURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/auth
+          #redeemURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/token
+          redeemURL: http://keycloak-http.keycloak/auth/realms/TAAS/protocol/openid-connect/token
+          profileURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
+          validateURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
+          scope: "openid profile email groups"
+          allowedGroups:
+          - admins # List all groups managed at our your IdP which should be allowed access
+          oidcConfig:
+            emailClaim: email  # Name of the clain in JWT containing the E-Mail
+            groupsClaim: groups # Name of the claim in JWT containing the Groups
+            userIDClaim: email  # Name of the claim in JWT containing the User ID
+            audienceClaims: ["aud"]
+            insecureAllowUnverifiedEmail: true
+            insecureSkipIssuerVerification: true
+            skipDiscovery: true # You can try using the well-knwon endpoint directly for auto discovery, here we won't use it
+            issuerURL: "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
+            jwksURL: "http://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/certs"
+
+        upstreamConfig:
+          upstreams:
+            - id: static_200
+              path: /
+              static: true
+              staticCode: 200
+
+        # Headers that should be added to responses from the proxy
+        injectResponseHeaders: # Send this headers in responses from oauth2-proxy
+          - name: X-Auth-Request-Preferred-Username
+            values:
+              - claim: preferred_username
+          - name: X-Auth-Request-Email
+            values:
+              - claim: email
+
       # Arbitrary configuration to append
       # This is treated as a Go template and rendered with the root context
       configFile: ""
@@ -120,7 +134,26 @@ spec:
     # This will default to 4443 if this value is not set and the httpScheme set to https
     # containerPort: 4180
 
-    extraArgs: {}
+    extraArgs:
+      code-challenge-method: "S256"
+      pass-basic-auth: "true"
+      pass-access-token: "true"
+      pass-user-headers: "true"
+      pass-host-header: "true"
+      set-xauthrequest: "true"
+      pass-authorization-header: "true"
+      set-authorization-header: "true"
+      cookie-refresh: "1m"
+      cookie-expire: "30m"
+      reverse-proxy: "true"
+      cookie-secure: "true"
+      cookie-domains: ".systemtracker.no-ip.org"
+      whitelist-domains: ".systemtracker.no-ip.org"
+      skip-provider-button: "true"
+      session-store-type: "cookie"
+      standard-logging: "true"
+      auth-logging: "true"
+      silence-ping-logging: "true"
 
     extraEnv: []
 
