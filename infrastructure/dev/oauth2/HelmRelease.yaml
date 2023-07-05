@@ -55,7 +55,7 @@ spec:
         #  - group2@example.com
       # Default configuration, to be overridden
       configFile: |-
-        email_domains = "*"
+        email_domain = "*"
         provider = "keycloak-oidc"
         # azure_tenant = [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
         pass_basic_auth = "true"
@@ -70,8 +70,8 @@ spec:
         reverse_proxy = "true"
         # make it true when using https
         cookie_secure = "true"
-        cookie_domains = [".systemtracker.no-ip.org"]
-        whitelist_domains = [".systemtracker.no-ip.org"]
+        cookie_domain = [".systemtracker.no-ip.org"]
+        whitelist_domain = [".systemtracker.no-ip.org"]
         scope = "openid profile email"
         upstreams = "static://200"
         http_address = "0.0.0.0:4180"
