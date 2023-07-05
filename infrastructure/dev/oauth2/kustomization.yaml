@@ -5,5 +5,5 @@ resources:
   - HelmRepository.yaml
   - namespace.yaml
   - ingress.yaml
-  - configMap.yaml
+  # - configMap.yaml
   - sealedsecret.yaml
