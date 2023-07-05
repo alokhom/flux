@@ -58,6 +58,13 @@ spec:
       # Custom configuration file: oauth2_proxy.cfg
       configFile: |
         email_domains = [ "*" ]
+        pass-basic-auth = "true"
+        pass-access-token = "true"
+        pass-user-headers = "true"
+        pass-host-header = "true"
+        set-xauthrequest = "true"
+        pass-authorization-header = "true"
+        set-authorization-header = "true"
       # Use an existing config map (see configmap.yaml for required fields)
       # Example:
       # existingConfig: oauth2-proxy
@@ -135,13 +142,6 @@ spec:
     # containerPort: 4180
 
     extraArgs:
-      pass-basic-auth: "true"
-      pass-access-token: "true"
-      pass-user-headers: "true"
-      pass-host-header: "true"
-      set-xauthrequest: "true"
-      pass-authorization-header: "true"
-      set-authorization-header: "true"
       cookie-refresh: "1m"
       cookie-expire: "30m"
       reverse-proxy: "true"
