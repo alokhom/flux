@@ -77,7 +77,7 @@ spec:
         upstreams = "static://200"
         skip_provider_button = "true"
         oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
-        redirect_url = "https://nginx.systemtracker.no-ip.org/oauth2/callback"
+        # redirect_url = "https://nginx.systemtracker.no-ip.org/oauth2/callback"
         session_store_type = "cookie"
         standard_logging = "true"
         auth_logging = "true"
