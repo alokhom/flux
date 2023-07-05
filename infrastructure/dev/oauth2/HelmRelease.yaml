@@ -31,7 +31,7 @@ spec:
       # OAuth client ID
       clientID: "oauth2-proxy"
       # OAuth client secret
-      clientSecret: "Yxkt9QW5v1KZqWntg2kPGXKH9qqUcj5L"
+      clientSecret: "Djnk7i3fPEB27gbb3ovNoq3CrbIWF9tn"
       # Create a new secret with the following command
       # openssl rand -base64 32 | head -c 32 | base64
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
@@ -82,7 +82,7 @@ spec:
         session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
         # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
         # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
-        insecure_oidc_allow_unverified_email = "true"
+        # insecure_oidc_allow_unverified_email = "true"
 
       # upstreams = [ "file:///dev/null" ]
       # Custom configuration file: oauth2_proxy.cfg
