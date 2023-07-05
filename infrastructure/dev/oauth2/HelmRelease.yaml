@@ -75,7 +75,7 @@ spec:
         scope = "openid profile email"
         upstreams = "static://200"
         skip_provider_button = "true"
-        oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
+        oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
         redirect_url = "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
         session_store_type = "cookie"
 
