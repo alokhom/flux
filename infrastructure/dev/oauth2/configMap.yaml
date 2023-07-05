@@ -17,9 +17,9 @@ data:
   cookie_expire: "30m"
   reverse_proxy: "true"
   cookie_secure: "true"
-  cookie_domains:
+  cookie_domains:  |
     - ".systemtracker.no-ip.org"
-  whitelist_domains:
+  whitelist_domains: |
     - ".systemtracker.no-ip.org"
   scope: "openid profile email"
   upstreams: "static://200"
