@@ -31,13 +31,13 @@ spec:
       # OAuth client ID
       clientID: "oauth2-proxy"
       # OAuth client secret
-      clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
+      # clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
       # Create a new secret with the following command
       # openssl rand -base64 32 | head -c 32 | base64
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
       # Example:
       # existingSecret: secret
-      cookieSecret: "ejJPUUtRNzl1S1RmdjZsNk9xTG1Uc3RMQnlhRXBpWkk"
+      # cookieSecret: "ejJPUUtRNzl1S1RmdjZsNk9xTG1Uc3RMQnlhRXBpWkk"
       # The name of the cookie that oauth2-proxy will create
       # If left empty, it will default to the release name
       cookieName: ""
