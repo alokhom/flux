@@ -70,11 +70,11 @@ spec:
         reverse_proxy = "true"
         # make it true when using https
         cookie_secure = "true"
-        cookie_domains = ["*"]
+        cookie_domains = [".systemtracker.no-ip.org"]
         whitelist_domains = [".systemtracker.no-ip.org"]
         scope = "openid profile email"
         upstreams = "static://200"
-        http_address = "0.0.0.0:4180"
+        http_address = "127.0.0.1:4180"
         https_address = ":443"
         skip_provider_button = "true"
         oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
