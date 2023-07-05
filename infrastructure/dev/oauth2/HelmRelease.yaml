@@ -55,7 +55,7 @@ spec:
         #  - group2@example.com
       # Default configuration, to be overridden
       configFile: |-
-        email_domains = "*"
+        email_domains = "systemtracker.no-ip.org"
         provider = "keycloak-oidc"
         # azure_tenant = [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
         pass_basic_auth = "true"
@@ -74,7 +74,7 @@ spec:
         whitelist_domains = [".systemtracker.no-ip.org"]
         scope = "openid profile email"
         upstreams = "static://200"
-        http_address = "0.0.0.0:4180"
+        http_address = ":4180"
         https_address = ":443"
         skip_provider_button = "true"
         oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
@@ -82,7 +82,7 @@ spec:
         session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
         # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
         # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
-        insecure_oidc_allow_unverified_email = "true"
+        # insecure_oidc_allow_unverified_email = "true"
 
       # upstreams = [ "file:///dev/null" ]
       # Custom configuration file: oauth2_proxy.cfg
