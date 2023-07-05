@@ -37,7 +37,7 @@ spec:
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
       # Example:
       # existingSecret: secret
-      cookieSecret: "ejJPUUtRNzl1S1RmdjZsNk9xTG1Uc3RMQnlhRXBpWkk"
+      cookieSecret: "KzdrWHBDTUhHTFpqOStnaFFMZm5BWG9pSU5pMUNhQUE"
       # The name of the cookie that oauth2-proxy will create
       # If left empty, it will default to the release name
       cookieName: ""
@@ -72,14 +72,18 @@ spec:
         reverse_proxy = "true"
         cookie_secure = "true"
         http_address = "0.0.0.0:4180"
+        https_address = ":443"
         cookie_domains = [ ".systemtracker.no-ip.org" ]
         whitelist_domains = [ ".systemtracker.no-ip.org" ]
         scope = "openid profile email"
         upstreams = "static://200"
         skip_provider_button = "true"
         oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
-        redirect_url = "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
+        redirect_url = "https://nginx.systemtracker.no-ip.org/oauth2/callback"
         session_store_type = "cookie"
+        standard_logging = "true"
+        auth_logging = "true"
+        silence_ping_logging = "true"
 
       # Use an existing config map (see configmap.yaml for required fields)
       # Example:
@@ -198,13 +202,14 @@ spec:
       annotations:
         #kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: ca-issuer
-        nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-        nginx.ingress.kubernetes.io/proxy-body-size: "2000m"
-        nginx.ingress.kubernetes.io/proxy-buffer-size: "256k"
-        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+        #nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+        #nginx.ingress.kubernetes.io/proxy-body-size: "2000m"
+        #nginx.ingress.kubernetes.io/proxy-buffer-size: "256k"
+        #nginx.ingress.kubernetes.io/ssl-redirect: "true"
         # allows large id token headers (especially helpful when dealing with azure active directory)
-        nginx.ingress.kubernetes.io/server-snippet: |
-          large_client_header_buffers 4 32k;
+        #nginx.ingress.kubernetes.io/server-snippet: |
+        #  large_client_header_buffers 4 32k;
         #kubernetes.io/rewrite-target: /
         #kubernetes.io/configuration-snippet: |
         #  proxy_set_header Host $host;
