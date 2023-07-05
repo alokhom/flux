@@ -58,7 +58,8 @@ spec:
       # Custom configuration file: oauth2_proxy.cfg
       configFile: |
         email_domains = [ "*" ]
-        provider = "keycloak-oidc"
+        provider = "oidc"
+        code_challenge_method = "S256"
         pass_basic_auth = "true"
         pass_access_token = "true"
         pass_user_headers = "true"
@@ -70,6 +71,7 @@ spec:
         cookie_expire = "30m"
         reverse_proxy = "true"
         cookie_secure = "true"
+        http_address = "0.0.0.0:4180"
         cookie_domains = [ ".systemtracker.no-ip.org" ]
         whitelist_domains = [ ".systemtracker.no-ip.org" ]
         scope = "openid profile email"
