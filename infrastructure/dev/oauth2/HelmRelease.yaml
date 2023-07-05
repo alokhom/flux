@@ -31,7 +31,7 @@ spec:
       # OAuth client ID
       clientID: "oauth2-proxy"
       # OAuth client secret
-      clientSecret: "Yxkt9QW5v1KZqWntg2kPGXKH9qqUcj5L"
+      clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
       # Create a new secret with the following command
       # openssl rand -base64 32 | head -c 32 | base64
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
@@ -54,36 +54,6 @@ spec:
         #  - group1@example.com
         #  - group2@example.com
       # Default configuration, to be overridden
-      configFile: |-
-        email_domains = "*"
-        provider = "keycloak-oidc"
-        # azure_tenant = [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
-        pass_basic_auth = "true"
-        pass_access_token = "true"
-        pass_user_headers = "true"
-        pass_host_header = "true"
-        set_xauthrequest = "true"
-        pass_authorization_header = "true"
-        set_authorization_header = "true"
-        cookie_refresh = "1m"
-        cookie_expire = "30m"
-        reverse_proxy = "true"
-        # make it true when using https
-        cookie_secure = "true"
-        cookie_domains = [".systemtracker.no-ip.org"]
-        whitelist_domains = [".systemtracker.no-ip.org"]
-        scope = "openid profile email"
-        upstreams = "static://200"
-        http_address = "0.0.0.0:4180"
-        https_address = ":443"
-        skip_provider_button = "true"
-        oidc_issuer_url = "https://keycloak.systemtracker.no-ip.org/realms/Oauth2-proxy"
-        redirect_url = "https://oauth2-proxy.systemtracker.no-ip.org/oauth2/callback"
-        session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
-        # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
-        # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
-        insecure_oidc_allow_unverified_email = "true"
-
       # upstreams = [ "file:///dev/null" ]
       # Custom configuration file: oauth2_proxy.cfg
       # configFile: |-
@@ -91,7 +61,7 @@ spec:
       #   pass_access_token = true
       # Use an existing config map (see configmap.yaml for required fields)
       # Example:
-      # existingConfig: config
+      existingConfig: oauth2-proxy
 
     alphaConfig:
       enabled: false
