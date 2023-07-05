@@ -31,13 +31,13 @@ spec:
       # OAuth client ID
       clientID: "oauth2-proxy"
       # OAuth client secret
-      clientSecret: "Yxkt9QW5v1KZqWntg2kPGXKH9qqUcj5L"
+      # clientSecret: ""
       # Create a new secret with the following command
       # openssl rand -base64 32 | head -c 32 | base64
       # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
       # Example:
       # existingSecret: secret
-      cookieSecret: "ejJPUUtRNzl1S1RmdjZsNk9xTG1Uc3RMQnlhRXBpWkk"
+      # cookieSecret: ""
       # The name of the cookie that oauth2-proxy will create
       # If left empty, it will default to the release name
       cookieName: ""
@@ -54,7 +54,10 @@ spec:
         #  - group1@example.com
         #  - group2@example.com
       # Default configuration, to be overridden
+      # upstreams = [ "file:///dev/null" ]
+      # Custom configuration file: oauth2_proxy.cfg
       configFile: |-
+        # Configuration values can be set as key-value properties
         email_domains = "*"
         provider = "keycloak-oidc"
         # azure_tenant = [oauth2-proxy-azure-ad-tenant-id]  # Azure AD OAuth2 Proxy application Tenant ID
@@ -82,16 +85,10 @@ spec:
         session_store_type = "cookie" # <- Redis setting, can be removed if default cookie storage is used
         # redis_use_cluster = "false" # <- Redis setting, can be removed if default cookie storage is used
         # redis_cluster_connection_urls = "redis://oauth2-proxy-redis-master:6379" # Redis setting, can be removed if default cookie storage is used
-        insecure_oidc_allow_unverified_email = "true"
-
-      # upstreams = [ "file:///dev/null" ]
-      # Custom configuration file: oauth2_proxy.cfg
-      # configFile: |-
-      #   pass_basic_auth = false
-      #   pass_access_token = true
+        # insecure_oidc_allow_unverified_email = "true"
       # Use an existing config map (see configmap.yaml for required fields)
       # Example:
-      # existingConfig: config
+      # existingConfig: oauth2-proxy
 
     alphaConfig:
       enabled: false
@@ -125,7 +122,17 @@ spec:
 
     extraArgs: {}
 
-    extraEnv: []
+    extraEnv: |
+      - name: COOKIE_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: oauth2-proxy
+            key: cookie_secret
+      - name: CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: oauth2-proxy
+            key: client_secret
 
     # -- Custom labels to add into metadata
     customLabels: {}
