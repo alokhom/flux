@@ -70,7 +70,7 @@ spec:
         reverse_proxy = "true"
         # make it true when using https
         cookie_secure = "true"
-        cookie_domains = [".systemtracker.no-ip.org"]
+        cookie_domains = ["*"]
         whitelist_domains = [".systemtracker.no-ip.org"]
         scope = "openid profile email"
         upstreams = "static://200"
