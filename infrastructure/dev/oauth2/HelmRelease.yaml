@@ -95,7 +95,17 @@ spec:
 
     extraArgs: {}
 
-    extraEnv: []
+    extraEnv: |
+      - name: COOKIE_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: oauth2-proxy
+            key: cookie_secret
+      - name: CLIENT_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: oauth2-proxy
+            key: client_secret
 
     # -- Custom labels to add into metadata
     customLabels: {}

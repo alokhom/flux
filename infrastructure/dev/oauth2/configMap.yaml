@@ -5,8 +5,6 @@ metadata:
   name: oauth2-proxy
   namespace: keycloak
 data:
-  client_secret = "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
-  cookie_secret = "ejJPUUtRNzl1S1RmdjZsNk9xTG1Uc3RMQnlhRXBpWkk"
   # Configuration values can be set as key-value properties
   email_domains = "*"
   provider = "keycloak-oidc"
