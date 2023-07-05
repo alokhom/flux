@@ -67,7 +67,7 @@ spec:
         set_authorization_header = "true"
         cookie_refresh = "1m"
         cookie_expire = "30m"
-        reverse-proxy = "true"
+        reverse_proxy = "true"
         # make it true when using https
         cookie_secure = "true"
         cookie_domains = [".systemtracker.no-ip.org"]
