@@ -29,7 +29,7 @@ spec:
       # Add config annotations
       annotations: {}
       # OAuth client ID
-      #clientID: "oauth2-proxy"
+      # clientID: "oauth2-proxy"
       # OAuth client secret
       # clientSecret: "QBUlD8YeLAGYu9Je8BvNgW8H7ngSYcMW"
       # Create a new secret with the following command
