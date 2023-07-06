@@ -79,22 +79,22 @@ spec:
           id: keycloak-id
           loginURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/auth
           #redeemURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/token
-          redeemURL: http://keycloak-http.keycloak/auth/realms/TAAS/protocol/openid-connect/token
+          redeemURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/token
           profileURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
           validateURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
-          scope: "openid profile email groups"
-          allowedGroups:
-          - admins # List all groups managed at our your IdP which should be allowed access
-          oidcConfig:
-            emailClaim: email  # Name of the clain in JWT containing the E-Mail
-            groupsClaim: groups # Name of the claim in JWT containing the Groups
-            userIDClaim: email  # Name of the claim in JWT containing the User ID
-            audienceClaims: ["aud"]
-            insecureAllowUnverifiedEmail: true
-            insecureSkipIssuerVerification: true
-            skipDiscovery: true # You can try using the well-knwon endpoint directly for auto discovery, here we won't use it
-            issuerURL: "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
-            jwksURL: "http://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/certs"
+        allowedGroups:
+        - admins # List all groups managed at our your IdP which should be allowed access
+        scope: "openid profile email groups"
+        oidcConfig:
+          emailClaim: email  # Name of the clain in JWT containing the E-Mail
+          groupsClaim: groups # Name of the claim in JWT containing the Groups
+          userIDClaim: email  # Name of the claim in JWT containing the User ID
+          audienceClaims: ["aud"]
+          insecureAllowUnverifiedEmail: true
+          insecureSkipIssuerVerification: true
+          skipDiscovery: true # You can try using the well-knwon endpoint directly for auto discovery, here we won't use it
+          issuerURL: "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
+          jwksURL: "http://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/certs"
 
         upstreamConfig:
           upstreams:
@@ -105,13 +105,24 @@ spec:
 
         # Headers that should be added to responses from the proxy
         injectResponseHeaders: # Send this headers in responses from oauth2-proxy
+          - name: X-Forwarded-Groups
+            values:
+            - claim: groups
+          - name: X-Forwarded-User
+            values:
+            -   claim: user
           - name: X-Auth-Request-Preferred-Username
             values:
               - claim: preferred_username
           - name: X-Auth-Request-Email
             values:
               - claim: email
-
+          - name: X-Forwarded-Preferred-Username
+            values:
+            - claim: preferred_username
+          - name: X-Forwarded-Access-Token
+            values:
+            - claim: access_token
       # Arbitrary configuration to append
       # This is treated as a Go template and rendered with the root context
       configFile: ""
@@ -147,6 +158,11 @@ spec:
       standard-logging: "true"
       auth-logging: "true"
       silence-ping-logging: "true"
+      set-authorization-header: "true" 
+      pass-host-header: "true"
+      pass-access-token: "true" 
+      pass-authorization-header: "true" 
+      set-xauthrequest: "true"
 
     extraEnv: []
 
