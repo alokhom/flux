@@ -82,19 +82,19 @@ spec:
           redeemURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/token
           profileURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
           validateURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
-        allowedGroups:
-        - admins # List all groups managed at our your IdP which should be allowed access
-        scope: "openid profile email groups"
-        oidcConfig:
-          emailClaim: email  # Name of the clain in JWT containing the E-Mail
-          groupsClaim: groups # Name of the claim in JWT containing the Groups
-          userIDClaim: email  # Name of the claim in JWT containing the User ID
-          audienceClaims: ["aud"]
-          insecureAllowUnverifiedEmail: true
-          insecureSkipIssuerVerification: true
-          skipDiscovery: true # You can try using the well-knwon endpoint directly for auto discovery, here we won't use it
-          issuerURL: "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
-          jwksURL: "http://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/certs"
+          allowedGroups:
+          - admins # List all groups managed at our your IdP which should be allowed access
+          scope: "openid profile email groups"
+          oidcConfig:
+            emailClaim: email  # Name of the clain in JWT containing the E-Mail
+            groupsClaim: groups # Name of the claim in JWT containing the Groups
+            userIDClaim: email  # Name of the claim in JWT containing the User ID
+            audienceClaims: ["aud"]
+            insecureAllowUnverifiedEmail: true
+            insecureSkipIssuerVerification: true
+            skipDiscovery: true # You can try using the well-knwon endpoint directly for auto discovery, here we won't use it
+            issuerURL: "https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy"
+            jwksURL: "http://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/certs"
 
         upstreamConfig:
           upstreams:
