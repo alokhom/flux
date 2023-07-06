@@ -58,6 +58,11 @@ spec:
       # Custom configuration file: oauth2_proxy.cfg
       configFile: |
         email_domains = [ "*" ]
+        set_authorization_header = "true" 
+        pass_host_header = "true"
+        pass_access_token = "true" 
+        pass_authorization_header = "true" 
+        set_xauthrequest = "true"
       # Use an existing config map (see configmap.yaml for required fields)
       # Example:
       # existingConfig: oauth2-proxy
@@ -157,11 +162,6 @@ spec:
       standard-logging: "true"
       auth-logging: "true"
       silence-ping-logging: "true"
-      set-authorization-header: "true" 
-      pass-host-header: "true"
-      pass-access-token: "true" 
-      pass-authorization-header: "true" 
-      set-xauthrequest: "true"
 
     extraEnv: []
 
