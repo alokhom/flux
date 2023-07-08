@@ -82,9 +82,9 @@ spec:
           redeemURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/token
           profileURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
           validateURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
-          #allowedGroups:
-          #- admins # List all groups managed at our your IdP which should be allowed access
-          scope: "openid profile email groups"
+          allowedGroups:
+          - testgroup # List all groups managed at our your IdP which should be allowed access
+          scope: "openid profile email"
           oidcConfig:
             emailClaim: email  # Name of the clain in JWT containing the E-Mail
             groupsClaim: groups # Name of the claim in JWT containing the Groups
