@@ -84,6 +84,7 @@ data:
             type: "credentials",
             users: [{
                 username: "admin",
+                // password is password
                 password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
                 permissions: "*"
             }]
@@ -97,10 +98,12 @@ data:
         */
 
         /** Option 1: static object */
-        //https: {
-        //  key: require("fs").readFileSync('privkey.pem'),
-        //  cert: require("fs").readFileSync('cert.pem')
-        //},
+        https: {
+          //key: require("fs").readFileSync('privkey.pem'),
+          key: require("fs").readFileSync('/keys/tls.key'),
+          //cert: require("fs").readFileSync('cert.pem')
+          cert: require("fs").readFileSync('/keys/tls.crt')
+        },
 
         /** Option 2: function that returns the HTTP configuration object */
         // https: function() {
@@ -124,13 +127,13 @@ data:
         requireHttps: true,
 
         /** To password protect the node-defined HTTP endpoints (httpNodeRoot),
-        * including node-red-dashboard, or the static content (httpStatic), the
+        * including node-red-dashboard, or the static content (httpStatic), thehttpAdminAuth
         * following properties can be used.
         * The `pass` field is a bcrypt hash of the password.
         * See http://nodered.org/docs/security.html#generating-the-password-hash
         */
-        //httpNodeAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
-        //httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
+        httpNodeAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
+        httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
 
     /*******************************************************************************
     * Server Settings
@@ -154,12 +157,12 @@ data:
         * The following property can be used to listen on a specific interface. For
         * example, the following would only allow connections from the local machine.
         */
-        //uiHost: "127.0.0.1",
+        uiHost: "127.0.0.1",
 
         /** The maximum size of HTTP request that will be accepted by the runtime api.
         * Default: 5mb
         */
-        //apiMaxLength: '5mb',
+        apiMaxLength: '5mb',
 
         /** The following property can be used to pass custom options to the Express.js
         * server used by Node-RED. For a full list of available options, refer
@@ -171,18 +174,18 @@ data:
         * The following property can be used to specify a different root path.
         * If set to false, this is disabled.
         */
-        //httpAdminRoot: '/admin',
+        httpAdminRoot: '/admin',
 
         /** The following property can be used to add a custom middleware function
         * in front of all admin http routes. For example, to set custom http
         * headers. It can be a single function or an array of middleware functions.
         */
-        // httpAdminMiddleware: function(req,res,next) {
-        //    // Set the X-Frame-Options header to limit where the editor
-        //    // can be embedded
-        //    //res.set('X-Frame-Options', 'sameorigin');
-        //    next();
-        // },
+        httpAdminMiddleware: function(req,res,next) {
+            // Set the X-Frame-Options header to limit where the editor
+            // can be embedded
+            res.set('X-Frame-Options', 'sameorigin');
+            next();
+        },
 
 
         /** Some nodes, such as HTTP In, can be used to listen for incoming http requests.
@@ -190,17 +193,17 @@ data:
         * can be used to specifiy a different root path. If set to false, this is
         * disabled.
         */
-        //httpNodeRoot: '/red-nodes',
+        httpNodeRoot: '/red-nodes',
 
         /** The following property can be used to configure cross-origin resource sharing
         * in the HTTP nodes.
         * See https://github.com/troygoode/node-cors#configuration-options for
         * details on its contents. The following is a basic permissive set of options:
         */
-        //httpNodeCors: {
-        //    origin: "*",
-        //    methods: "GET,PUT,POST,DELETE"
-        //},
+        httpNodeCors: {
+            origin: "*",
+            methods: "GET,PUT,POST,DELETE"
+        },
 
         /** If you need to set an http proxy please set an environment variable
         * called http_proxy (or HTTP_PROXY) outside of Node-RED in the operating system.
@@ -215,12 +218,12 @@ data:
         * applied to all http in nodes, or any other sort of common request processing.
         * It can be a single function or an array of middleware functions.
         */
-        //httpNodeMiddleware: function(req,res,next) {
-        //    // Handle/reject the request, or pass it on to the http in node by calling next();
-        //    // Optionally skip our rawBodyParser by setting this to true;
-        //    //req.skipRawBodyParser = true;
-        //    next();
-        //},
+        httpNodeMiddleware: function(req,res,next) {
+            // Handle/reject the request, or pass it on to the http in node by calling next();
+            // Optionally skip our rawBodyParser by setting this to true;
+            req.skipRawBodyParser = true;
+            next();
+        },
 
         /** When httpAdminRoot is used to move the UI to a different root path, the
         * following property can be used to identify a directory of static content
@@ -256,7 +259,7 @@ data:
                   * trace - record very detailed logging + debug + info + warn + error + fatal errors
                   * off - turn off all logging (doesn't affect metrics or audit)
                   */
-                level: "info",
+                level: "debug",
                 /** Whether or not to include metric events in the log output */
                 metrics: false,
                 /** Whether or not to include audit events in the log output */
@@ -294,19 +297,19 @@ data:
           * will install/load. It can use '*' as a wildcard that matches anything.
           */
         externalModules: {
-            // autoInstall: false,   /** Whether the runtime will attempt to automatically install missing modules */
-            // autoInstallRetry: 30, /** Interval, in seconds, between reinstall attempts */
-            // palette: {              /** Configuration for the Palette Manager */
-            //     allowInstall: true, /** Enable the Palette Manager in the editor */
-            //     allowUpload: true,  /** Allow module tgz files to be uploaded and installed */
-            //     allowList: [],
-            //     denyList: []
-            // },
-            // modules: {              /** Configuration for node-specified modules */
-            //     allowInstall: true,
-            //     allowList: [],
-            //     denyList: []
-            // }
+            autoInstall: true,   /** Whether the runtime will attempt to automatically install missing modules */
+            autoInstallRetry: 30, /** Interval, in seconds, between reinstall attempts */
+            palette: {              /** Configuration for the Palette Manager */
+               allowInstall: true, /** Enable the Palette Manager in the editor */
+               allowUpload: true,  /** Allow module tgz files to be uploaded and installed */
+               allowList: [],
+               denyList: []
+            },
+            modules: {              /** Configuration for node-specified modules */
+                allowInstall: true,
+                allowList: [],
+                denyList: []
+            }
         },
 
 
@@ -331,7 +334,38 @@ data:
             * See https://github.com/node-red-contrib-themes/theme-collection for
             * a collection of themes to chose from.
             */
-            //theme: "",
+            "page": {
+              "title": "Node-RED",
+              "favicon": "favicon.ico",
+              "tabicon": "red/images/node-red-icon-black.svg"
+            },
+            "header": {
+              "title": "Node-RED",
+              "image": "red/images/node-red.svg"
+            },
+            "asset": {
+              "red": "red/red.min.js",
+              "main": "red/main.min.js",
+              "vendorMonaco": ""
+            },
+            menu: { // Hide unwanted menu items by id. see packages/node_modules/@node-red/editor-client/src/js/red.js:loadEditor for complete list
+                "menu-item-import-library": false,
+                "menu-item-export-library": false,
+                "menu-item-keyboard-shortcuts": false,
+                "menu-item-help": {
+                    label: "Alternative Help Link Text",
+                    url: "http://example.com"
+                }
+            },
+            tours: false, // disable the Welcome Tour for new users
+            userMenu: false, // Hide the user-menu even if adminAuth is enabled
+            login: {
+                image: "/absolute/path/to/login/page/big/image" // a 256x256 image
+            },
+            logout: {
+                redirect: "http://example.com"
+            },
+            theme: "dark",
             palette: {
                 /** The following property can be used to order the categories in the editor
                 * palette. If a node's category is not in the list, the category will get
