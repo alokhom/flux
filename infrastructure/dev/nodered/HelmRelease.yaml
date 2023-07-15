@@ -235,11 +235,14 @@ spec:
     # - name: example
     #   configMap:
     #     name: example
+    - name: keys
+      secret:
+        secretName: nodered-tls
 
     # -- Extra Volume Mounts for the node-red pod
     extraVolumeMounts:
-    # - name: test
-    #   mountPath: /test
+    - name: keys
+      mountPath: /keys
 
     # -- You can configure node-red using a settings file. default: {}
     settings:
@@ -261,7 +264,7 @@ spec:
     # Sidecar that collect the configmaps with specified label and stores the included files into the given folder
     sidecar:
       # -- Enable the sidecar
-      enabled: false
+      enabled: true
       # Env variables to pass to the sidecar
       env:
         # -- Set the sleep time for refresh script
@@ -275,9 +278,9 @@ spec:
         # -- Absolute path to shell script to execute after a configmap got reloaded.
         script: flow_refresh.py
         # The username for the API Call, check node-red documentation for more information
-        username: ""
+        username: "admin"
         # -- Password as key value pair
-        password: ""
+        password: "password"
         # -- Password from existing secret
         passwordFromExistingSecret: {}
         # -- Name of the secret that contains the password
