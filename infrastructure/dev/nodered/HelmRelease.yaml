@@ -167,7 +167,7 @@ spec:
       # -- Additional ingress annotations
       annotations:
         kubernetes.io/ingress.class: nginx
-        cert-manager.io/cluster-issuer: ca-issuer
+        # cert-manager.io/cluster-issuer: ca-issuer
         # kubernetes.io/tls-acme: "true"
       hosts:
         #  Ingress accepted hostnames
@@ -180,22 +180,22 @@ spec:
       # --  Ingress TLS configuration
       tls:
         # -- Secret name for the certificate
-        - secretName: noderedt-tls
+        - secretName: nodered-tls
           # -- Hostnames for the Ingress
           hosts:
             - nodered.systemtracker.no-ip.org
-        # -- Certificate used by the Cert-Manager
-        # certificate:
-        # -- Enable certificate
-        #   enabled: true
-        # -- Name of the certificate default: `$fullname-cert-$index`
-        #   name: ""
-        # -- Reference of ClusterIssuers or Issuer
-        #   issuerRef:
-        # -- Kind of the Issuer
-        #     kind: ClusterIssuer
-        # -- Name of the Issuer
-        #     name: "test"
+          # -- Certificate used by the Cert-Manager
+          certificate:
+          # -- Enable certificate
+            enabled: true
+          # -- Name of the certificate default: `$fullname-cert-$index`
+            name: "nodered-tls"
+          # -- Reference of ClusterIssuers or Issuer
+            issuerRef:
+          # -- Kind of the Issuer
+              kind: ClusterIssuer
+          # -- Name of the Issuer
+              name: "ca-issuer"
 
     # -- CPU/Memory resource requests/limits
     resources:
