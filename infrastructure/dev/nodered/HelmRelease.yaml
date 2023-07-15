@@ -226,19 +226,13 @@ spec:
               - dietpi
 
     # -- Extra Volumes for the pod
-    extraVolumes:
-    # - name: pv-claim
-    #   persistentVolumeClaim:
-    #     claimName: task-pv-volume
-    # - name: example
-    #   configMap:
-    #     name: example
+    extraVolumes: |
       - name: keys
         secret:
           secretName: nodered-tls
 
     # -- Extra Volume Mounts for the node-red pod
-    extraVolumeMounts:
+    extraVolumeMounts: |
       - name: keys
         mountPath: /keys
         readOnly: true
@@ -263,7 +257,7 @@ spec:
     # Sidecar that collect the configmaps with specified label and stores the included files into the given folder
     sidecar:
       # -- Enable the sidecar
-      enabled: true
+      enabled: false
       # Env variables to pass to the sidecar
       env:
         # -- Set the sleep time for refresh script

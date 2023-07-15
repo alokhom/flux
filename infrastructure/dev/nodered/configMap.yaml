@@ -84,7 +84,6 @@ data:
             type: "credentials",
             users: [{
                 username: "admin",
-                // password is password
                 password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
                 permissions: "*"
             }]
@@ -99,9 +98,7 @@ data:
 
         /** Option 1: static object */
         https: {
-          //key: require("fs").readFileSync('privkey.pem'),
           key: require("fs").readFileSync('/keys/tls.key'),
-          //cert: require("fs").readFileSync('cert.pem')
           cert: require("fs").readFileSync('/keys/tls.crt')
         },
 
@@ -297,15 +294,15 @@ data:
           * will install/load. It can use '*' as a wildcard that matches anything.
           */
         externalModules: {
-            autoInstall: true,   /** Whether the runtime will attempt to automatically install missing modules */
-            autoInstallRetry: 30, /** Interval, in seconds, between reinstall attempts */
-            palette: {              /** Configuration for the Palette Manager */
-               allowInstall: true, /** Enable the Palette Manager in the editor */
-               allowUpload: true,  /** Allow module tgz files to be uploaded and installed */
+            autoInstall: true,
+            autoInstallRetry: 30,
+            palette: {
+               allowInstall: true,
+               allowUpload: true,
                allowList: [],
                denyList: []
             },
-            modules: {              /** Configuration for node-specified modules */
+            modules: {
                 allowInstall: true,
                 allowList: [],
                 denyList: []
@@ -372,7 +369,7 @@ data:
                 * added to the end of the palette.
                 * If not set, the following default order is used:
                 */
-                //categories: ['subflows', 'common', 'function', 'network', 'sequence', 'parser', 'storage'],
+                categories: ['subflows', 'common', 'function', 'network', 'sequence', 'parser', 'storage'],
             },
             projects: {
                 /** To enable the Projects feature, set this value to true */
@@ -403,9 +400,9 @@ data:
                     /** other overrides can be set e.g. fontSize, fontFamily, fontLigatures etc.
                     * for the full list, see https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.istandaloneeditorconstructionoptions.html
                     */
-                    //fontSize: 14,
-                    //fontFamily: "Cascadia Code, Fira Code, Consolas, 'Courier New', monospace",
-                    //fontLigatures: true,
+                    fontSize: 14,
+                    fontFamily: "Cascadia Code, Fira Code, Consolas, 'Courier New', monospace",
+                    fontLigatures: true,
                 }
             }
         },
@@ -447,7 +444,7 @@ data:
         *    global.get("os")
         */
         functionGlobalContext: {
-            // os:require('os'),
+            os:require('os'),
         },
 
         /** The maximum number of messages nodes will buffer internally as part of their
@@ -463,10 +460,10 @@ data:
         *  middleware:{function or array}, (req,res,next) - http middleware
         *  ioMiddleware:{function or array}, (socket,next) - socket.io middleware
         */
-        //ui: { path: "ui" },
+        ui: { path: "ui" },
 
         /** Colourise the console output of the debug node */
-        //debugUseColors: true,
+        debugUseColors: true,
 
         /** The maximum length, in characters, of any message sent to the debug sidebar tab */
         debugMaxLength: 1000,
