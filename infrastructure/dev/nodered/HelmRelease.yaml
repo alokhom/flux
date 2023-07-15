@@ -226,16 +226,16 @@ spec:
               - dietpi
 
     # -- Extra Volumes for the pod
-    extraVolumes: |
-      - name: keys
-        secret:
-          secretName: nodered-tls
+    extraVolumes:
+    - name: keys
+      secret:
+        secretName: nodered-tls
 
     # -- Extra Volume Mounts for the node-red pod
-    extraVolumeMounts: |
-      - name: keys
-        mountPath: /keys
-        readOnly: true
+    extraVolumeMounts:
+    - name: keys
+      mountPath: /keys
+      readOnly: true
 
     # -- You can configure node-red using a settings file. default: {}
     settings:
