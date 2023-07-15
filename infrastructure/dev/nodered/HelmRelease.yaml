@@ -211,14 +211,21 @@ spec:
         memory: 128Mi
 
     # -- Node selector
-    nodeSelector:
-      kubernetes.io/hostname: orangepi5
+    nodeSelector: {}
 
     # -- Toleration labels for pod assignment
     tolerations: []
 
     # -- The affinity constraint
-    affinity: {}
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - dietpi
 
     # -- Extra Volumes for the pod
     extraVolumes:
