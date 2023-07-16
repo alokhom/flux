@@ -4,7 +4,7 @@ metadata:
   name: flows-json
   namespace: node-red
   annotations:
-    node-red-settings: "1"
+    node-red-settings: "one"
 data:
   flows.json: |
     [

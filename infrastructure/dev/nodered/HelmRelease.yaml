@@ -267,7 +267,7 @@ spec:
         # -- Label that should be used for filtering
         label: node-red-settings
         # -- The value for the label you want to filter your resources on. Don't set a value to filter by any value
-        label_value: "1"
+        label_value: "one"
         # -- Absolute path to shell script to execute after a configmap got reloaded.
         script: flow_refresh.py
         # The username for the API Call, check node-red documentation for more information
