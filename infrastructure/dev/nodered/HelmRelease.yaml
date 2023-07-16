@@ -257,7 +257,7 @@ spec:
     # Sidecar that collect the configmaps with specified label and stores the included files into the given folder
     sidecar:
       # -- Enable the sidecar
-      enabled: false
+      enabled: true
       # Env variables to pass to the sidecar
       env:
         # -- Set the sleep time for refresh script
@@ -281,7 +281,10 @@ spec:
         # -- Key of the secret that contains the password
         #  key: password
       # -- Extra Node-Modules that will be installed  from the sidecar script
-      extraNodeModules: []
+      extraNodeModules:
+         - node-red-contrib-xkeys_setunitid
+         - node-red-contrib-microsoft-teams-tasks
+         - node-red-contrib-json
       # -- Extra Environments for the sidecar
       extraEnv: []
       # -- Resources for the sidecar
