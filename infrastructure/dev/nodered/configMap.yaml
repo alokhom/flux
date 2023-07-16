@@ -180,7 +180,7 @@ data:
         httpAdminMiddleware: function(req,res,next) {
             // Set the X-Frame-Options header to limit where the editor
             // can be embedded
-            res.set('X-Frame-Options', 'sameorigin');
+            // res.set('X-Frame-Options', 'sameorigin');
             next();
         },
 
@@ -218,7 +218,7 @@ data:
         httpNodeMiddleware: function(req,res,next) {
             // Handle/reject the request, or pass it on to the http in node by calling next();
             // Optionally skip our rawBodyParser by setting this to true;
-            req.skipRawBodyParser = true;
+           //  req.skipRawBodyParser = true;
             next();
         },
 
@@ -226,7 +226,7 @@ data:
         * following property can be used to identify a directory of static content
         * that should be served at http://localhost:1880/.
         */
-        //httpStatic: '/home/nol/node-red-static/',
+        httpStatic: '/home/nol/node-red-static/',
 
     /*******************************************************************************
     * Runtime Settings
