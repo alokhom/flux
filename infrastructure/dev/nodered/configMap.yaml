@@ -48,7 +48,7 @@ data:
         * node-red from being able to decrypt your existing credentials and they will be
         * lost.
         */
-        credentialSecret: "7txdr2rqx4j1abqv",
+        //credentialSecret: "7txdr2rqx4j1abqv",
 
         /** By default, the flow JSON will be formatted over multiple lines making
         * it easier to compare changes when using version control.
@@ -97,20 +97,20 @@ data:
         */
 
         /** Option 1: static object */
-        https: {
-          key: require("fs").readFileSync('/keys/tls.key'),
-          cert: require("fs").readFileSync('/keys/tls.crt')
-        },
+        //https: {
+        //  key: require("fs").readFileSync('/keys/tls.key'),
+        //  cert: require("fs").readFileSync('/keys/tls.crt')
+        //},
 
         /** Option 2: function that returns the HTTP configuration object */
-        // https: function() {
-        //     // This function should return the options object, or a Promise
-        //     // that resolves to the options object
-        //     return {
-        //         key: require("fs").readFileSync('privkey.pem'),
-        //         cert: require("fs").readFileSync('cert.pem')
-        //     }
-        // },
+        https: function() {
+            // This function should return the options object, or a Promise
+            // that resolves to the options object
+            return {
+                key: require("fs").readFileSync('/keys/tls.key'),
+                cert: require("fs").readFileSync('/keys/tls.crt')
+            }
+        },
 
         /** If the `https` setting is a function, the following setting can be used
         * to set how often, in hours, the function will be called. That can be used
@@ -129,8 +129,8 @@ data:
         * The `pass` field is a bcrypt hash of the password.
         * See http://nodered.org/docs/security.html#generating-the-password-hash
         */
-        httpNodeAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
-        httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
+        //httpNodeAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
+        //httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
 
     /*******************************************************************************
     * Server Settings
@@ -351,16 +351,13 @@ data:
                 "menu-item-keyboard-shortcuts": false,
                 "menu-item-help": {
                     label: "Alternative Help Link Text",
-                    url: "http://example.com"
+                    url: "https://nodered.systemtracker.no-ip.org/"
                 }
             },
             tours: false, // disable the Welcome Tour for new users
             userMenu: false, // Hide the user-menu even if adminAuth is enabled
-            login: {
-                image: "/absolute/path/to/login/page/big/image" // a 256x256 image
-            },
             logout: {
-                redirect: "http://example.com"
+                redirect: "https://nodered.systemtracker.no-ip.org/"
             },
             theme: "dark",
             palette: {
@@ -460,7 +457,7 @@ data:
         *  middleware:{function or array}, (req,res,next) - http middleware
         *  ioMiddleware:{function or array}, (socket,next) - socket.io middleware
         */
-        ui: { path: "ui" },
+        //ui: { path: "ui" },
 
         /** Colourise the console output of the debug node */
         debugUseColors: true,
@@ -469,10 +466,10 @@ data:
         debugMaxLength: 1000,
 
         /** Maximum buffer size for the exec node. Defaults to 10Mb */
-        //execMaxBufferSize: 10000000,
+        execMaxBufferSize: 10000000,
 
         /** Timeout in milliseconds for HTTP request connections. Defaults to 120s */
-        //httpRequestTimeout: 120000,
+        httpRequestTimeout: 120000,
 
         /** Retry time in milliseconds for MQTT connections */
         mqttReconnectTime: 15000,
@@ -481,25 +478,25 @@ data:
         serialReconnectTime: 15000,
 
         /** Retry time in milliseconds for TCP socket connections */
-        //socketReconnectTime: 10000,
+        socketReconnectTime: 10000,
 
         /** Timeout in milliseconds for TCP server socket connections. Defaults to no timeout */
-        //socketTimeout: 120000,
+        socketTimeout: 120000,
 
         /** Maximum number of messages to wait in queue while attempting to connect to TCP socket
         * defaults to 1000
         */
-        //tcpMsgQueueSize: 2000,
+        tcpMsgQueueSize: 2000,
 
         /** Timeout in milliseconds for inbound WebSocket connections that do not
         * match any configured node. Defaults to 5000
         */
-        //inboundWebSocketTimeout: 5000,
+        inboundWebSocketTimeout: 5000,
 
         /** To disable the option for using local files for storing keys and
         * certificates in the TLS configuration node, set this to true.
         */
-        //tlsConfigDisableLocalFiles: true,
+        tlsConfigDisableLocalFiles: true,
 
         /** The following property can be used to verify websocket connection attempts.
         * This allows, for example, the HTTP request headers to be checked to ensure
