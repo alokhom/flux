@@ -261,11 +261,11 @@ spec:
       # Env variables to pass to the sidecar
       env:
         # -- Set the sleep time for refresh script
-        sleep_time_sidecar: "5s"
+        sleep_time_sidecar: 5s
         # -- If METHOD is set to LIST, the sidecar will just list config-maps/secrets and exit. With SLEEP it will list all config-maps/secrets, then sleep for SLEEP_TIME seconds. Anything else will continuously watch for changes (see https://kubernetes.io/docs/reference/using-api/api-concepts/#efficient-detection-of-changes).
-        method: "watch"
+        method: watch
         # -- Label that should be used for filtering
-        label: "node-red-settings"
+        label: node-red-settings
         # -- The value for the label you want to filter your resources on. Don't set a value to filter by any value
         label_value: "1"
         # -- Absolute path to shell script to execute after a configmap got reloaded.
@@ -282,9 +282,9 @@ spec:
         #  key: password
       # -- Extra Node-Modules that will be installed  from the sidecar script
       extraNodeModules:
-         - node-red-contrib-xkeys_setunitid
-         - node-red-contrib-microsoft-teams-tasks
-         - node-red-contrib-json
+        - node-red-contrib-xkeys_setunitid
+        - node-red-contrib-microsoft-teams-tasks
+        - node-red-contrib-json
       # -- Extra Environments for the sidecar
       extraEnv: []
       # -- Resources for the sidecar
