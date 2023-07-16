@@ -5,41 +5,10 @@ metadata:
   namespace: node-red
 data:
   settings.js: |
-    /**
-    * This is the default settings file provided by Node-RED.
-    *
-    * It can contain any valid JavaScript code that will get run when Node-RED
-    * is started.
-    *
-    * Lines that start with // are commented out.
-    * Each entry should be separated from the entries above and below by a comma ','
-    *
-    * For more information about individual settings, refer to the documentation:
-    *    https://nodered.org/docs/user-guide/runtime/configuration
-    *
-    * The settings are split into the following sections:
-    *  - Flow File and User Directory Settings
-    *  - Security
-    *  - Server Settings
-    *  - Runtime Settings
-    *  - Editor Settings
-    *  - Node Settings
-    *
-    **/
-
     module.exports = {
 
-    /*******************************************************************************
-    * Flow File and User Directory Settings
-    *  - flowFile
-    *  - credentialSecret
-    *  - flowFilePretty
-    *  - userDir
-    *  - nodesDir
-    ******************************************************************************/
-
         /** The file containing the flows. If not set, defaults to flows_<hostname>.json **/
-        flowFile: 'flows.json',
+        //flowFile: 'flows.json',
 
         /** By default, credentials are encrypted in storage using a generated key. To
         * specify your own secret, set the following property.
@@ -67,16 +36,6 @@ data:
         */
         //nodesDir: '/home/nol/.node-red/nodes',
 
-    /*******************************************************************************
-    * Security
-    *  - adminAuth
-    *  - https
-    *  - httpsRefreshInterval
-    *  - requireHttps
-    *  - httpNodeAuth
-    *  - httpStaticAuth
-    ******************************************************************************/
-
         /** To password protect the Node-RED editor and admin API, the following
         * property can be used. See http://nodered.org/docs/security.html for details.
         */
@@ -96,20 +55,12 @@ data:
         * for details of its contents.
         */
 
-        /** Option 1: static object */
-        //https: {
-        //  key: require("fs").readFileSync('/keys/tls.key'),
-        //  cert: require("fs").readFileSync('/keys/tls.crt')
-        //},
-
         /** Option 2: function that returns the HTTP configuration object */
-        https: function() {
-            // This function should return the options object, or a Promise
-            // that resolves to the options object
-            return {
-                key: require("fs").readFileSync('/keys/tls.key'),
-                cert: require("fs").readFileSync('/keys/tls.crt')
-            }
+        https: function() { 
+            return { 
+              key: require("fs").readFileSync('/keys/tls.key'), 
+              cert: require("fs").readFileSync('/keys/tls.crt')
+            }  
         },
 
         /** If the `https` setting is a function, the following setting can be used
@@ -122,29 +73,6 @@ data:
         * be redirected to HTTPS.
         */
         requireHttps: true,
-
-        /** To password protect the node-defined HTTP endpoints (httpNodeRoot),
-        * including node-red-dashboard, or the static content (httpStatic), thehttpAdminAuth
-        * following properties can be used.
-        * The `pass` field is a bcrypt hash of the password.
-        * See http://nodered.org/docs/security.html#generating-the-password-hash
-        */
-        //httpNodeAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
-        //httpStaticAuth: {user:"user",pass:"$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN."},
-
-    /*******************************************************************************
-    * Server Settings
-    *  - uiPort
-    *  - uiHost
-    *  - apiMaxLength
-    *  - httpServerOptions
-    *  - httpAdminRoot
-    *  - httpAdminMiddleware
-    *  - httpNodeRoot
-    *  - httpNodeCors
-    *  - httpNodeMiddleware
-    *  - httpStatic
-    ******************************************************************************/
 
         /** the tcp port that the Node-RED web server is listening on */
         uiPort: process.env.PORT || 1880,
@@ -177,13 +105,7 @@ data:
         * in front of all admin http routes. For example, to set custom http
         * headers. It can be a single function or an array of middleware functions.
         */
-        httpAdminMiddleware: function(req,res,next) {
-            // Set the X-Frame-Options header to limit where the editor
-            // can be embedded
-            // res.set('X-Frame-Options', 'sameorigin');
-            next();
-        },
-
+        httpAdminMiddleware: function(req,res,next) { next(); },
 
         /** Some nodes, such as HTTP In, can be used to listen for incoming http requests.
         * By default, these are served relative to '/'. The following property
@@ -215,12 +137,8 @@ data:
         * applied to all http in nodes, or any other sort of common request processing.
         * It can be a single function or an array of middleware functions.
         */
-        httpNodeMiddleware: function(req,res,next) {
-            // Handle/reject the request, or pass it on to the http in node by calling next();
-            // Optionally skip our rawBodyParser by setting this to true;
-           //  req.skipRawBodyParser = true;
-            next();
-        },
+
+        httpNodeMiddleware: function(req,res,next) { next(); },
 
         /** When httpAdminRoot is used to move the UI to a different root path, the
         * following property can be used to identify a directory of static content
@@ -228,14 +146,6 @@ data:
         */
         httpStatic: '/home/nol/node-red-static/',
 
-    /*******************************************************************************
-    * Runtime Settings
-    *  - lang
-    *  - logging
-    *  - contextStorage
-    *  - exportGlobalContextKeys
-    *  - externalModules
-    ******************************************************************************/
 
         /** Uncomment the following to run node-red in your preferred language.
           * Available languages include: en-US (default), ja, de, zh-CN, zh-TW, ru, ko
@@ -308,13 +218,6 @@ data:
                 denyList: []
             }
         },
-
-
-    /*******************************************************************************
-    * Editor Settings
-    *  - disableEditor
-    *  - editorTheme
-    ******************************************************************************/
 
         /** The following property can be used to disable the editor. The admin API
         * is not affected by this option. To disable both the editor and the admin
@@ -404,27 +307,6 @@ data:
             }
         },
 
-    /*******************************************************************************
-    * Node Settings
-    *  - fileWorkingDirectory
-    *  - functionGlobalContext
-    *  - functionExternalModules
-    *  - nodeMessageBufferMaxLength
-    *  - ui (for use with Node-RED Dashboard)
-    *  - debugUseColors
-    *  - debugMaxLength
-    *  - execMaxBufferSize
-    *  - httpRequestTimeout
-    *  - mqttReconnectTime
-    *  - serialReconnectTime
-    *  - socketReconnectTime
-    *  - socketTimeout
-    *  - tcpMsgQueueSize
-    *  - inboundWebSocketTimeout
-    *  - tlsConfigDisableLocalFiles
-    *  - webSocketNodeVerifyClient
-    ******************************************************************************/
-
         /** The working directory to handle relative file paths from within the File nodes
         * defaults to the working directory of the Node-RED process.
         */
@@ -502,20 +384,4 @@ data:
         * This allows, for example, the HTTP request headers to be checked to ensure
         * they include valid authentication information.
         */
-        //webSocketNodeVerifyClient: function(info) {
-        //    /** 'info' has three properties:
-        //    *   - origin : the value in the Origin header
-        //    *   - req : the HTTP request
-        //    *   - secure : true if req.connection.authorized or req.connection.encrypted is set
-        //    *
-        //    * The function should return true if the connection should be accepted, false otherwise.
-        //    *
-        //    * Alternatively, if this function is defined to accept a second argument, callback,
-        //    * it can be used to verify the client asynchronously.
-        //    * The callback takes three arguments:
-        //    *   - result : boolean, whether to accept the connection or not
-        //    *   - code : if result is false, the HTTP error status to return
-        //    *   - reason: if result is false, the HTTP reason string to return
-        //    */
-        //},
     }
