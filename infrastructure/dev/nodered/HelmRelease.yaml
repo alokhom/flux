@@ -238,12 +238,12 @@ spec:
       readOnly: true
 
     # -- You can configure node-red using a settings file. default: {}
-    settings:
+    settings: {}
     # Details about the content of the settings.js, you can lookup under
     # https://nodered.org/docs/user-guide/runtime/settings-file
     # The ConfigMap should already exist and the key must be named `settings.js`
-      name: settings-config
-      configMapName: settings-config
+      #name: settings-config
+      #configMapName: settings-config
 
     # -- Labels to add to the node-red pod. default: {}
     podLabels: {}
@@ -298,7 +298,7 @@ spec:
         # -- The image repository to pull from
         repository: "kiwigrid/k8s-sidecar"
         # -- The image tag to pull, default: `1.24.4`
-        tag: "1.24.4"
+        tag: "1.25.0"
         # -- The image pull policy, default: `IfNotPresent`
         pullPolicy: IfNotPresent
       # -- The extra volume mounts for the sidecar
