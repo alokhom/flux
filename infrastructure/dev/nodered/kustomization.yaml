@@ -5,6 +5,7 @@ resources:
   - HelmRepository.yaml
   - namespace.yaml
   - configMap.yaml
+  - configMap-flows.yaml
 
   # ingress template for app
   #- ingress.yaml

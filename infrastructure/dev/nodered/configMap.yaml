@@ -234,20 +234,6 @@ data:
             * See https://github.com/node-red-contrib-themes/theme-collection for
             * a collection of themes to chose from.
             */
-            "page": {
-              "title": "Node-RED",
-              "favicon": "favicon.ico",
-              "tabicon": "red/images/node-red-icon-black.svg"
-            },
-            "header": {
-              "title": "Node-RED",
-              "image": "red/images/node-red.svg"
-            },
-            "asset": {
-              "red": "red/red.min.js",
-              "main": "red/main.min.js",
-              "vendorMonaco": ""
-            },
             menu: { // Hide unwanted menu items by id. see packages/node_modules/@node-red/editor-client/src/js/red.js:loadEditor for complete list
                 "menu-item-import-library": false,
                 "menu-item-export-library": false,
@@ -273,7 +259,7 @@ data:
             },
             projects: {
                 /** To enable the Projects feature, set this value to true */
-                enabled: false,
+                enabled: true,
                 workflow: {
                     /** Set the default projects workflow mode.
                     *  - manual - you must manually commit changes
