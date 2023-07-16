@@ -6,6 +6,7 @@ resources:
   - namespace.yaml
   #- configMap.yaml
   - configMap-flows.yaml
+  - role-rb.yaml
 
   # ingress template for app
   #- ingress.yaml
