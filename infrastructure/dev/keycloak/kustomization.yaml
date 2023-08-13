@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./pg
-  - ./mysql
+  #- ./mysql
   - namespace.yaml
   - keycloak-sts.yaml
   - keycloak-Service.yaml
