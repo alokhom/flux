@@ -1,0 +1,52 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  # istio 1.17 and gateway
+  - ./common/istio-1-17/istio-crds/base/
+  - ./common/istio-1-17/istio-namespace/base
+  - ./common/istio-1-17/istio-install/base
+  # Dex 
+  - ./common/dex/overlays/istio
+  #- HelmRelease.yaml
+  #- HelmRepository.yaml
+  # OIDC Auth Service
+  - ./common/oidc-authservice/base
+  # knative
+  - ./common/knative/knative-serving/overlays/gateways
+  - ./common/istio-1-17/cluster-local-gateway/base
+  - ./common/knative/knative-eventing/base
+  # kf namesoace
+  - ./common/kubeflow-namespace/base
+  - ./common/kubeflow-roles/base
+  - ./common/istio-1-17/kubeflow-istio-resources/base
+  # kf pipelines
+  - ./apps/pipeline/upstream/env/cert-manager/platform-agnostic-multi-user
+  - ./apps/pipeline/upstream/env/platform-agnostic-multi-user-pns
+  # kf serving
+  - ./contrib/kserve/kserve
+  - ./contrib/kserve/models-web-app/overlays/kubeflow
+  # katib
+  - ./apps/katib/upstream/installs/katib-with-kubeflow
+  # central dashboard
+  - ./apps/centraldashboard/upstream/overlays/kserve
+  - ./apps/admission-webhook/upstream/overlays/cert-manager
+  # notebook controller official kf components
+  - ./apps/jupyter/notebook-controller/upstream/overlays/kubeflow
+  # jupyter lab official kf components
+  - ./apps/jupyter/jupyter-web-app/upstream/overlays/istio
+  # profile controller and KFAM official kf components 
+  - ./apps/profiles/upstream/overlays/kubeflow
+  # volume web app and kf components 
+  - ./apps/volumes-web-app/upstream/overlays/istio
+  # tensorboard
+  - ./apps/tensorboard/tensorboards-web-app/upstream/overlays/istio
+  # tensor controller
+  - ./apps/tensorboard/tensorboard-controller/upstream/overlays/kubeflow
+  # training operator
+  - ./apps/training-operator/upstream/overlays/kubeflow
+  # new ns for default user
+  - ./common/user-namespace/base
+
+
+
