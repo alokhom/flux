@@ -22,7 +22,7 @@ resources:
   - ./common/istio-1-17/kubeflow-istio-resources/base
   # kf pipelines
   - ./apps/pipeline/upstream/env/cert-manager/platform-agnostic-multi-user
-  - ./apps/pipeline/upstream/env/platform-agnostic-multi-user-pns
+  #- ./apps/pipeline/upstream/env/platform-agnostic-multi-user-pns
   # kf serving
   - ./contrib/kserve/kserve
   - ./contrib/kserve/models-web-app/overlays/kubeflow
