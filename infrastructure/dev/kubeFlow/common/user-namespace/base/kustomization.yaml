@@ -2,7 +2,9 @@
 # bootstrap a profile for the user running kfctl.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: kubeflow-user
 resources:
+- namespace.yaml
 - profile-instance.yaml
 configMapGenerator:
 - name: default-install-config
