@@ -2,7 +2,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: flows-json
-  namespace: node-red
+  namespace: node-rednew
   annotations:
     node-red-settings: "one"
 data:
