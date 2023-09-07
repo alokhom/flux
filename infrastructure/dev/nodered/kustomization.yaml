@@ -4,7 +4,7 @@ resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
   - namespace.yaml
-  #- configMap.yaml
+  - configMap.yaml
   - configMap-flows.yaml
   - role-rb.yaml
 
