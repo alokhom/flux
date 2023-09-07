@@ -331,18 +331,21 @@ spec:
         fsGroup: 1000
         runAsUser: 1000
       containers:
-        - command:
-          - sh
-          - -c
-          - apt update && apt install make && wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.58tar.gz
-            && tar zxvf bcm2835-1.58.tar.gz && cd bcm2835-1.58 && ./configure && make && sudo
-            make check && sudo make install
-          image: debian:latest
-          name: sidecar-example
-          volumeMounts:
-          - mountPath: /data
-            name: data
-        - env:
+        # - name: sidecar-example
+        #   image: debian:latest
+        #   command:
+        #   - sh
+        #   - -c
+        #   - apt update && apt install make && wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.58tar.gz
+        #     && tar zxvf bcm2835-1.58.tar.gz && cd bcm2835-1.58 && ./configure && make && sudo
+        #     make check && sudo make install
+        #   volumeMounts:
+        #   - mountPath: /data
+        #     name: data
+        - image: "quay.io/kiwigrid/k8s-sidecar:1.25.0"
+          imagePullPolicy: IfNotPresent
+          name: node-red-sidecar
+          env:
           - name: METHOD
             value: watch
           - name: SLEEP_TIME_SIDECAR
@@ -357,14 +360,10 @@ spec:
             value: /app/flow_refresh.py
           - name: URL
             value: http://abcd-node-red.node-rednew.svc.cluster.local:1880
-
           - name: USERNAME
             value: admin
           - name: PASSWORD
             value: "password"
-          image: "quay.io/kiwigrid/k8s-sidecar:1.25.0"
-          imagePullPolicy: IfNotPresent
-          name: node-red-sidecar
           resources:
             limits:
               cpu: 300m
