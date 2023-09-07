@@ -487,7 +487,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: noderednew-tls
-  namespace: node-rednew
+  namespace: node-red
 spec:
   commonName: nodered.systemtracker.no-ip.org
   dnsNames:
