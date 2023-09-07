@@ -20,4 +20,4 @@ resources:
   #- ./kcOp
   #- ./powerdns
   - ./nodered
-  - ./kubeFlow
+  #- ./kubeFlow
