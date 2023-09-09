@@ -3,7 +3,7 @@ kind: ClusterIssuer
 metadata:
   name: ca-issuer
   #name: selfsigned-issuer
-  namespace: ingress-nginx
+  namespace: cert-manager
 spec:
   #selfSigned: {}
   ca:
