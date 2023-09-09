@@ -5,3 +5,4 @@ resources:
   - HelmRepository.yaml
   - namespace.yaml
   - sealed-secret.yaml
+  - ClusterIssuer.yaml
