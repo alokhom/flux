@@ -105,6 +105,8 @@ spec:
                   namespace: stepca
             EOF
             sleep 2;
+            cat ./StepClusterIssuer.yaml;
+            sleep 2;
             kubectl -n stepca apply -f ./StepClusterIssuer.yaml;
             sleep 2;
             kubectl get StepClusterIssuer/step-clusterissuer -o yaml;
