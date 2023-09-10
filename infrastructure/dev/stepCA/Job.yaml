@@ -13,6 +13,7 @@ rules:
   - apiGroups: [""]
     resources:
       - pods
+      - configmaps
     verbs:
       - get
       - list
@@ -82,7 +83,7 @@ spec:
             sleep 2;
             CA_PROVISIONER_KID=$(kubectl -n stepca get -o jsonpath="{.data['ca\.json']}" configmaps/step-certificates-config | jq -r .authority.provisioners[0].key.kid);
             sleep 2;
-            cat <<EOF > step-issuer.yaml
+            cat <<EOF > StepClusterIssuer.yaml
             ---
             apiVersion: certmanager.step.sm/v1beta1
             #kind: StepIssuer
@@ -102,12 +103,11 @@ spec:
                   name: step-certificates-provisioner-password
                   key: password
                   namespace: stepca
-            ---
-            EOF;
+            EOF
             sleep 2;
-            cat ./step-issuer.yaml;
+            kubectl -n stepca apply -f ./StepClusterIssuer.yaml;
             sleep 2;
-            kubectl -n stepca apply -f ./step-issuer.yaml;
+            kubectl get StepClusterIssuer/step-clusterissuer -o yaml;
             sleep 20;
       restartPolicy: Never
   backoffLimit: 4
