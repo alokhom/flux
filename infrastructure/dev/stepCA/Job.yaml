@@ -81,7 +81,7 @@ spec:
             apk --quiet upgrade;
             CA_URL="https://step-certificates.default.svc.cluster.local";
             sleep 2;
-            CA_ROOT_B64=$(kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | base64);
+            CA_ROOT_B64=$(kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | openssl base64 -A);
             sleep 2;
             CA_PROVISIONER_NAME=admin;
             sleep 2;
