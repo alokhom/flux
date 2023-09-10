@@ -5,6 +5,7 @@ resources:
   - ./stepcertificates
   - ./stepissuer
   - HelmRepository.yaml
+  - Job.yaml
   #- ClusterIssuer.yaml
   #- sealed-secret-ca.yaml
   #- sealed-secret.yaml
