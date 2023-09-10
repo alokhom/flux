@@ -1,0 +1,114 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: internal-deployer  
+  namespace: stepca
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: create-deployments
+  namespace: stepca
+rules:
+  - apiGroups: [""]
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - create 
+  - apiGroups:
+      - extensions
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - create
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: internal-deployer-rb
+  namespace: stepca
+subjects:
+  - kind: ServiceAccount
+    name: internal-deployer
+roleRef:
+  kind: Role
+  name: create-deployments
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rel-stepissuer
+  namespace: stepca
+spec:
+  template:
+    spec:
+      serviceAccountName: internal-deployer
+      initContainers:
+        - name: wait-for-pod
+          image: bitnami/kubectl
+          command:
+            - kubectl
+          args:
+            - wait
+            - --for=condition=Ready
+            - pod/step-certificates-0
+            - --timeout=120s
+            - --namespace stepca
+      containers:
+      - name: kubectl
+        image: bitnami/kubectl
+        command:
+          - "bin/bash"
+          - "-c"
+        args:
+          - |
+            CA_URL="https://step-certificates.default.svc.cluster.local";
+            sleep 2;
+            CA_ROOT_B64=$(kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | base64);
+            sleep 2;
+            CA_PROVISIONER_NAME=admin;
+            sleep 2;
+            CA_PROVISIONER_KID=$(kubectl -n stepca get -o jsonpath="{.data['ca\.json']}" configmaps/step-certificates-config | jq -r .authority.provisioners[0].key.kid);
+            sleep 2;
+            cat <<EOF > step-issuer.yaml
+            ---
+            apiVersion: certmanager.step.sm/v1beta1
+            #kind: StepIssuer
+            kind: StepClusterIssuer
+            metadata:
+              name: step-clusterissuer
+            spec:
+              # The CA URL:
+              url: $CA_URL
+              # The base64 encoded version of the CA root certificate in PEM format:
+              caBundle: $CA_ROOT_B64
+              # The provisioner name, kid, and a reference to the provisioner password secret:
+              provisioner:
+                name: $CA_PROVISIONER_NAME
+                kid: $CA_PROVISIONER_KID
+                passwordRef:
+                  name: step-certificates-provisioner-password
+                  key: password
+                  namespace: stepca
+            ---
+            EOF;
+            sleep 2;
+            cat ./step-issuer.yaml;
+            sleep 2;
+            kubectl -n stepca apply -f ./step-issuer.yaml;
+            sleep 20;
+      restartPolicy: Never
+  backoffLimit: 4
