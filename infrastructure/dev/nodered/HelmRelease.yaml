@@ -191,9 +191,11 @@ spec:
           # -- Reference of ClusterIssuers or Issuer
             issuerRef:
           # -- Kind of the Issuer
-              kind: ClusterIssuer
+              #kind: ClusterIssuer
+              group: certmanager.step.sm
+              kind: StepClusterIssuer
           # -- Name of the Issuer
-              name: "ca-issuer"
+              name: "step-clusterissuer"
 
     # -- CPU/Memory resource requests/limits
     resources:
