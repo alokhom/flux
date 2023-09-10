@@ -80,8 +80,9 @@ spec:
             - |
               apk add --update --no-cache --quiet curl coreutils openssl jq;
               apk --quiet upgrade;
-              curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl";
-              chmod +x kubectl && mkdir -p ~/.local/bin && mv ./kubectl ~/.local/bin/kubectl;
+              sleep 2;
+              curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" && chmod +x kubectl && mv ./kubectl /usr/bin/kubectl;
+              sleep 2;
               CA_URL="https://step-certificates.default.svc.cluster.local";
               sleep 2;
               CA_ROOT_B64=$(kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | openssl base64 -A);
