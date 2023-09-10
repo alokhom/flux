@@ -17,7 +17,15 @@ rules:
     verbs:
       - get
       - list
-      - create 
+      - create
+  - apiGroups: ["certmanager.step.sm"]
+    resources:
+      - stepclusterissuers
+      - stepissuers
+    verbs:
+      - get
+      - list
+      - create
   - apiGroups:
       - extensions
     resources:
