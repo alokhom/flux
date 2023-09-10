@@ -492,6 +492,8 @@ spec:
   dnsNames:
     - nodered.systemtracker.no-ip.org
   issuerRef:
-    kind: ClusterIssuer
-    name: ca-issuer
+    group: certmanager.step.sm
+    kind: StepClusterIssuer
+    # -- Name of the Issuer
+    name: "step-clusterissuer"
   secretName: noderednew-tls
