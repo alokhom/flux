@@ -5,6 +5,34 @@ metadata:
   namespace: stepca
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: create-rolecluster
+rules:
+  - apiGroups: ["certmanager.step.sm"]
+    resources:
+      - stepclusterissuers
+      - stepissuers
+    verbs:
+      - get
+      - list
+      - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+# This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
+kind: ClusterRoleBinding
+metadata:
+  name: create-rcbind
+subjects:
+- kind: ServiceAccount
+  name: internal-deployer # name of your service account
+  namespace: stepca # this is the namespace your service account is in
+roleRef:
+  kind: ClusterRole
+  name: create-rolecluster
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: create-deployments
@@ -14,14 +42,6 @@ rules:
     resources:
       - pods
       - configmaps
-    verbs:
-      - get
-      - list
-      - create
-  - apiGroups: ["certmanager.step.sm"]
-    resources:
-      - stepclusterissuers
-      - stepissuers
     verbs:
       - get
       - list
