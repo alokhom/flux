@@ -21,3 +21,4 @@ resources:
   #- ./powerdns
   - ./nodered
   #- ./kubeFlow
+  - ./stepCA
