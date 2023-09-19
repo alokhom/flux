@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: pebbleLE
-  namespace: pebbleLE
+  name: pebble
+  namespace: pebble
 spec:
   interval: 30m
   chart:
@@ -11,26 +11,9 @@ spec:
       version: "0.0.1-set.by.chartpress"
       sourceRef:
         kind: HelmRepository
-        name: pebbleLE
-        namespace: pebbleLE
+        name: pebble
+        namespace: pebble
       interval: 5m
-  # postRenderers:
-  #   # Instruct helm-controller to use built-in "kustomize" post renderer.
-  #   - kustomize:
-  #       # Array of inline JSON6902 patch definitions as YAML object.
-  #       # Note, this is a YAML object and not a string, to avoid syntax
-  #       # indention errors.
-  #       patches:
-  #         - target:
-  #             version: v1
-  #             kind: Ingress
-  #             name: nexus-nexus-repository-manager
-  #             labelSelector: "app.kubernetes.io/name=nexus-repository-manager"           
-  #           patch: |
-  #             # container 0
-  #             - op: replace #action 
-  #               path: "/spec/rules/0/http/paths/0/pathType" #resouirce we want to change
-  #               value: ImplementationSpecific
   values:
     ## Values to render the Helm templates.
     fullnameOverride: ""
@@ -110,3 +93,20 @@ spec:
         deployment: {}
         service: {}
         configmap: {}
+  # postRenderers:
+  #   # Instruct helm-controller to use built-in "kustomize" post renderer.
+  #   - kustomize:
+  #       # Array of inline JSON6902 patch definitions as YAML object.
+  #       # Note, this is a YAML object and not a string, to avoid syntax
+  #       # indention errors.
+  #       patches:
+  #         - target:
+  #             version: v1
+  #             kind: Ingress
+  #             name: nexus-nexus-repository-manager
+  #             labelSelector: "app.kubernetes.io/name=nexus-repository-manager"           
+  #           patch: |
+  #             # container 0
+  #             - op: replace #action 
+  #               path: "/spec/rules/0/http/paths/0/pathType" #resouirce we want to change
+  #               value: ImplementationSpecific
