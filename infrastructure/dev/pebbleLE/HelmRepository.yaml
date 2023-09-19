@@ -5,4 +5,4 @@ metadata:
   namespace: pebble
 spec:
   interval: 5m
-  url: https://jupyterhub.github.io/helm-chart/
+  url: https://github.com/jupyterhub/pebble-helm-chart/
