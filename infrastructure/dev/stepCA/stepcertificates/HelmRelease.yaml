@@ -57,7 +57,7 @@ spec:
         tag: latest
         pullPolicy: IfNotPresent
       # enabled defines if the bootstrap job is created.
-      enabled: false
+      enabled: true
       # configmaps defines if the configmaps are created.
       configmaps: true
       # secrets defines if the secrets are created.
@@ -77,7 +77,7 @@ spec:
 
     # inject contains values to be injected into config maps and secrets
     inject:
-      enabled: true
+      enabled: false
       config:
         files:
           ca.json:
