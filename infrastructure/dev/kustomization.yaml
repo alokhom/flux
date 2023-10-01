@@ -22,5 +22,5 @@ resources:
   - ./nodered
   #- ./kubeFlow
   #- ./stepCA
-  - ./pebbleLE
+  #- ./pebbleLE
   - ./vault
