@@ -493,7 +493,7 @@ spec:
     - nodered.systemtracker.no-ip.org
   issuerRef:
     group: certmanager.step.sm
-    kind: StepClusterIssuer
+    kind: ClusterIssuer
     # -- Name of the Issuer
-    name: "step-clusterissuer"
+    name: "ca-issuer"
   secretName: noderednew-tls
