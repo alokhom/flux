@@ -15,7 +15,7 @@
 to store - even inside a public repository. The SealedSecret can be
 decrypted only by the controller running in the target cluster and
 nobody else (not even the original author) is able to obtain the
-originaly Secret from the SealedSecret.
+originalz Secret from the SealedSecret.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
