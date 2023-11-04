@@ -15,7 +15,7 @@ spec:
     spec:
       domain:
         cpu:
-          cores: 2
+          cores: 1
         devices:
           disks:
             - name: containervolume
@@ -37,7 +37,7 @@ spec:
         - name: containervolume
           containerDisk:
             image: tedezed/debian-container-disk:10.0
-        - name: cloudinitdisk
+        - name: cloudinitvolume
           cloudInitNoCloud:
             userData: |
               #cloud-config
