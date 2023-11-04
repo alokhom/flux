@@ -4,4 +4,4 @@ resources:
   - namespace.yaml
   - vm.yaml
   - fedora.yaml
-  - ubuntu.yaml
+  - debian.yaml
