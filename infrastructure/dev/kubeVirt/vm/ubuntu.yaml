@@ -1,0 +1,57 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: VirtualMachine
+metadata:
+  name: ubuntu-vmi
+  namespace: vm
+  labels:
+    special: key
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        special: key
+    spec:
+      domain:
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: containerdisk
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+        machine:
+          type: ""
+        resources:
+          requests:
+            memory: 1024M
+      terminationGracePeriodSeconds: 0
+      volumes:
+        - containerDisk:
+            image: tedezed/ubuntu-container-disk:latest
+          name: containerdisk
+        - cloudInitNoCloud:
+            userData: |
+              #!/bin/sh
+              echo 'Add authorized SSH keys'
+              mkdir -p /root/.ssh
+              echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDKhf7TdaWuYsJQToFJ9ee16xUfZmdVG/ts0VMPx4n52p3ABaX31qPOGeneEBW7V0ua1+GaEZnqbmf+ld6tEELTlLFFXb7GCXwBJEI8T9Szr7ZMPVUu9j0tlX9ZpO0m1SVyX/OsTyDSyro+8rBh7fXakqrJdB1/akXRtuIBdU4V7K0ybjgd3b9FL/gnikc/w84gShj9w9K4ZyF23z6NK9qUhav0VIQl+eC/fq3910Ja/yrLP/vnTTQzEsgNJiDzKdZeLoj/ommuVjPIKds7O1j9NPATtsN8BvucAOGKAdHMIZfDkuU1UqbeRfNP97TYyWTeaZLBNUudfYt7hSl9stA71TMqWurtURPqUiuGbNXWaJSbLTZcxJ18z9zy31OEO1zAe4y6cTSLjK+FEwCGKs/kDYEzF22p3zXAeg3UJIAh8tNO1duhvFDaOCjAGyxOHhOnT1+wjx5JXyl2C7HZySjNHDxH5yyaZmOgCFRi5JQmVMcmjwEvrK48JjoWRgXLh48= alok@C11-BX61IU40V5C' > /root/.ssh/authorized_keys
+          name: cloudinitdisk
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ubuntu-vmi
+  namespace: vm
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - name: nodeport
+      nodePort: 32017
+      port: 27017
+      protocol: TCP
+      targetPort: 22
+  selector:
+    special: key
+  type: NodePort
