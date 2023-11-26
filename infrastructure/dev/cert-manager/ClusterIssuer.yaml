@@ -7,8 +7,8 @@ metadata:
 spec:
   #selfSigned: {}
   ca:
-    #secretName: ssl-ingress-secret-ca
-    secretName: ssl-ingress-secret
+    secretName: ssl-ingress-secret-ca
+    #secretName: ssl-ingress-secret
   #acme: 
   #  #server: "https://acme-v02.api.letsencrypt.org/directory"
   #  server: "https://acme-staging-v02.api.letsencrypt.org/directory"
