@@ -24,4 +24,4 @@ resources:
   #- ./stepCA
   #- ./pebbleLE
   - ./vault
-  - ./kubeVirt
+  #- ./kubeVirt
