@@ -74,7 +74,7 @@ spec:
       configData:
         providers:
         - clientID: "oauth2-proxy"
-          clientSecret: "eHhgYHcA9g149HMIt1rCkUjGXF1wEf0Y"
+          clientSecret: "KHo2TGIJBd6jYGrhzHpttoAmr2WMClk9"
           provider: oidc
           id: keycloak-id
           loginURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/auth
@@ -83,7 +83,7 @@ spec:
           profileURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
           validateURL: https://keycloak.systemtracker.no-ip.org/realms/oauth2-proxy/protocol/openid-connect/userinfo
           allowedGroups:
-          - testgroup # List all groups managed at our your IdP which should be allowed access
+          - grp # List all groups managed at our your IdP which should be allowed access
           scope: "openid profile email"
           oidcConfig:
             emailClaim: email  # Name of the clain in JWT containing the E-Mail
