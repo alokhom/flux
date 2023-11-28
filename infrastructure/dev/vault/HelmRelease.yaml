@@ -429,6 +429,7 @@ spec:
         # traffic: external
         annotations:
           kubernetes.io/ingress.class: nginx
+          cert-manager.io/cluster-issuer: ca-issuer
           # kubernetes.io/tls-acme: "true"
           #   or
           # kubernetes.io/ingress.class: nginx
@@ -456,10 +457,10 @@ spec:
         #       name: ssl-redirect
         #       port:
         #         number: use-annotation
-        tls: []
-        #  - secretName: chart-example-tls
-        #    hosts:
-        #      - chart-example.local
+        tls:
+          - secretName: chart-example-tls
+            hosts:
+              - vault.systemtracker.no-ip.org
 
       # hostAliases is a list of aliases to be added to /etc/hosts. Specified as a YAML list.
       hostAliases: []
