@@ -3,15 +3,15 @@ kind: Kustomization
 resources:
   - ./cert-manager
   #- ./hadoop
-  - ./ingress-nginx
+  #- ./ingress-nginx
   - ./sealed-secrets
   #- ./spark
   #- splunk-ent
   #- splunk-collector
   #- ./graylog
   #- storage-class
-  - ./keycloak
-  - ./oauth2
+  #- ./keycloak
+  #- ./oauth2
   #- ./openLdap
   #- ./mongo
   #- ./kube-prometheus-stack
@@ -23,5 +23,5 @@ resources:
   #- ./kubeFlow
   #- ./stepCA
   #- ./pebbleLE
-  - ./vault
+  #- ./vault
   #- ./kubeVirt
