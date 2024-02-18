@@ -15,7 +15,7 @@
 to store - even inside a public repository. The SealedSecret can be
 decrypted only by the controller running in the target cluster and
 nobody else (not even the original author) is able to obtain the
-originalm Secret from the SealedSecret.
+original Secret from the SealedSecret.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -28,15 +28,18 @@ originalm Secret from the SealedSecret.
   - [Controller](#controller)
     - [Kustomize](#kustomize)
     - [Helm Chart](#helm-chart)
-  - [Homebrew](#homebrew)
-  - [MacPorts](#macports)
-  - [Linux](#linux)
-  - [Installation from source](#installation-from-source)
+  - [Kubeseal](#kubeseal)
+    - [Homebrew](#homebrew)
+    - [MacPorts](#macports)
+    - [Linux](#linux)
+    - [Installation from source](#installation-from-source)
 - [Upgrade](#upgrade)
 - [Usage](#usage)
   - [Managing existing secrets](#managing-existing-secrets)
+  - [Patching existing secrets](#patching-existing-secrets)
   - [Update existing secrets](#update-existing-secrets)
   - [Raw mode (experimental)](#raw-mode-experimental)
+  - [Validate a Sealed Secret](#validate-a-sealed-secret)
 - [Secret Rotation](#secret-rotation)
   - [Sealing key renewal](#sealing-key-renewal)
   - [User secret rotation](#user-secret-rotation)
@@ -113,7 +116,9 @@ In particular, the annotations and labels of a `SealedSecret` resource are not t
 
 To capture this distinction, the `SealedSecret` object has a `template` section which encodes all the fields you want the controller to put in the unsealed `Secret`.
 
-This includes metadata such as labels or annotations, but also things like the `type` of the secret.
+The `metadata` block is copied as is (the `ownerReference` field will be updated [unless disabled](#seal-secret-which-can-skip-set-owner-references)).
+
+Other secret fields are handled individually. The `type` and `immutable` fields are copied, and the `data` field can be used to [template complex values](docs/examples/config-template) on the `Secret`. All other fields are currently ignored.
 
 ```yaml
 apiVersion: bitnami.com/v1alpha1
@@ -128,6 +133,7 @@ spec:
     .dockerconfigjson: AgBy3i4OJSWK+PiTySYZZA9rO43cGDEq.....
   template:
     type: kubernetes.io/dockerconfigjson
+    immutable: true
     # this is an example of labels and annotations that will be added to the output secret
     metadata:
       labels:
@@ -155,6 +161,7 @@ metadata:
     name: mysecret
     uid: 5caff6a0-c9ac-11e9-881e-42010aac003e
 type: kubernetes.io/dockerconfigjson
+immutable: true
 data:
   .dockerconfigjson: ewogICJjcmVk...
 ```
@@ -324,8 +331,8 @@ serviceAccount:
 rbac:
   create: false
   clusterRole: false
-resources: 
-  limits: 
+resources:
+  limits:
     cpu: 150m
     memory: 256Mi
 ```
@@ -337,7 +344,7 @@ Note that:
 - Resource limits must be specified.
   - The limits are samples that should work, but you might want to review them in your particular setup.
 
-Once that file is ready, if you named it `config.yaml` you now can install the sealed secrets Helm Chart like this: 
+Once that file is ready, if you named it `config.yaml` you now can install the sealed secrets Helm Chart like this:
 
 ```shell
 helm install sealed-secrets -n {allocated-namespace} sealed-secrets/sealed-secrets --skip-crds -f config.yaml
@@ -345,7 +352,9 @@ helm install sealed-secrets -n {allocated-namespace} sealed-secrets/sealed-secre
 
 Where `{allocated-namespace}` is the name of the `namespace` you were allocated in the cluster.
 
-### Homebrew
+### Kubeseal
+
+#### Homebrew
 
 The `kubeseal` client is also available on [homebrew](https://formulae.brew.sh/formula/kubeseal):
 
@@ -353,7 +362,7 @@ The `kubeseal` client is also available on [homebrew](https://formulae.brew.sh/f
 brew install kubeseal
 ```
 
-### MacPorts
+#### MacPorts
 
 The `kubeseal` client is also available on [MacPorts](https://ports.macports.org/port/kubeseal/summary):
 
@@ -361,7 +370,7 @@ The `kubeseal` client is also available on [MacPorts](https://ports.macports.org
 port install kubeseal
 ```
 
-### Nixpkgs
+#### Nixpkgs
 
 The `kubeseal` client is also available on [Nixpkgs](https://search.nixos.org/packages?channel=unstable&show=kubeseal&from=0&size=50&sort=relevance&type=packages&query=kubeseal): (**DISCLAIMER**: Not maintained by bitnami-labs)
 
@@ -369,19 +378,37 @@ The `kubeseal` client is also available on [Nixpkgs](https://search.nixos.org/pa
 nix-env -iA nixpkgs.kubeseal
 ```
 
-### Linux
+#### Linux
 
 The `kubeseal` client can be installed on Linux, using the below commands:
 
 ```bash
-wget https://github.com/bitnami-labs/sealed-secrets/releases/download/<release-tag>/kubeseal-<version>-linux-amd64.tar.gz
-tar -xvzf kubeseal-<version>-linux-amd64.tar.gz kubeseal
+KUBESEAL_VERSION='' # Set this to, for example, KUBESEAL_VERSION='0.23.0'
+wget "https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION:?}/kubeseal-${KUBESEAL_VERSION:?}-linux-amd64.tar.gz"
+tar -xvzf kubeseal-${KUBESEAL_VERSION:?}-linux-amd64.tar.gz kubeseal
 sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 ```
 
-where `release-tag` is the [version tag](https://github.com/bitnami-labs/sealed-secrets/tags) of the kubeseal release you want to use. For example: `v0.18.0`.
+If you have `curl` and `jq` installed on your machine, you can get the version dynamically this way. This can be useful for environments used in automation and such.
 
-### Installation from source
+```
+# Fetch the latest sealed-secrets version using GitHub API
+KUBESEAL_VERSION=$(curl -s https://api.github.com/repos/bitnami-labs/sealed-secrets/tags | jq -r '.[0].name' | cut -c 2-)
+
+# Check if the version was fetched successfully
+if [ -z "$KUBESEAL_VERSION" ]; then
+    echo "Failed to fetch the latest KUBESEAL_VERSION"
+    exit 1
+fi
+
+wget "https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION}/kubeseal-${KUBESEAL_VERSION}-linux-amd64.tar.gz"
+tar -xvzf kubeseal-${KUBESEAL_VERSION}-linux-amd64.tar.gz kubeseal
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+```
+
+where `KUBESEAL_VERSION` is the [version tag](https://github.com/bitnami-labs/sealed-secrets/tags) of the kubeseal release you want to use. For example: `v0.18.0`.
+
+#### Installation from source
 
 If you just want the latest client tool, it can be installed into
 `$GOPATH/bin` with:
@@ -404,6 +431,12 @@ Don't forget to check the [release notes](RELEASE-NOTES.md) for guidance about
 possible breaking changes when you upgrade the client tool
 and/or the controller.
 
+### Supported Versions
+Currently, only the latest version of Sealed Secrets is supported for production environments.
+
+### Compatibility with Kubernetes versions
+The Sealed Secrets controller ensures compatibility with different versions of Kubernetes by relying on a stable Kubernetes API. Typically, Kubernetes versions above 1.16 are considered compatible. However, we officially support the [currently recommended Kubernetes versions](https://kubernetes.io/releases/). Additionally, versions above 1.24 undergo thorough verification through our CI process with every release.
+
 ## Usage
 
 ```bash
@@ -412,8 +445,7 @@ and/or the controller.
 echo -n bar | kubectl create secret generic mysecret --dry-run=client --from-file=foo=/dev/stdin -o json >mysecret.json
 
 # This is the important bit:
-# (note default format is json!)
-kubeseal <mysecret.json >mysealedsecret.json
+kubeseal -f mysecret.json -w mysealedsecret.json
 
 # At this point mysealedsecret.json is safe to upload to Github,
 # post on Twitter, etc.
@@ -444,7 +476,19 @@ only change from existing Kubernetes is that the *contents* of the
 
 ### Managing existing secrets
 
-If you want `SealedSecret` controller to take management of an existing `Secret` (i.e. overwrite it when unsealing a `SealedSecret` with the same name and namespace), then you have to annotate that `Secret` with the annotation `sealedsecrets.bitnami.com/managed: "true"` ahead applying the [Usage](#usage) steps.
+If you want the Sealed Secrets controller to manage an existing `Secret`, you can annotate your `Secret` with the `sealedsecrets.bitnami.com/managed: "true"` annotation. The existing `Secret` will be overwritten when unsealing a `SealedSecret` with the same name and namespace, and the `SealedSecret` will take ownership of the `Secret` (so that when the `SealedSecret` is deleted the `Secret` will also be deleted).
+
+### Patching existing secrets
+
+> New in v0.23.0
+
+There are some use cases in which you don't want to replace the whole `Secret` but just add or modify some keys from the existing `Secret`. For this, you can annotate your `Secret` with `sealedsecrets.bitnami.com/patch: "true"`. Using this annotation will make sure that secret keys, labels and annotations in the `Secret` that are not present in the `SealedSecret` won't be deleted, and those present in the `SealedSecret` will be added to the `Secret` (secret keys, labels and annotations that exist both in the `Secret` and the `SealedSecret` will be modified by the `SealedSecret`).
+
+This annotation does not make the `SealedSecret` take ownership of the `Secret`. You can add both the `patch` and `managed` annotations to obtain the patching behavior while also taking ownership of the `Secret`.
+
+### Seal secret which can skip set owner references
+
+If you want `SealedSecret` and the `Secret` to be independent, which mean when you delete the `SealedSecret` the `Secret` won't disappear with it, then you have to annotate that Secret with the annotation `sealedsecrets.bitnami.com/skip-set-owner-references: "true"` ahead of applying the Usage steps. You still may also add `sealedsecrets.bitnami.com/managed: "true"` to your `Secret` so that your secret will be updated when `SealedSecret` is updated.
 
 ### Update existing secrets
 
@@ -505,6 +549,36 @@ Include the `sealedsecrets.bitnami.com/cluster-wide` annotation in the `SealedSe
 metadata:
   annotations:
     sealedsecrets.bitnami.com/cluster-wide: "true"
+```
+
+### Validate a Sealed Secret
+
+If you want to validate an existing sealed secret, `kubeseal` has the flag `--validate` to help you.
+
+Giving a file named `sealed-secrets.yaml` containing the following sealed secret:
+
+```yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: mysecret
+  namespace: mynamespace
+spec:
+  encryptedData:
+    foo: AgBy3i4OJSWK+PiTySYZZA9rO43cGDEq.....
+```
+
+You can validate if the sealed secret was properly created or not:
+
+```console
+$ cat sealed-secrets.yaml | kubeseal --validate
+```
+
+In case of an invalid sealed secret, `kubeseal` will show:
+
+```console
+$ cat sealed-secrets.yaml | kubeseal --validate
+error: unable to decrypt sealed secret
 ```
 
 ## Secret Rotation
@@ -645,6 +719,10 @@ Developing guidelines can be found [in the Developer Guide](docs/developer/READM
 
 ## FAQ
 
+### Can I encrypt multiple secrets at once, in one YAML / JSON file?
+
+Yes, you can! Drop as many secrets as you like in one file. Make sure to separate them via `---` for YAML and as extra, single objects in JSON.
+
 ### Will you still be able to decrypt if you no longer have access to your cluster?
 
 No, the private keys are only stored in the Secret managed by the controller (unless you have some other backup of your k8s objects). There are no backdoors - without that private key used to encrypt a given SealedSecrets, you can't decrypt it. If you can't get to the Secrets with the encryption keys, and you also can't get to the decrypted versions of your Secrets live in the cluster, then you will need to regenerate new passwords for everything, seal them again with a new sealing key, etc.
@@ -655,6 +733,8 @@ If you do want to make a backup of the encryption private keys, it's easy to do 
 
 ```bash
 kubectl get secret -n kube-system -l sealedsecrets.bitnami.com/sealed-secrets-key -o yaml >main.key
+
+echo "---" >> main.key
 kubectl get secret -n kube-system sealed-secrets-key -o yaml >>main.key
 ```
 
@@ -664,10 +744,17 @@ kubectl get secret -n kube-system sealed-secrets-key -o yaml >>main.key
 
 To restore from a backup after some disaster, just put that secrets back before starting the controller - or if the controller was already started, replace the newly-created secrets and restart the controller:
 
-```bash
-kubectl apply -f main.key
-kubectl delete pod -n kube-system -l name=sealed-secrets-controller
-```
+* For Helm deployment:
+    ```bash
+    kubectl apply -f main.key
+    kubectl delete pod -n kube-system -l app.kubernetes.io/name=sealed-secrets
+    ```
+
+* For deployment via `controller.yaml` manifest
+    ```bash
+    kubectl apply -f main.key
+    kubectl delete pod -n kube-system -l name=sealed-secrets-controller
+    ```
 
 ### Can I decrypt my secrets offline with a backup key?
 
@@ -748,12 +835,3 @@ Click [here](http://slack.k8s.io) to sign up to the Kubernetes Slack org.
 - WebSeal: generates secrets in the browser: [https://socialgouv.github.io/webseal](https://socialgouv.github.io/webseal)
 - HybridEncrypt TypeScript implementation: [https://github.com/SocialGouv/aes-gcm-rsa-oaep](https://github.com/SocialGouv/aes-gcm-rsa-oaep)
 - [DEPRACATED] Sealed Secrets Operator: [https://github.com/disposab1e/sealed-secrets-operator-helm](https://github.com/disposab1e/sealed-secrets-operator-helm)
-
-
-##############
-
-using sealed secrets
-
-```
-kubectl -n cert-manager create secret tls ssl-ingress-secret-ca --cert /tmp/CAcert.crt --key /tmp/CAkey.crt --dry-run=client -o yaml  | kubeseal --controller-name=sealed-secrets --controller-namespace=sealed-secrets -o yaml
-```
