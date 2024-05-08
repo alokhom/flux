@@ -477,8 +477,8 @@ spec:
             ## type: LoadBalancer
             type: NodePort
             nodePorts:
-              http: 32080
-              https: 32443
+              http: 31080
+              https: 31443
               #tcp:
               #  389: 32389
               #udp:
