@@ -892,15 +892,15 @@ spec:
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
     tcp:
-      "1222": "graylog/tcp-gelf:12222"
-      "555": "graylog/tcp-gelf:5556"
+      "12222": "graylog/tcp-gelf:12222"
+      "5556": "graylog/tcp-gelf:5556"
       "389": "openldap/openldap:389"
 
     # -- UDP service key-value pairs
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
-    udp:
-       "553": "powerdns/pdns:53"
+    #udp:
+    #   "553": "powerdns/pdns:53"
     #  "12220": "graylog/udp-12222-syslog:12222"
 
     # -- Prefix for TCP and UDP ports names in ingress controller service
