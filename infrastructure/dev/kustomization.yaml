@@ -10,8 +10,8 @@ resources:
   #- splunk-collector
   #- ./graylog
   #- storage-class
-  - ./keycloak
-  - ./oauth2
+  #- ./keycloak
+  #- ./oauth2
   #- ./openLdap
   #- ./mongo
   #- ./kube-prometheus-stack
@@ -23,5 +23,5 @@ resources:
   #- ./kubeFlow
   #- ./stepCA
   #- ./pebbleLE
-  - ./vault
+  #- ./vault
   #- ./kubeVirt
