@@ -278,8 +278,7 @@ spec:
         ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
         ##
         nodeSelector:
-            kubernetes.io/os: linux
-            #kubernetes.io/hostname: dietpi
+          kubernetes.io/os: linux
         ## Liveness and readiness probe values
         ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
         ##
