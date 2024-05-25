@@ -73,25 +73,26 @@ spec:
     # mandatory values to generate stepIssuer resource
     # please follow the https://github.com/smallstep/step-issuer#getting-started to setup step-ca and get step-issuer values
     stepIssuer:
-      create: false
+      create: true
       caUrl: "https://step-certificates.stepca.svc.cluster.local"
-      caBundle: ""
+      caBundle: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJ3ekNDQVdtZ0F3SUJBZ0lRR3d4MXUwN29IazdtSFRDeFFWYmpRREFLQmdncWhrak9QUVFEQWpCQU1Sb3cKR0FZRFZRUUtFeEZUZEdWd0lFTmxjblJwWm1sallYUmxjekVpTUNBR0ExVUVBeE1aVTNSbGNDQkRaWEowYVdacApZMkYwWlhNZ1VtOXZkQ0JEUVRBZUZ3MHlOREExTWpVeE1EUXhNamhhRncwek5EQTFNak14TURReE1qaGFNRUF4CkdqQVlCZ05WQkFvVEVWTjBaWEFnUTJWeWRHbG1hV05oZEdWek1TSXdJQVlEVlFRREV4bFRkR1Z3SUVObGNuUnAKWm1sallYUmxjeUJTYjI5MElFTkJNRmt3RXdZSEtvWkl6ajBDQVFZSUtvWkl6ajBEQVFjRFFnQUVNcll6cXB1bgpiTyszRE81L1VzanNac3lGczdIRW9FM2ttazV0bU1wdTM0UkdnYWcvcHA0d1BoRnRRbElrSG41NVAwc0VENGlWCnlUaS9QdmUyaHN1eVphTkZNRU13RGdZRFZSMFBBUUgvQkFRREFnRUdNQklHQTFVZEV3RUIvd1FJTUFZQkFmOEMKQVFFd0hRWURWUjBPQkJZRUZKbVRFVjVGL2lLVFNxa0RFRUNBV3BiY2JJYy9NQW9HQ0NxR1NNNDlCQU1DQTBnQQpNRVVDSVFEWVBYSXptQ2duNjducDBST1V0ZCtFT1FHT3g4ZjVvd2luMWV1UmFyMG1kQUlnSGt5SEdoV2JmMlYwCjRyOEhCc0djM1NSbXZkMlVaRWVDYkYyYXN0ZC8zZjQ9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
       provisioner:
-        name: ""
-        kid: ""
+        name: "admin"
+        kid: "2D-s3YPaqqz5IZkWYNDs94YEEQhlZJlNl23qFj3T15c"
         passwordRef:
-          name: ""
-          key: ""
+          name: "step-certificates-provisioner-password"
+          namespace: "stepca"
+          key: "password"
 
     # mandatory values to generate stepClusterIssuer resource
     # please follow the https://github.com/smallstep/step-issuer#getting-started to setup step-ca and get step-issuer values
     stepClusterIssuer:
       create: false
-      caUrl: ""
-      caBundle: ""
+      caUrl: "https://step-certificates.stepca.svc.cluster.local"
+      caBundle: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJ3ekNDQVdtZ0F3SUJBZ0lRR3d4MXUwN29IazdtSFRDeFFWYmpRREFLQmdncWhrak9QUVFEQWpCQU1Sb3cKR0FZRFZRUUtFeEZUZEdWd0lFTmxjblJwWm1sallYUmxjekVpTUNBR0ExVUVBeE1aVTNSbGNDQkRaWEowYVdacApZMkYwWlhNZ1VtOXZkQ0JEUVRBZUZ3MHlOREExTWpVeE1EUXhNamhhRncwek5EQTFNak14TURReE1qaGFNRUF4CkdqQVlCZ05WQkFvVEVWTjBaWEFnUTJWeWRHbG1hV05oZEdWek1TSXdJQVlEVlFRREV4bFRkR1Z3SUVObGNuUnAKWm1sallYUmxjeUJTYjI5MElFTkJNRmt3RXdZSEtvWkl6ajBDQVFZSUtvWkl6ajBEQVFjRFFnQUVNcll6cXB1bgpiTyszRE81L1VzanNac3lGczdIRW9FM2ttazV0bU1wdTM0UkdnYWcvcHA0d1BoRnRRbElrSG41NVAwc0VENGlWCnlUaS9QdmUyaHN1eVphTkZNRU13RGdZRFZSMFBBUUgvQkFRREFnRUdNQklHQTFVZEV3RUIvd1FJTUFZQkFmOEMKQVFFd0hRWURWUjBPQkJZRUZKbVRFVjVGL2lLVFNxa0RFRUNBV3BiY2JJYy9NQW9HQ0NxR1NNNDlCQU1DQTBnQQpNRVVDSVFEWVBYSXptQ2duNjducDBST1V0ZCtFT1FHT3g4ZjVvd2luMWV1UmFyMG1kQUlnSGt5SEdoV2JmMlYwCjRyOEhCc0djM1NSbXZkMlVaRWVDYkYyYXN0ZC8zZjQ9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
       provisioner:
         name: "admin"
-        kid: ""
+        kid: "2D-s3YPaqqz5IZkWYNDs94YEEQhlZJlNl23qFj3T15c"
         passwordRef:
           name: "step-certificates-provisioner-password"
           namespace: "stepca"
