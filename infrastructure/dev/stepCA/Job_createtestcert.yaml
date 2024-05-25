@@ -1,0 +1,76 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-testcert
+  namespace: stepca
+spec:
+  template:
+    spec:
+      serviceAccountName: internal-deployer
+      initContainers:
+        - name: wait-for-pod
+          image: bitnami/kubectl
+          command:
+            - kubectl
+          args:
+            - wait
+            - --for=condition=Ready
+            - pod -l app.kubernetes.io/instance=step-issuer
+            - --timeout=1024s
+      containers:
+        - name: alpine
+          image: "alpine:3.20"
+          resources:
+            requests:
+              cpu: 20m
+              memory: 200Mi
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apk add --update --no-cache --quiet curl coreutils openssl jq kubectl;
+              sleep 5;
+              apk --quiet upgrade;
+              sleep 5;
+              curl -L https://dl.smallstep.com/gh-release/cli/gh-release-header/v0.26.1/step_linux_0.26.1_amd64.tar.gz | tar -zx -C /demo/ && cp /demo/step_0.26.1/bin/step /usr/local/bin/;
+              sleep 5;
+              step certificate create internal.smallstep.com /demo/internal.csr /demo/internal.key --csr --no-password --insecure;
+              sleep 5;
+              CSR=$(cat /demo/internal.csr | base64);
+              sleep 5;
+              cat <<EOF > /demo/csr.yaml
+              ---
+              apiVersion: cert-manager.io/v1
+              kind: CertificateRequest
+              metadata:
+                name: internal-smallstep-com
+                namespace: stepca
+              spec:
+                # The base64 encoded version of the certificate request in PEM format.
+                request: $CSR
+                # The duration of the certificate
+                duration: 24h
+                # If the certificate will be a CA or not.
+                # Step certificates won't accept a certificate request if this value is true,
+                # you can also omit this.
+                isCA: false
+                # A reference to the issuer in charge of signing the CSR.
+                issuerRef:
+                  group: certmanager.step.sm
+                  kind: StepIssuer
+                  name: step-issuer
+              EOF
+              sleep 2;
+              cat /demo/csr.yaml && kubectl apply -f /demo/csr.yaml;
+              sleep 5;
+              kubectl -n stepca get certificaterequests.cert-manager.io internal-smallstep-com -o yaml;
+              sleep 20;
+          volumeMounts:
+          - mountPath: /demo
+            name: demo-volume
+      restartPolicy: Never
+      volumes:
+      - name: demo-volume
+        emptyDir: {}
+  backoffLimit: 4

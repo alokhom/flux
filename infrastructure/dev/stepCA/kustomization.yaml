@@ -6,6 +6,7 @@ resources:
   - ./stepissuer
   - HelmRepository.yaml
   - Job.yaml
+  - Job_createtestcert.yaml
   #- ClusterIssuer.yaml
   #- sealed-secret-ca.yaml
   #- sealed-secret.yaml
