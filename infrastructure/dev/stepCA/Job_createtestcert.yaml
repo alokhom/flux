@@ -38,7 +38,7 @@ spec:
               sleep 5;
               step certificate create internal.smallstep.com /demo/internal.csr /demo/internal.key --csr --no-password --insecure;
               sleep 5;
-              CSR=$(cat /demo/internal.csr | base64);
+              CSR=$(cat /demo/internal.csr | base64 -w 0);
               sleep 5;
               cat <<EOF > /demo/csr.yaml
               ---
