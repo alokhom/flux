@@ -113,6 +113,9 @@ spec:
               sleep 2;
               CA_URL="https://step-certificates.stepca.svc.cluster.local";
               sleep 2;
+              kubectl version;
+              kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs;
+              kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | openssl base64 -A;
               CA_ROOT_B64=$(kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | openssl base64 -A);
               sleep 2;
               CA_PROVISIONER_NAME=admin;
