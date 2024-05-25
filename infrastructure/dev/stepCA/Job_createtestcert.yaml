@@ -16,8 +16,9 @@ spec:
           args:
             - wait
             - --for=condition=Ready
-            - pod -l app.kubernetes.io/instance=step-issuer
-            - --timeout=1024s
+            - pod 
+            - -l app.kubernetes.io/instance=step-issuer
+            - --timeout=512s
       containers:
         - name: alpine
           image: "alpine:3.20"
