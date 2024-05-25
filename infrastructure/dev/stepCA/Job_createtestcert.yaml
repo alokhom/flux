@@ -63,7 +63,9 @@ spec:
                   name: step-issuer
               EOF
               sleep 2;
-              cat /demo/csr.yaml && kubectl apply -f /demo/csr.yaml;
+              cat /demo/csr.yaml;
+              sleep 2;
+              kubectl -n stepca apply -f /demo/csr.yaml;
               sleep 5;
               kubectl -n stepca get certificaterequests.cert-manager.io internal-smallstep-com -o yaml;
               sleep 20;
