@@ -36,7 +36,7 @@ spec:
               sleep 5;
               curl -L https://dl.smallstep.com/gh-release/cli/gh-release-header/v0.26.1/step_linux_0.26.1_amd64.tar.gz | tar -zx -C /demo/ && cp /demo/step_0.26.1/bin/step /usr/local/bin/;
               sleep 5;
-              step certificate create internal.smallstep.com /demo/internal.csr /demo/internal.key --csr --no-password --insecure;
+              step certificate create internal.systemtracker.no-ip.org /demo/internal.csr /demo/internal.key --csr --no-password --insecure;
               sleep 5;
               CSR=$(cat /demo/internal.csr | base64 -w 0);
               sleep 5;
@@ -45,7 +45,7 @@ spec:
               apiVersion: cert-manager.io/v1
               kind: CertificateRequest
               metadata:
-                name: internal-smallstep-com
+                name: internal-systemtrackernoip-org
                 namespace: stepca
               spec:
                 # The base64 encoded version of the certificate request in PEM format.
