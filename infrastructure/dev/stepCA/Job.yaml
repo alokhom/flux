@@ -97,7 +97,7 @@ spec:
             - --timeout=120s
       containers:
         - name: alpine
-          image: "alpine:3.15"
+          image: "alpine:3.25"
           resources:
             requests:
               cpu: 20m
@@ -106,14 +106,14 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              apk add --update --no-cache --quiet curl coreutils openssl jq;
+              apk add --update --no-cache --quiet curl coreutils openssl jq kubectl;
+              sleep 5;
               apk --quiet upgrade;
-              sleep 2;
-              curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl" && chmod +x kubectl && mv ./kubectl /usr/bin/kubectl;
-              sleep 2;
+              sleep 5;
               CA_URL="https://step-certificates.stepca.svc.cluster.local";
-              sleep 2;
+              sleep 5;
               kubectl version;
+              sleep 5;
               kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs;
               kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | openssl base64 -A;
               CA_ROOT_B64=$(kubectl -n stepca get -o jsonpath="{.data['root_ca\.crt']}" configmaps/step-certificates-certs | openssl base64 -A);
