@@ -21,7 +21,7 @@ resources:
   #- ./powerdns
   #- ./nodered
   #- ./kubeFlow
-  #- ./stepCA
+  - ./stepCA
   #- ./pebbleLE
   - ./vault
   #- ./kubeVirt

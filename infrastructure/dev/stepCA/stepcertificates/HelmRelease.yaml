@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: step-certificates
-      version: "1.24.2+1"
+      version: "1.26.1"
       sourceRef:
         kind: HelmRepository
         name: stepca
@@ -146,28 +146,37 @@ spec:
               "criticalOptions": {{ toJson .CriticalOptions }}
             }
 
-      certificates:
-        # certificate_issuer contains the text of the Certificate Issuer certificate in PEM format.
-        # when set to "", certificate issuer crt is not injected, this is the default for the JWK provisioner.
-        # Provide a value if using the X5C provisioner.
-        certificate_issuer: ""
-        # certificate_issuer: |
-        #   -----BEGIN CERTIFICATE-----
-        #   ...
-        #   -----END CERTIFICATE-----
+        certificates:
+          # certificate_issuer contains the text of the Certificate Issuer certificate in PEM format.
+          # when set to "", certificate issuer crt is not injected, this is the default for the JWK provisioner.
+          # Provide a value if using the X5C provisioner.
+          certificate_issuer: ""
+          # certificate_issuer: |
+          #   -----BEGIN CERTIFICATE-----
+          #   ...
+          #   -----END CERTIFICATE-----
 
-        # intermediate_ca contains the text of the intermediate CA Certificate
-        intermediate_ca: ""
-        # root_ca contains the text of the root CA Certificate
-        root_ca: ""
+          # intermediate_ca contains the text of the intermediate CA Certificate
+          intermediate_ca: ""
+          # intermediate_ca: |
+          #   -----BEGIN CERTIFICATE-----
+          #   ...
+          #   -----END CERTIFICATE-----
 
-        # ssh_host_ca contains the text of the public ssh key for the SSH root CA
-        ssh_host_ca: ""
-        # ssh_host_ca: "ecdsa-sha2-nistp384 public-key-here=="
+          # root_ca contains the text of the root CA Certificate
+          root_ca: ""
+          # root_ca: |
+          #   -----BEGIN CERTIFICATE-----
+          #   ...
+          #   -----END CERTIFICATE-----
 
-        # ssh_user_ca contains the text of the public ssh key for the SSH root CA
-        ssh_user_ca: ""
-        # ssh_user_ca: "ecdsa-sha2-nistp384 public-key-here=="
+          # ssh_host_ca contains the text of the public ssh key for the SSH root CA
+          ssh_host_ca: ""
+          # ssh_host_ca: "ecdsa-sha2-nistp384 public-key-here=="
+
+          # ssh_user_ca contains the text of the public ssh key for the SSH root CA
+          ssh_user_ca: ""
+          # ssh_user_ca: "ecdsa-sha2-nistp384 public-key-here=="
 
       secrets:
         # ca_password contains the password used to encrypt x509.intermediate_ca_key, ssh.host_ca_key and ssh.user_ca_key
@@ -369,6 +378,18 @@ spec:
     ##     command: ['do', 'something']
     ##
     extraInitContainers: []
+
+    ## extraContainers:
+    ##   - name: do-something
+    ##     image: busybox
+    ##     command: ['do', 'something']
+    ##
+    extraContainers: []
+
+    # shareProcessNamespace share a single process namespace between all of the
+    # containers in a pod.
+    shareProcessNamespace: false
+
 
     # nodeSelector contains the node labels for pod assignment.
     nodeSelector: {}
