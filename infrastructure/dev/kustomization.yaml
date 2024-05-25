@@ -23,5 +23,5 @@ resources:
   #- ./kubeFlow
   #- ./stepCA
   #- ./pebbleLE
-  #- ./vault
+  - ./vault
   #- ./kubeVirt
