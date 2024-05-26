@@ -326,9 +326,9 @@ spec:
       # nodeSelector labels for server pod assignment, formatted as a multi-line string or YAML map.
       # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
       # Example:
-      nodeSelector:
-        beta.kubernetes.io/arch: arm64
-      #nodeSelector: {}
+      #nodeSelector:
+      #  beta.kubernetes.io/arch: arm64
+      nodeSelector: {}
 
       # Priority class for injector pods
       priorityClassName: ""
@@ -619,16 +619,16 @@ spec:
       # Commenting out or setting as empty the affinity variable, will allow
       # deployment to single node services such as Minikube
       # This should be either a multi-line string or YAML matching the PodSpec's affinity field.
-      #affinity: |
-      #  podAntiAffinity:
-      #    requiredDuringSchedulingIgnoredDuringExecution:
-      #      - labelSelector:
-      #          matchLabels:
-      #            app.kubernetes.io/name: {{ template "vault.name" . }}
-      #            app.kubernetes.io/instance: "{{ .Release.Name }}"
-      #            component: server
-      #        topologyKey: kubernetes.io/hostname
-      affinity: {}
+      affinity: |
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: {{ template "vault.name" . }}
+                  app.kubernetes.io/instance: "{{ .Release.Name }}"
+                  component: server
+              topologyKey: kubernetes.io/hostname
+      #affinity: {}
 
       # Topology settings for server pods
       # ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
@@ -644,9 +644,9 @@ spec:
       # nodeSelector labels for server pod assignment, formatted as a multi-line string or YAML map.
       # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
       # Example:
-      nodeSelector:
-        beta.kubernetes.io/arch: arm64
-      #nodeSelector: {}
+      #nodeSelector:
+      #  beta.kubernetes.io/arch: arm64
+      nodeSelector: {}
 
       # Enables network policy for server pods
       networkPolicy:
@@ -1138,9 +1138,9 @@ spec:
         # nodeSelector labels for csi pod assignment, formatted as a multi-line string or YAML map.
         # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
         # Example:
-        nodeSelector:
-          beta.kubernetes.io/arch: arm64
-        #nodeSelector: {}
+        #nodeSelector:
+        #  beta.kubernetes.io/arch: arm64
+        nodeSelector: {}
 
         # Affinity Settings
         # This should be either a multi-line string or YAML matching the PodSpec's affinity field.
