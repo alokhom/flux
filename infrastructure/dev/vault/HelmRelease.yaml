@@ -85,7 +85,7 @@ spec:
       # image sets the repo and tag of the vault-k8s image to use for the injector.
       image:
         repository: "hashicorp/vault-k8s"
-        tag: "1.2.1"
+        tag: "1.4.1"
         pullPolicy: IfNotPresent
 
       # agentImage sets the repo and tag of the Vault image to use for the Vault Agent
@@ -93,7 +93,7 @@ spec:
       # required.
       agentImage:
         repository: "hashicorp/vault"
-        tag: "1.14.0"
+        tag: "1.16.2"
 
       # The default values for the injected Vault Agent containers.
       agentDefaults:
@@ -326,9 +326,9 @@ spec:
       # nodeSelector labels for server pod assignment, formatted as a multi-line string or YAML map.
       # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
       # Example:
-      # nodeSelector:
-      #   beta.kubernetes.io/arch: amd64
-      nodeSelector: {}
+      nodeSelector:
+        beta.kubernetes.io/arch: arm64
+      #nodeSelector: {}
 
       # Priority class for injector pods
       priorityClassName: ""
@@ -643,9 +643,9 @@ spec:
       # nodeSelector labels for server pod assignment, formatted as a multi-line string or YAML map.
       # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
       # Example:
-      # nodeSelector:
-      #   beta.kubernetes.io/arch: amd64
-      nodeSelector: {}
+      nodeSelector:
+        beta.kubernetes.io/arch: arm64
+      #nodeSelector: {}
 
       # Enables network policy for server pods
       networkPolicy:
@@ -1137,9 +1137,9 @@ spec:
         # nodeSelector labels for csi pod assignment, formatted as a multi-line string or YAML map.
         # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
         # Example:
-        # nodeSelector:
-        #   beta.kubernetes.io/arch: amd64
-        nodeSelector: {}
+        nodeSelector:
+          beta.kubernetes.io/arch: arm64
+        #nodeSelector: {}
 
         # Affinity Settings
         # This should be either a multi-line string or YAML matching the PodSpec's affinity field.
