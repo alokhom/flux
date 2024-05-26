@@ -14,7 +14,7 @@ resources:
   #- ./oauth2
   #- ./openLdap
   #- ./mongo
-  #- ./kube-prometheus-stack
+  - ./kube-prometheus-stack
   #- ./arc
   #- ./nexus
   #- ./kcOp
