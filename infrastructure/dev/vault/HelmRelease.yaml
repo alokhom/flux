@@ -394,7 +394,7 @@ spec:
 
       image:
         repository: "hashicorp/vault"
-        tag: "1.14.0"
+        tag: "1.16.2"
         # Overrides the default Image Pull Policy
         pullPolicy: IfNotPresent
 
@@ -619,15 +619,16 @@ spec:
       # Commenting out or setting as empty the affinity variable, will allow
       # deployment to single node services such as Minikube
       # This should be either a multi-line string or YAML matching the PodSpec's affinity field.
-      affinity: |
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  app.kubernetes.io/name: {{ template "vault.name" . }}
-                  app.kubernetes.io/instance: "{{ .Release.Name }}"
-                  component: server
-              topologyKey: kubernetes.io/hostname
+      #affinity: |
+      #  podAntiAffinity:
+      #    requiredDuringSchedulingIgnoredDuringExecution:
+      #      - labelSelector:
+      #          matchLabels:
+      #            app.kubernetes.io/name: {{ template "vault.name" . }}
+      #            app.kubernetes.io/instance: "{{ .Release.Name }}"
+      #            component: server
+      #        topologyKey: kubernetes.io/hostname
+      affinity: {}
 
       # Topology settings for server pods
       # ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
