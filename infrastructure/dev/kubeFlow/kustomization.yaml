@@ -1,7 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  #- namespace.yaml
+  - namespace.yaml
+  #
+  #
+  # Common services, as maintained by the Manifests WG
+  #
   # istio 1.17 and gateway
   - ./common/istio-1-17/istio-crds/base/
   - ./common/istio-1-17/istio-namespace/base
@@ -20,12 +24,21 @@ resources:
   - ./common/kubeflow-namespace/base
   - ./common/kubeflow-roles/base
   - ./common/istio-1-17/kubeflow-istio-resources/base
+  #
+  #
+  #
+  # 3rd party contributed applications (e.g. Ray, Kserve), which are maintained externally and are not part of a Kubeflow WG
+  # kf serving
+  #- ./contrib/kserve/kserve
+  #- ./contrib/kserve/models-web-app/overlays/kubeflow
+  #
+  #
+  #  
+  # Kubeflow's official components, as maintained by the respective Kubeflow WGs
   # kf pipelines
   - ./apps/pipeline/upstream/env/cert-manager/platform-agnostic-multi-user
   #- ./apps/pipeline/upstream/env/platform-agnostic-multi-user-pns
-  # kf serving
-  - ./contrib/kserve/kserve
-  - ./contrib/kserve/models-web-app/overlays/kubeflow
+  #  
   # katib
   - ./apps/katib/upstream/installs/katib-with-kubeflow
   # central dashboard
@@ -45,8 +58,8 @@ resources:
   - ./apps/tensorboard/tensorboard-controller/upstream/overlays/kubeflow
   # training operator
   - ./apps/training-operator/upstream/overlays/kubeflow
+  #
+  #
+  # Common services, as maintained by the Manifests WG
   # new ns for default user
   - ./common/user-namespace/base
-
-
-
