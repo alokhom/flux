@@ -20,7 +20,7 @@ resources:
   #- ./kcOp
   #- ./powerdns
   #- ./nodered
-  #- ./kubeFlow
+  - ./kubeFlow
   - ./stepCA
   #- ./pebbleLE
   - ./vault
