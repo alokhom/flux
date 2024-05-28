@@ -8,6 +8,8 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
       - image: docker.io/kubeflownotebookswg/poddefaults-webhook
         name: admission-webhook
