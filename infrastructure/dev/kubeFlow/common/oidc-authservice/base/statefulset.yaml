@@ -15,6 +15,15 @@ spec:
       labels:
         app: authservice
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       serviceAccountName: authservice
       containers:
       - name: authservice
