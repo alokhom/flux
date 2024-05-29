@@ -16,6 +16,8 @@ spec:
       annotations:
         sidecar.istio.io/inject: "true"
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
       - name: centraldashboard
         image: docker.io/kubeflownotebookswg/centraldashboard
