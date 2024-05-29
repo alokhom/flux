@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
       - name: jupyter-web-app
         image: docker.io/kubeflownotebookswg/jupyter-web-app
