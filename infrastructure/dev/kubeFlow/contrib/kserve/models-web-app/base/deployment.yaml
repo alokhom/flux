@@ -13,6 +13,8 @@ spec:
       labels:
         app.kubernetes.io/component: kserve-models-web-app
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
       - image: kserve/models-web-app:latest
         imagePullPolicy: Always
