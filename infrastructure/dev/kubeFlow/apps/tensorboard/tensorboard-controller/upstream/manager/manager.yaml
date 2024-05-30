@@ -23,6 +23,8 @@ spec:
       labels:
         control-plane: controller-manager
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
