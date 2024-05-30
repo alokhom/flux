@@ -16,6 +16,8 @@ spec:
         app: notebook-controller
         kustomize.component: notebook-controller
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
       - name: manager
         image: docker.io/kubeflownotebookswg/notebook-controller
