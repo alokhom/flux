@@ -14,7 +14,9 @@ spec:
         app: ml-pipeline-scheduledworkflow
       annotations:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-    spec:
+    spec:  
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
       - image: gcr.io/ml-pipeline/scheduledworkflow:dummy
         imagePullPolicy: IfNotPresent
