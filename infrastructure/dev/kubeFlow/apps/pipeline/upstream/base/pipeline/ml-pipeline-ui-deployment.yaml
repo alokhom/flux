@@ -19,6 +19,8 @@ spec:
       - name: config-volume
         configMap:
           name: ml-pipeline-ui-configmap
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
       - image: gcr.io/ml-pipeline/frontend:dummy
         imagePullPolicy: IfNotPresent
