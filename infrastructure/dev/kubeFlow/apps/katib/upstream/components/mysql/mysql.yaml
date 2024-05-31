@@ -20,6 +20,8 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
         - name: katib-mysql
           image: mysql:8.0.29
