@@ -5,6 +5,8 @@ metadata:
 spec:
   template:
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: amd5
       containers:
         - name: workflow-controller
           image: gcr.io/ml-pipeline/workflow-controller:v3.3.8-license-compliance
