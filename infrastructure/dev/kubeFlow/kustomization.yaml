@@ -1,6 +1,42 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
+sortOptions:
+  order: legacy
+  legacySortOptions:
+    orderFirst:
+    - Namespace
+    - ResourceQuota
+    - StorageClass
+    - CustomResourceDefinition
+    - MutatingWebhookConfiguration
+    - ServiceAccount
+    - PodSecurityPolicy
+    - Role
+    - ClusterRole
+    - RoleBinding
+    - ClusterRoleBinding
+    - ConfigMap
+    - Secret
+    - Endpoints
+    - Service
+    - LimitRange
+    - PriorityClass
+    - PersistentVolume
+    - PersistentVolumeClaim
+    - Deployment
+    - StatefulSet
+    - CronJob
+    - PodDisruptionBudget
+    orderLast:
+    - ValidatingWebhookConfiguration
+
 resources:
+  # Cert-Manager
+  #- HelmRelease.yaml
+  #- HelmRepository.yaml
+  #- ../common/cert-manager/cert-manager/base
+  - ../common/cert-manager/kubeflow-issuer/base
   #
   #
   # Common services, as maintained by the Manifests WG
@@ -9,28 +45,23 @@ resources:
   - ./common/istio-1-17/istio-crds/base/
   - ./common/istio-1-17/istio-namespace/base
   - ./common/istio-1-17/istio-install/base
-  # Dex 
-  - ./common/dex/overlays/istio
-  #- HelmRelease.yaml
-  #- HelmRepository.yaml
   # OIDC Auth Service
   - ./common/oidc-authservice/base
+  # Dex 
+  - ./common/dex/overlays/istio
   # knative
   - ./common/knative/knative-serving/overlays/gateways
   - ./common/istio-1-17/cluster-local-gateway/base
   - ./common/knative/knative-eventing/base
-  # kf namesoace
-  - ./common/kubeflow-namespace/base
-  - ./common/kubeflow-roles/base
-  - ./common/istio-1-17/kubeflow-istio-resources/base
+  # Kubeflow namespace
+  - ../common/kubeflow-namespace/base
+  # Kubeflow Roles
+  - ../common/kubeflow-roles/base
+  # Kubeflow Istio Resources
+  - ../common/istio-1-17/kubeflow-istio-resources/base
   #
   #
-  #
-  # 3rd party contributed applications (e.g. Ray, Kserve), which are maintained externally and are not part of a Kubeflow WG
-  # kf serving
-  - ./contrib/kserve/kserve
-  - ./contrib/kserve/models-web-app/overlays/kubeflow
-  #
+  # kubeflow
   #
   #  
   # Kubeflow's official components, as maintained by the respective Kubeflow WGs
@@ -42,6 +73,7 @@ resources:
   - ./apps/katib/upstream/installs/katib-with-kubeflow
   # central dashboard
   - ./apps/centraldashboard/upstream/overlays/kserve
+  # Admission Webhook
   - ./apps/admission-webhook/upstream/overlays/cert-manager
   # notebook controller official kf components
   - ./apps/jupyter/notebook-controller/upstream/overlays/kubeflow
@@ -62,3 +94,8 @@ resources:
   # Common services, as maintained by the Manifests WG
   # new ns for default user
   - ./common/user-namespace/base
+  #
+  # 3rd party contributed applications (e.g. Ray, Kserve), which are maintained externally and are not part of a Kubeflow WG
+  # kf serving
+  - ./contrib/kserve/kserve
+  - ./contrib/kserve/models-web-app/overlays/kubeflow
