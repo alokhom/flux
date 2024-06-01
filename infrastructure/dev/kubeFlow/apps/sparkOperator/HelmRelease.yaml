@@ -15,5 +15,15 @@ spec:
         namespace: kubeflow
       interval: 30m
   values:
+    image:
+      # -- Image repository
+      repository: docker.io/kubeflow/spark-operator
+      # -- Image pull policy
+      pullPolicy: IfNotPresent
+      # -- if set, override the image tag whose default is the chart appVersion.
+      tag: "latest"
     nodeSelector:
       kubernetes.io/hostname: amd5
+    batchScheduler:
+      # -- Enable batch scheduler for spark jobs scheduling. If enabled, users can specify batch scheduler name in spark application
+      enable: true
