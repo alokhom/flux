@@ -1,8 +1,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: cert-manager
-  namespace: spark-operator
+  name: spark-operator
+  namespace: kubeflow
 spec:
   interval: 30m
   chart:
