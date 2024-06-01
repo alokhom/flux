@@ -99,3 +99,5 @@ resources:
   # kf serving
   - ./contrib/kserve/kserve
   - ./contrib/kserve/models-web-app/overlays/kubeflow
+  #
+  - ./apps/sparkOperator
