@@ -458,7 +458,7 @@ spec:
         #       port:
         #         number: use-annotation
         tls:
-          - secretName: chart-example-tls
+          - secretName: vault-tls
             hosts:
               - vault.systemtracker.no-ip.org
 
