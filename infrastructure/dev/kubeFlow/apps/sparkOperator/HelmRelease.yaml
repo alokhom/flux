@@ -21,7 +21,7 @@ spec:
       # -- Image pull policy
       pullPolicy: IfNotPresent
       # -- if set, override the image tag whose default is the chart appVersion.
-      tag: "latest"
+      tag: "v1beta2-1.6.0-3.5.0"
     nodeSelector:
       kubernetes.io/hostname: amd5
     batchScheduler:
