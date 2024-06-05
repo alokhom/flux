@@ -17,7 +17,7 @@ spec:
   values:
     image:
       # -- Image repository
-      repository: docker.io/kubeflow/spark-operator
+      repository: docker.io/chainguard/spark-operator
       # -- Image pull policy
       pullPolicy: IfNotPresent
       # -- if set, override the image tag whose default is the chart appVersion.
