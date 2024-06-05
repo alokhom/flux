@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
+  - sparkoperator.k8s.io_scheduledsparkapplications.yaml
+  - sparkoperator.k8s.io_sparkapplications.yaml
