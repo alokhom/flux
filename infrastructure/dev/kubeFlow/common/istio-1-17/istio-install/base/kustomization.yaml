@@ -9,6 +9,9 @@ resources:
 #- deny_all_authorizationpolicy.yaml
 - gateway.yaml
 - x-forwarded-host.yaml
+# kiali
+- ../../../kiali
+
 
 patchesStrategicMerge:
 - patches/service.yaml
