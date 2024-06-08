@@ -8,7 +8,7 @@ resources:
   #- ./spark
   #- splunk-ent
   #- splunk-collector
-  #- ./graylog
+  - ./graylog
   #- storage-class
   #- ./keycloak
   #- ./oauth2
@@ -20,7 +20,7 @@ resources:
   #- ./kcOp
   #- ./powerdns
   #- ./nodered
-  #- ./kubeFlow
+  - ./kubeFlow
   - ./stepCA
   #- ./pebbleLE
   - ./vault
