@@ -7,4 +7,4 @@ resources:
   #- release.yaml
   - sts.yaml
   - service.yaml
-  - ingress.yaml
+  #- ingress.yaml
