@@ -17,5 +17,3 @@ spec:
   values:
     global:
       logLevel: 4
-    crds:
-      enabled: true
