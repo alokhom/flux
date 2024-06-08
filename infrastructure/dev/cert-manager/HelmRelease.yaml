@@ -15,5 +15,7 @@ spec:
         namespace: cert-manager
       interval: 30m
   values:
-    logLevel: 4
-    installCRDs: true
+    global:
+      logLevel: 4
+    crds:
+      enabled: true
