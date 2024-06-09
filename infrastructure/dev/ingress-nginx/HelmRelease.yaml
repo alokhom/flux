@@ -338,7 +338,7 @@ spec:
       ##
       nodeSelector:
         kubernetes.io/os: linux
-        kubernetes.io/hostname: amd5
+        kubernetes.io/hostname: dietpi
       ## Liveness and readiness probe values
       ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
       ##
