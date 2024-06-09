@@ -5,6 +5,6 @@ resources:
   - namespace.yaml
   #- repository.yaml
   #- release.yaml
-  #- sts.yaml
-  #- service.yaml
-  #- ingress.yaml
+  - sts.yaml
+  - service.yaml
+  - ingress.yaml
