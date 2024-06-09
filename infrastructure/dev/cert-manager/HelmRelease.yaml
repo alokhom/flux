@@ -17,3 +17,6 @@ spec:
   values:
     global:
       logLevel: 4
+    nodeSelector:
+      kubernetes.io/os: linux
+      kubernetes.io/hostname: amd5
