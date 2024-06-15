@@ -1146,11 +1146,12 @@ spec:
     # -- TCP service key-value pairs
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
-    tcp: {}
+    tcp:
       #  "8080": "default/example-tcp-svc:9000"
       #"12222": "graylog/tcp-gelf:12222"
       #"5556": "graylog/tcp-gelf:5556"
       #"389": "openldap/openldap:389"
+      "8200": "vault/vault:8200"
 
     # -- UDP service key-value pairs
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
