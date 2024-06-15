@@ -16,7 +16,7 @@ spec:
 
     exporters:
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
-      debug:
+      debug: true
 
     service:
       pipelines:
