@@ -457,10 +457,10 @@ spec:
         #       name: ssl-redirect
         #       port:
         #         number: use-annotation
-        tls:
-          - secretName: vault-tls
-            hosts:
-              - vault.systemtracker.no-ip.org
+        #tls:
+        #  - secretName: vault-tls
+        #    hosts:
+        #      - vault.systemtracker.no-ip.org
 
       # hostAliases is a list of aliases to be added to /etc/hosts. Specified as a YAML list.
       hostAliases: []
