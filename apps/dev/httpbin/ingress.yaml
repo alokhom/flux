@@ -22,7 +22,7 @@ spec:
               number: 80
         path: /oauth2
         pathType: ImplementationSpecific
-  tls:
-  - hosts:
-    - oauth2-proxy.systemtracker.no-ip.org
-    secretName: oauth-tls
+  #tls:
+  #- hosts:
+  #  - oauth2-proxy.systemtracker.no-ip.org
+  #  secretName: oauth-tls

@@ -25,10 +25,10 @@ metadata:
     #   proxy_set_header Authorization $http_authorization;
 spec:
   ingressClassName: nginx
-  tls:
-  - hosts:
-      - nginx.systemtracker.no-ip.org
-    secretName: nginx-tls
+  #tls:
+  #- hosts:
+  #    - nginx.systemtracker.no-ip.org
+  #  secretName: nginx-tls
   rules:
   - host: nginx.systemtracker.no-ip.org
     http:
