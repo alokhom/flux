@@ -55,7 +55,7 @@ spec:
       extensions: [health_check, pprof, zpages]
       pipelines:
         traces:
-          receivers: [hostmetrics]
+          receivers: [otlp]
           processors: [memory_limiter, batch]
           exporters: [debug]
         metrics:
@@ -63,6 +63,6 @@ spec:
           processors: [batch]
           exporters: [debug]
         logs:
-          receivers: [otlp]
+          receivers: [hostmetrics]
           processors: [batch]
           exporters: [debug]
