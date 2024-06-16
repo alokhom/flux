@@ -63,6 +63,6 @@ spec:
           processors: [batch]
           exporters: [debug]
         logs:
-          receivers: [hostmetrics]
+          receivers: [otlp]
           processors: [batch]
           exporters: [debug]
