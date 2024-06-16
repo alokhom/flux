@@ -55,7 +55,7 @@ spec:
       extensions: [health_check, pprof, zpages]
       pipelines:
         traces:
-          receivers: [prometheus]
+          receivers: [hostmetrics]
           processors: [memory_limiter, batch]
           exporters: [debug]
         metrics:
