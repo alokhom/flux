@@ -46,7 +46,7 @@ spec:
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
       debug:
       otlp/openobserve:
-        endpoint: https://api.openobserve.ai/api/alok_organization_20763_MRbctdqwkUaSQzN/traces
+        endpoint: https://api.openobserve.ai/api/alok_organization_20763_MRbctdqwkUaSQzN
         headers:
           Authorization: Basic YWxvay5ob21AZ21haWwuY29tOjE4QmI3a254NTY0RDBKaDlXMk0z
           stream-name: default
