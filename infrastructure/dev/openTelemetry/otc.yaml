@@ -45,6 +45,14 @@ spec:
     exporters:
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
       debug:
+      otlp/openobserve:
+        endpoint: api.openobserve.ai
+        headers: 
+          Authorization: "Basic YWxvay5ob21AZ21haWwuY29tOjE4QmI3a254NTY0RDBKaDlXMk0z"
+          organization: alok_organization_20763_MRbctdqwkUaSQzN
+          stream-name: default
+        tls:
+          insecure: false
 
     extensions:
       health_check:
@@ -61,7 +69,7 @@ spec:
         metrics:
           receivers: [prometheus]
           processors: [batch]
-          exporters: [debug]
+          exporters: [otlp/openobserve]
         logs:
           receivers: [otlp]
           processors: [batch]
