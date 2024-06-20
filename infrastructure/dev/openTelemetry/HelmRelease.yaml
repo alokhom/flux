@@ -7,8 +7,8 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: openobserve-standalone
-      version: "0.10.7"
+      chart: openobserve
+      version: "0.10.27"
       sourceRef:
         kind: HelmRepository
         name: otc
@@ -20,10 +20,18 @@ spec:
     # Declare variables to be passed into your templates.
 
     image:
-      repository: public.ecr.aws/zinclabs/openobserve
+      oss:
+        repository: public.ecr.aws/zinclabs/openobserve
+        # Overrides the image tag whose default is the chart appVersion.
+        tag: "v0.10.5"
+      enterprise:
+        repository: public.ecr.aws/zinclabs/openobserve-enterprise
+        # Overrides the image tag whose default is the chart appVersion.
+        tag: "v0.10.5"
+      busybox:
+        repository: public.ecr.aws/docker/library/busybox
+        tag: 1.36.1
       pullPolicy: IfNotPresent
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: "v0.10.5"
 
     imagePullSecrets: []
     nameOverride: ""
@@ -59,19 +67,35 @@ spec:
       # runAsNonRoot: true
       # runAsUser: 1000
 
-    persistence:
-      enabled: true
-      size: 10Gi
-      storageClass: ""
-      accessModes:
-        - ReadWriteOnce
-      annotations: {}
-      volumePermissions:
-        enabled: false
-    headless:
-      enabled: true
+    replicaCount:
+      ingester: 1
+      querier: 1
+      router: 1
+      alertmanager: 1
+      compactor: 1
+      zplane: 1
 
-    # Credentials for authentication
+    ingester:
+      headless:
+        enabled: false
+      persistence:
+        enabled: true
+        size: 10Gi
+        storageClass: ""
+        accessModes:
+          - ReadWriteOnce
+        annotations: {}
+        volumePermissions:
+          enabled: false
+
+
+    # Enable the following to use an external secret instead of placing credentials under the auth section in this values.yaml file
+    externalSecret:
+      enabled: false
+      # name of the external secret
+      name: "super-secret"
+
+    # Credentials for authentication. Will be stored in a k8s secret
     auth:
       ZO_ROOT_USER_EMAIL: "alok.hom@gmail.com"
       ZO_ROOT_USER_PASSWORD: "Openobserve1978!"
@@ -82,14 +106,17 @@ spec:
 
       AZURE_STORAGE_ACCOUNT_KEY: ""
       AZURE_STORAGE_ACCOUNT_NAME: ""
+      ZO_META_POSTGRES_DSN: ""
+      ZO_META_MYSQL_DSN: ""
+      ZO_TRACING_HEADER_VALUE: "Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM="
+      ZO_RUM_CLIENT_TOKEN: ""
 
-    # https://openobserve.ai/docs/environment-variables/
     config:
       ZO_APP_NAME: "openobserve"
       ZO_CLUSTER_NAME: "o2"
       ZO_INSTANCE_NAME: ""
       ZO_NODE_ROLE: "all"
-      ZO_LOCAL_MODE: "true"
+      ZO_LOCAL_MODE: "false"
       ZO_LOCAL_MODE_STORAGE: "disk"
       ZO_HTTP_PORT: "5080"
       ZO_HTTP_ADDR: ""
@@ -113,9 +140,9 @@ spec:
       ZO_UI_SQL_BASE64_ENABLED: "false"
       ZO_WEB_URL: ""
       ZO_BASE_URI: ""
-      ZO_META_STORE: "sqlite"
-      ZO_META_POSTGRES_DSN: ""
-      ZO_META_MYSQL_DSN: ""
+      ZO_CLUSTER_COORDINATOR: "nats"
+      ZO_QUEUE_STORE: ""
+      ZO_META_STORE: "postgres"
       ZO_META_CONNECTION_POOL_MIN_SIZE: "0"
       ZO_META_CONNECTION_POOL_MAX_SIZE: "0"
       ZO_META_TRANSACTION_RETRIES: "3"
@@ -151,7 +178,6 @@ spec:
       ZO_TRACING_ENABLED: "false"
       ZO_TRACING_SEARCH_ENABLED: "false"
       ZO_TRACING_HEADER_KEY: "Authorization"
-      ZO_TRACING_HEADER_VALUE: "Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM="
       OTEL_OTLP_HTTP_ENDPOINT: ""
       ZO_TELEMETRY: "true"
       ZO_TELEMETRY_HEARTBEAT: "1800"
@@ -176,8 +202,8 @@ spec:
       ZO_ROUTE_MAX_CONNECTIONS: "1024"
       ZO_HTTP_WORKER_NUM: "0"
       ZO_HTTP_WORKER_MAX_BLOCKING: "0"
-      ZO_ACTIX_REQ_TIMEOUT: "30" # in second 
-      ZO_ACTIX_KEEP_ALIVE: "30" # in second 
+      ZO_ACTIX_REQ_TIMEOUT: "30"      # in second 
+      ZO_ACTIX_KEEP_ALIVE: "30"       # in second 
       ZO_ACTIX_SHUTDOWN_TIMEOUT: "10" # in second
       ZO_INGEST_ALLOWED_UPTO: "24"
       ZO_INGEST_FLATTEN_LEVEL: "3"
@@ -215,10 +241,31 @@ spec:
       ZO_DISK_CACHE_RELEASE_SIZE: "0"
       ZO_DISK_CACHE_GC_SIZE: "100"
       ZO_DISK_CACHE_GC_INTERVAL: "0"
-      #ZO_S3_PROVIDER: "" # Need to set this up only if minio is being for object storage. Will be set automatically if enabled minio is being used.valid values are s3, azure, minio
+      ZO_ETCD_PREFIX: "/zinc/observe/"
+      ZO_ETCD_CONNECT_TIMEOUT: "5"
+      ZO_ETCD_COMMAND_TIMEOUT: "5"
+      ZO_ETCD_LOCK_WAIT_TIMEOUT: "600"
+      ZO_ETCD_USER: ""
+      ZO_ETCD_PASSWORD: ""
+      ZO_ETCD_CLIENT_CERT_AUTH: "false"
+      ZO_ETCD_TRUSTED_CA_FILE: ""
+      ZO_ETCD_CERT_FILE: ""
+      ZO_ETCD_KEY_FILE: ""
+      ZO_ETCD_DOMAIN_NAME: ""
+      ZO_ETCD_LOAD_PAGE_SIZE: "100" 
+      ZO_NATS_ADDR: "nats://nats.openobserve.svc.cluster.local:4222"
+      ZO_NATS_PREFIX: "o2_"
+      ZO_NATS_USER: ""
+      ZO_NATS_PASSWORD: ""
+      ZO_NATS_REPLICAS: "3"
+      ZO_NATS_QUEUE_MAX_AGE: "60" # days for queue message max age
+      ZO_NATS_CONNECT_TIMEOUT: "5"
+      ZO_NATS_COMMAND_TIMEOUT: "10"
+      ZO_NATS_LOCK_WAIT_TIMEOUT: "600"
+      # ZO_S3_PROVIDER: "minio" # Need to set this up only if minio is being for object storage. Will be set automatically if enabled minio is being used.valid values are s3, azure, minio
       ZO_S3_SERVER_URL: "" # do not need to set this if enabled minio is being used. settings will be picked from minio section
-      ZO_S3_REGION_NAME: "" # do not need to set this if enabled minio is being used. settings will be picked from minio section
-      ZO_S3_BUCKET_NAME: "" # do not need to set this if enabled minio is being used. settings will be picked from minio section
+      ZO_S3_REGION_NAME: "us-east-2" # do not need to set this if enabled minio is being used. settings will be picked from minio section
+      ZO_S3_BUCKET_NAME: "o2-dev-bucket" # do not need to set this if enabled minio is being used. settings will be picked from minio section
       ZO_S3_BUCKET_PREFIX: ""
       ZO_S3_FEATURE_FORCE_PATH_STYLE: "false"
       ZO_S3_FEATURE_FORCE_HOSTED_STYLE: "false"
@@ -240,7 +287,6 @@ spec:
       ZO_INGESTER_SERVICE_URL: ""
       ZO_IGNORE_FILE_RETENTION_BY_STREAM: "false"
       ZO_RUM_ENABLED: "false"
-      ZO_RUM_CLIENT_TOKEN: ""
       ZO_RUM_APPLICATION_ID: ""
       ZO_RUM_SITE: ""
       ZO_RUM_SERVICE: ""
@@ -258,6 +304,7 @@ spec:
       ZO_ENTRY_PER_SCHEMA_VERSION_ENABLED: "true"
       RUST_LOG: "info"
       RUST_BACKTRACE: "0"
+
 
     # Add extra environment variables to all pods, useful for overriding secrets
     extraEnv: []
@@ -297,7 +344,7 @@ spec:
       tls: []
       #  - secretName: openobserve.example.com
       #    hosts:
-      #      - openobserve.systemtracker.no-ip.org
+      #      - openobserve.example.com
 
     # You can specify resources for each deployment independently.
     # For example, to configure resources for the ingester, use
@@ -310,15 +357,129 @@ spec:
     #     requests:
     #       cpu: 100m
     #       memory: 128Mi
-    resources: {}
+    resources:
+      ingester: {}
+      querier: {}
+      compactor: {}
+      router: {}
+      alertmanager: {}
 
-    nodeSelector: {}
+    # autoscaling:
+    #   enabled: false
+    #   minReplicas: 1
+    #   maxReplicas: 100
+    #   targetCPUUtilizationPercentage: 80
+    #   # targetMemoryUtilizationPercentage: 80
 
-    tolerations: []
+    autoscaling:
+      ingester:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 100
+        targetCPUUtilizationPercentage: 80
+        # targetMemoryUtilizationPercentage: 80
+      querier:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 100
+        targetCPUUtilizationPercentage: 80
+        # targetMemoryUtilizationPercentage: 80
+      router:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 100
+        targetCPUUtilizationPercentage: 80
+        # targetMemoryUtilizationPercentage: 80
+      compactor:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 100
+        targetCPUUtilizationPercentage: 80
+        # targetMemoryUtilizationPercentage: 80
+      dex:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 100
+        targetCPUUtilizationPercentage: 80
+        # targetMemoryUtilizationPercentage: 80
 
-    affinity: {}
+    nodeSelector:
+      ingester: {}
+      querier: {}
+      compactor: {}
+      router: {}
+      alertmanager: {}
+      zplane: {}
 
-    # https://github.com/minio/minio/blob/master/helm/minio/values.yaml
+    tolerations:
+      ingester: []
+      querier: []
+      compactor: []
+      router: []
+      alertmanager: []
+      zplane: []
+      dex: []
+
+    affinity:
+      ingester: {}
+      querier: {}
+      compactor: {}
+      router: {}
+      alertmanager: {}
+      zplane: {}
+
+    nats:
+      enabled: true # if true then nats will be deployed as part of openobserve
+      externalUrl: "my_custom_host.com:4222" # if enabled is false then this is required
+      config:
+        cluster:
+          enabled: true
+        routeURLs:
+          user: ""
+          password: ""
+        jetstream:
+          enabled: true
+          fileStore: 
+            enabled: true
+            pvc:
+              enabled: true
+              size: 20Gi
+        promExporter:
+          enabled: true
+          podMonitor:
+            enabled: true
+
+    etcd:
+      enabled: false # if true then etcd will be deployed as part of openobserve
+      externalUrl: "my_custom_host.com:2379" # if enabled is false then this is required
+      replicaCount: 3 # if enabled is true then this is required. should be odd number
+      clusterDomain: "cluster.local"
+      image:
+        registry: docker.io
+        repository: bitnami/etcd
+        tag: 3.5.8-debian-11-r4
+        pullPolicy: IfNotPresent
+        digest: ""
+      auth:
+        token:
+          enabled: false
+        rbac:
+          create: false
+          allowNoneAuthentication: true
+          rootPassword: ""
+      logLevel: "info"
+      extraEnvVars:
+        - name: ETCD_QUOTA_BACKEND_BYTES
+          value: "17179869184"
+        - name: ETCD_AUTO_COMPACTION_RETENTION
+          value: "2"
+      persistence:
+        size: 20Gi
+        storageClass: ""
+        accessModes:
+          - ReadWriteOnce
+        annotations: {}
+
     minio:
       enabled: true # if true then minio will be deployed as part of openobserve
       region: "us-east-1"
@@ -367,11 +528,12 @@ spec:
         enabled: false
         className: ""
         annotations:
-          kubernetes.io/ingress.class: nginx
+          {}
+          # kubernetes.io/ingress.class: nginx
           # cert-manager.io/issuer: letsencrypt
           # kubernetes.io/tls-acme: true
         hosts:
-          - host: zplane.systemtracker.no-ip.org
+          - host: chart-example.local
             paths:
               - path: /
                 pathType: ImplementationSpecific
@@ -380,7 +542,178 @@ spec:
           #   hosts:
           #     - chart-example.local
 
-    probes:
+    # Postgres is used for storing openobserve metadata. 
+    # Make sure to install cloudnative-pg operator before enabling this
+    # https://github.com/cloudnative-pg/cloudnative-pg/blob/main/docs/src/installation_upgrade.md
+    # kubectl apply --server-side -f \
+    #   https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.22/releases/cnpg-1.22.1.yaml
+    postgres:
       enabled: true
-      initialDelaySeconds: 10
-      failureThreshold: 3
+      pgadmin:
+        enabled: true
+        PGADMIN_DEFAULT_EMAIL: hello@openobserve.ai
+        PGADMIN_DEFAULT_PASSWORD: Batman123
+      spec:
+        password: Batman123 # password # username is hardcoded to openobserve, db is hardcoded to app
+        enableSuperuserAccess: true # if true then superuser access will be enabled. You can get the password from appropriate secret once the postgres is deployed
+        instances: 2  # creates a primary and a replica. replica will become primary if the primary fails
+        storage:
+          size: 10Gi
+        postgresql:
+          parameters:
+            shared_buffers: "1GB"
+            max_connections: "1500"
+        monitoring:
+          enablePodMonitor: true
+        backup: {} # All the configuration associated with an object store from https://cloudnative-pg.io/documentation/1.17/backup_recovery/
+
+    enterprise:
+      enabled: false
+      parameters:
+        O2_AUDIT_ENABLED: "true"
+        O2_AUDIT_BATCH_SIZE: "500"
+        O2_CUSTOM_LOGO_TEXT: ""
+        O2_CUSTOM_SLACK_URL: ""
+        O2_CUSTOM_DOCS_URL: ""
+        O2_CUSTOM_HIDE_MENUS: ""
+        O2_SUPER_CLUSTER_ENABLED: "false"
+        O2_SUPER_CLUSTER_PUBLIC_ADDR: ""
+        O2_SUPER_CLUSTER_PUBLIC_PORT: ""
+        O2_SUPER_CLUSTER_GRPC_TOKEN: ""
+        O2_SEARCH_GROUP_LONG_MAX_CPU: "80%"
+        O2_SEARCH_GROUP_LONG_MAX_MEMORY: "80%"
+        O2_SEARCH_GROUP_LONG_MAX_CONCURRENCY: "2"
+        O2_SEARCH_GROUP_SHORT_MAX_CPU: "20%"
+        O2_SEARCH_GROUP_SHORT_MAX_MEMORY: "20%"
+        O2_SEARCH_GROUP_BASE_SPEED: "1024" # in MB
+        O2_SEARCH_GROUP_BASE_SECS: "10" # in seconds
+      openfga:
+        enabled: false
+        parameters:
+          O2_OPENFGA_LIST_ONLY_PERMITTED: "true"
+          O2_MAP_GROUP_TO_ROLE: "true"
+          O2_MAP_GROUP_TO_ROLE_SKIP_CREATION: "false"
+          O2_OPENFGA_PAGE_SIZE: "100"
+        image:
+          repository: openfga/openfga
+          tag: latest
+          pullPolicy: IfNotPresent
+      dex:
+        enabled: false
+        parameters:
+          O2_CALLBACK_URL: https://openobserve.example.com/web/cb
+          O2_DEX_SCOPES: openid profile email groups offline_access
+          O2_DEX_GROUP_ATTRIBUTE: ou
+          O2_DEX_DEFAULT_ORG: default
+          O2_DEX_DEFAULT_ROLE: user
+          O2_DEX_ROLE_ATTRIBUTE: role
+          O2_DEX_NATIVE_LOGIN_ENABLED: "true"
+          O2_DEX_GROUP_CLAIM: "groups"
+          O2_DEX_LDAP_GROUP_ATTRIBUTE: "ou"
+          O2_DEX_LDAP_ROLE_ATTRIBUTE: "cn"
+        config:
+          issuer: https://dex.example.com/dex
+          storage:
+            type: kubernetes
+            config:
+              inCluster: true
+          web:
+            http: 0.0.0.0:5556
+          expiry:
+            idTokens: 10m
+            refreshTokens:
+              validIfNotUsedFor: 30m
+          staticClients:
+          - id: o2-client
+            redirectURIs:
+            - https://openobserve.example.com/config/redirect
+            name: o2-client
+            secret: ZXhhbXBsZS1hcHAtc2VjcmV0 # This should be base64 encoded value of client secret.Gets mapped to O2_DEX_CLIENT_SECRET
+          oauth2:
+            responseTypes:
+            - code
+            skipApprovalScreen: true
+          connectors:
+            # - type: google
+            #   id: google
+            #   name: Google
+            #   config:
+
+            #     # Connector config values starting with a "$" will read from the environment.
+            #     clientID: 123144355-hcghfcfghd5fhcv5v7hvh.apps.googleusercontent.com
+            #     clientSecret: GOABCD-gghfge543edfgc55dcgcghf6
+
+            #     # Dex's issuer URL + "/callback"
+            #     redirectURI: https://dex.example.com/dex/callback
+            #     # Google supports whitelisting allowed domains when using G Suite
+            #     # (Google Apps). The following field can be set to a list of domains
+            #     # that can log in:
+            #     #
+            #     hostedDomains:
+            #     - openobserve.ai
+            #     - zinclabs.io
+            - type: ldap
+              name: OpenLDAP
+              id: ldap
+              config:
+                host: openldap:389
+                insecureNoSSL: true
+                bindDN: cn=admin,dc=o2,dc=ai
+                bindPW: Z54H7w5WQUARsLKaumM967iX62msTEno
+                usernamePrompt: Email Address
+                userSearch:
+                  baseDN: ou=users,dc=o2,dc=ai
+                  filter: "(objectClass=inetOrgPerson)"
+                  username: mail
+                  idAttr: DN
+                  emailAttr: mail
+                  nameAttr: cn
+                groupSearch:
+                  baseDN: ou=teams,dc=o2,dc=ai
+                  filter: "(objectClass=groupOfUniqueNames)"
+                  userMatchers:
+                  - userAttr: DN
+                    groupAttr: uniqueMember
+                  nameAttr: entryDN
+        image:
+          repository: dexidp/dex
+          tag: v2.37.0
+          pullPolicy: IfNotPresent
+        extraEnv: []
+        podAnnotations: {}
+        ingress:
+          enabled: true
+          className: "nginx"
+          annotations:
+            cert-manager.io/issuer: letsencrypt
+            kubernetes.io/tls-acme: "true"
+            nginx.ingress.kubernetes.io/enable-cors: "true"
+            # nginx.ingress.kubernetes.io/connection-proxy-header: keep-alive
+            # nginx.ingress.kubernetes.io/proxy-connect-timeout: '600'
+            # nginx.ingress.kubernetes.io/proxy-send-timeout: '600'
+            # nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+            # nginx.ingress.kubernetes.io/proxy-body-size: 32m
+          hosts:
+            - host: dex.example.com
+              paths:
+                - path: /
+                  pathType: ImplementationSpecific
+          tls:
+            - secretName: dex.example.com
+              hosts:
+                - dex.example.com  
+        
+
+    probes:
+      alertmanager:
+        enabled: false
+      compactor:
+        enabled: false
+      ingester:
+        enabled: true
+      querier:
+        enabled: true
+      router:
+        enabled: true
+      dex:
+        enabled: false
