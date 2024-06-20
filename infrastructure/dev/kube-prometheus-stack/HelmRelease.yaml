@@ -14,3 +14,11 @@ spec:
         name: kps
         namespace: kps
       interval: 5m
+  values:
+    grafana:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
+        hosts:
+          - grafana.systemtracker.no-ip.org
