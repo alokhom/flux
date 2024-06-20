@@ -6,3 +6,5 @@ resources:
   - namespace.yaml
   - HelmRelease.yaml
   - HelmRepository.yaml
+  - pg-HelmRelease.yaml
+  - pg-HelmRepository.yaml

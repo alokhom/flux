@@ -516,7 +516,7 @@ spec:
     # zPlane is a commercial software and requires a license to be used.
     # Reach out to hello@zinclabs.io for commercial license if you continue to use zPlane
     zplane:
-      enabled: true # if true then zPlane will be deployed as part of openobserve
+      enabled: false # if true then zPlane will be deployed as part of openobserve
       image:
         repository: public.ecr.aws/zinclabs/zplane
         tag: 0.1.6
@@ -525,15 +525,14 @@ spec:
         type: ClusterIP
         port: 9200
       ingress: # if enabled is true then this is required
-        enabled: false
-        className: ""
+        enabled: true
+        className: "nginx"
         annotations:
-          {}
-          # kubernetes.io/ingress.class: nginx
+           kubernetes.io/ingress.class: nginx
           # cert-manager.io/issuer: letsencrypt
           # kubernetes.io/tls-acme: true
         hosts:
-          - host: chart-example.local
+          - host: zplane.systemtracker.no-ip.org
             paths:
               - path: /
                 pathType: ImplementationSpecific
@@ -566,144 +565,6 @@ spec:
         monitoring:
           enablePodMonitor: true
         backup: {} # All the configuration associated with an object store from https://cloudnative-pg.io/documentation/1.17/backup_recovery/
-
-    enterprise:
-      enabled: false
-      parameters:
-        O2_AUDIT_ENABLED: "true"
-        O2_AUDIT_BATCH_SIZE: "500"
-        O2_CUSTOM_LOGO_TEXT: ""
-        O2_CUSTOM_SLACK_URL: ""
-        O2_CUSTOM_DOCS_URL: ""
-        O2_CUSTOM_HIDE_MENUS: ""
-        O2_SUPER_CLUSTER_ENABLED: "false"
-        O2_SUPER_CLUSTER_PUBLIC_ADDR: ""
-        O2_SUPER_CLUSTER_PUBLIC_PORT: ""
-        O2_SUPER_CLUSTER_GRPC_TOKEN: ""
-        O2_SEARCH_GROUP_LONG_MAX_CPU: "80%"
-        O2_SEARCH_GROUP_LONG_MAX_MEMORY: "80%"
-        O2_SEARCH_GROUP_LONG_MAX_CONCURRENCY: "2"
-        O2_SEARCH_GROUP_SHORT_MAX_CPU: "20%"
-        O2_SEARCH_GROUP_SHORT_MAX_MEMORY: "20%"
-        O2_SEARCH_GROUP_BASE_SPEED: "1024" # in MB
-        O2_SEARCH_GROUP_BASE_SECS: "10" # in seconds
-      openfga:
-        enabled: false
-        parameters:
-          O2_OPENFGA_LIST_ONLY_PERMITTED: "true"
-          O2_MAP_GROUP_TO_ROLE: "true"
-          O2_MAP_GROUP_TO_ROLE_SKIP_CREATION: "false"
-          O2_OPENFGA_PAGE_SIZE: "100"
-        image:
-          repository: openfga/openfga
-          tag: latest
-          pullPolicy: IfNotPresent
-      dex:
-        enabled: false
-        parameters:
-          O2_CALLBACK_URL: https://openobserve.example.com/web/cb
-          O2_DEX_SCOPES: openid profile email groups offline_access
-          O2_DEX_GROUP_ATTRIBUTE: ou
-          O2_DEX_DEFAULT_ORG: default
-          O2_DEX_DEFAULT_ROLE: user
-          O2_DEX_ROLE_ATTRIBUTE: role
-          O2_DEX_NATIVE_LOGIN_ENABLED: "true"
-          O2_DEX_GROUP_CLAIM: "groups"
-          O2_DEX_LDAP_GROUP_ATTRIBUTE: "ou"
-          O2_DEX_LDAP_ROLE_ATTRIBUTE: "cn"
-        config:
-          issuer: https://dex.example.com/dex
-          storage:
-            type: kubernetes
-            config:
-              inCluster: true
-          web:
-            http: 0.0.0.0:5556
-          expiry:
-            idTokens: 10m
-            refreshTokens:
-              validIfNotUsedFor: 30m
-          staticClients:
-          - id: o2-client
-            redirectURIs:
-            - https://openobserve.example.com/config/redirect
-            name: o2-client
-            secret: ZXhhbXBsZS1hcHAtc2VjcmV0 # This should be base64 encoded value of client secret.Gets mapped to O2_DEX_CLIENT_SECRET
-          oauth2:
-            responseTypes:
-            - code
-            skipApprovalScreen: true
-          connectors:
-            # - type: google
-            #   id: google
-            #   name: Google
-            #   config:
-
-            #     # Connector config values starting with a "$" will read from the environment.
-            #     clientID: 123144355-hcghfcfghd5fhcv5v7hvh.apps.googleusercontent.com
-            #     clientSecret: GOABCD-gghfge543edfgc55dcgcghf6
-
-            #     # Dex's issuer URL + "/callback"
-            #     redirectURI: https://dex.example.com/dex/callback
-            #     # Google supports whitelisting allowed domains when using G Suite
-            #     # (Google Apps). The following field can be set to a list of domains
-            #     # that can log in:
-            #     #
-            #     hostedDomains:
-            #     - openobserve.ai
-            #     - zinclabs.io
-            - type: ldap
-              name: OpenLDAP
-              id: ldap
-              config:
-                host: openldap:389
-                insecureNoSSL: true
-                bindDN: cn=admin,dc=o2,dc=ai
-                bindPW: Z54H7w5WQUARsLKaumM967iX62msTEno
-                usernamePrompt: Email Address
-                userSearch:
-                  baseDN: ou=users,dc=o2,dc=ai
-                  filter: "(objectClass=inetOrgPerson)"
-                  username: mail
-                  idAttr: DN
-                  emailAttr: mail
-                  nameAttr: cn
-                groupSearch:
-                  baseDN: ou=teams,dc=o2,dc=ai
-                  filter: "(objectClass=groupOfUniqueNames)"
-                  userMatchers:
-                  - userAttr: DN
-                    groupAttr: uniqueMember
-                  nameAttr: entryDN
-        image:
-          repository: dexidp/dex
-          tag: v2.37.0
-          pullPolicy: IfNotPresent
-        extraEnv: []
-        podAnnotations: {}
-        ingress:
-          enabled: true
-          className: "nginx"
-          annotations:
-            cert-manager.io/issuer: letsencrypt
-            kubernetes.io/tls-acme: "true"
-            nginx.ingress.kubernetes.io/enable-cors: "true"
-            # nginx.ingress.kubernetes.io/connection-proxy-header: keep-alive
-            # nginx.ingress.kubernetes.io/proxy-connect-timeout: '600'
-            # nginx.ingress.kubernetes.io/proxy-send-timeout: '600'
-            # nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
-            # nginx.ingress.kubernetes.io/proxy-body-size: 32m
-          hosts:
-            - host: dex.example.com
-              paths:
-                - path: /
-                  pathType: ImplementationSpecific
-          tls:
-            - secretName: dex.example.com
-              hosts:
-                - dex.example.com  
-        
-
     probes:
       alertmanager:
         enabled: false
