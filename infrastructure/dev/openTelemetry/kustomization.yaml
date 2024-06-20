@@ -4,3 +4,5 @@ resources:
   - opentelemetry-operator.yaml
   - otc.yaml
   - namespace.yaml
+  - HelmRelease.yaml
+  - HelmRepository.yaml
