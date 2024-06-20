@@ -46,9 +46,9 @@ spec:
       # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
       debug:
       otlphttp/openobserve:
-        endpoint: https://api.openobserve.ai/api/alok_organization_20763_MRbctdqwkUaSQzN
+        endpoint: http://otc-openobserve-router.otc.svc:5080/api/default
         headers:
-          Authorization: Basic YWxvay5ob21AZ21haWwuY29tOjE4QmI3a254NTY0RDBKaDlXMk0z
+          Authorization: Basic YWxvay5ob21AZ21haWwuY29tOk82YWtEM0ZLeVdlYzNqQjA=
           stream-name: default
 
     extensions:
