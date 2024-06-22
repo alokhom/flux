@@ -215,7 +215,7 @@ spec:
         hostname: powerdns-php.systemtracker.no-ip.org
         path: /sub-phpmyadmin/
         pathType: ImplementationSpecific
-        tls: []
+        tls: true
 
       db:
         chartName: mariadb
