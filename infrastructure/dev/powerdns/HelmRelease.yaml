@@ -268,14 +268,6 @@ spec:
               version: v1
               kind: Deployment
               name: powerdns-phpmyadmin
-            # - group: apps
-            #   version: v1
-            #   kind: Deployment
-            #   name: powerdns-powerdns-admin
-            #- group: apps
-            #  version: v1
-            #  kind: StatefulSet
-            #  name: powerdns-mariadb
             patch: |
               - op: add
                 path: "/spec/template/spec/nodeSelector"
@@ -285,10 +277,6 @@ spec:
               version: v1
               kind: Deployment
               name: powerdns-powerdns-admin
-            #- group: apps
-            #  version: v1
-            #  kind: StatefulSet
-            #  name: powerdns-mariadb
             patch: |
               - op: add
                 path: "/spec/template/spec/nodeSelector"
