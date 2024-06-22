@@ -260,4 +260,37 @@ spec:
             #- secretName: pdns-admin
             #  hosts:
             #  - pdns-admin.chart-example.local
-      
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          # Repeat this block 15 times...
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: powerdns-phpmyadmin
+              namespace: powerdns
+            spec:
+              template:
+                spec:
+                  nodeSelector:
+                    kubernetes.io/hostname: amd5
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: powerdns-powerdns-admin
+              namespace: powerdns
+            spec:
+              template:
+                spec:
+                  nodeSelector:
+                    kubernetes.io/hostname: amd5
+          - kind: StatefulSet
+            apiVersion: apps/v1
+            metadata:
+              name: powerdns-mariadb
+              namespace: powerdns
+            spec:
+              template:
+                spec:
+                  nodeSelector:
+                    kubernetes.io/hostname: amd5
