@@ -135,7 +135,8 @@ spec:
       # targetMemoryUtilizationPercentage: 80
 
     # @ignored
-    nodeSelector: {}
+    nodeSelector:
+      kubernetes.io/hostname: amd5
 
     # @ignored
     tolerations: []
