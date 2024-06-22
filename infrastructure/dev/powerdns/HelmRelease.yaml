@@ -192,7 +192,7 @@ spec:
 
     # https://github.com/bitnami/charts/blob/master/bitnami/phpmyadmin/values.yaml
     phpmyadmin:
-      enabled: true
+      enabled: false
 
     ## @param extraEnvVars Extra environment variables to be set on PhpMyAdmin container
       ## For example:
@@ -201,9 +201,9 @@ spec:
       ##   value: "80M"
       ## - name: TZ
       ##   value: Asia/Shanghai
-      extraEnvVars: []
-      #  - name: TZ
-      #    value: Asia/Shanghai
+      extraEnvVars:
+        - name: TZ
+          value: Europe/Oslo
 
       ingress: 
         enabled: true
