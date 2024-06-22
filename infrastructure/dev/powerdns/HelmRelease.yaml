@@ -46,10 +46,10 @@ spec:
       path: /
       hosts:
         - powerdns.systemtracker.no-ip.org
-      tls:
-        - secretName: chart-example-tls
-          hosts:
-            - powerdns.systemtracker.no-ip.org
+      tls: []
+        #- secretName: chart-example-tls
+        #  hosts:
+        #    - powerdns.systemtracker.no-ip.org
 
     resources: {}
       # We usually recommend not to specify default resources and to leave this as a conscious
