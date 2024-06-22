@@ -89,7 +89,7 @@ spec:
 
     service:
       dns:
-        type: LoadBalancer
+        type: ClusterIP
         annotations: {}
       api:
         type: ClusterIP
