@@ -5,4 +5,4 @@ metadata:
   namespace: powerdns
 spec:
   interval: 5m
-  url: https://github.com/cdwv/powerdns-helm
+  url: https://fsdrw08.github.io/helm-charts/
