@@ -224,7 +224,7 @@ spec:
     # https://github.com/k8s-at-home/charts/blob/master/charts/stable/powerdns-admin/values.yaml
     # https://github.com/k8s-at-home/library-charts/blob/main/charts/stable/common/values.yaml
     powerdns-admin:
-      enabled: true
+      enabled: false
 
       image:
         tag: latest
