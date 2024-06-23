@@ -39,7 +39,7 @@ spec:
       # -- Unique app Key
       SECRET_KEY: PowerDNSAPI
       # -- Database connection string - if not set uses internal sqlite db
-      SQLALCHEMY_DATABASE_URI: "mysql://pda:pda@{{ .Release.Name }}-mariadb/pda"  # mysql://db_user:db_pass@db_host/powerdns_admin
+      SQLALCHEMY_DATABASE_URI: "mysql://pda:pda@powerdns-mariadb/pda"  # mysql://db_user:db_pass@db_host/powerdns_admin
       # -- Timeout for Gunicorn workers
       GUNICORN_TIMEOUT: 60
       # -- How many Gunicorn workers to spawn
