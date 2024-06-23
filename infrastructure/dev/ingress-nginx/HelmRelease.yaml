@@ -117,12 +117,12 @@ spec:
       # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
       # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
       # is merged
-      hostNetwork: false
+      hostNetwork: false # <--- originally was true
       ## Use host ports 80 and 443
       ## Disabled by default
       hostPort:
         # -- Enable 'hostPort' or not
-        enabled: false
+        enabled: false # <--- originally was true
         ports:
           # -- 'hostPort' http port
           http: 80
@@ -498,7 +498,7 @@ spec:
         labels: {}
           # -- Type of the external controller service.
         # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
-        type: ClusterIP
+        type: ClusterIP # <--- originally was NodePort
         # -- Pre-defined cluster internal IP address of the external controller service. Take care of collisions with existing services.
         # This value is immutable. Set once, it can not be changed without deleting and re-creating the service.
         # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#choosing-your-own-ip-address
