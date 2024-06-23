@@ -84,3 +84,16 @@ spec:
     persistence:
       data:
         enabled: false
+  postRenderers:
+    - kustomize:
+        patches:
+          # Repeat this block 15 times...
+          - target:
+              version: v1
+              kind: Deployment
+              name:  powerdnsadmin
+            patch: |
+              - op: add
+                path: "/spec/template/spec/nodeSelector"
+                value:
+                  kubernetes.io/hostname: amd5

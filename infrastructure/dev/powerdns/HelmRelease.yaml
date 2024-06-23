@@ -275,15 +275,6 @@ spec:
                   kubernetes.io/hostname: amd5
           - target:
               version: v1
-              kind: Deployment
-              name: powerdns-powerdns-admin
-            patch: |
-              - op: add
-                path: "/spec/template/spec/nodeSelector"
-                value:
-                  kubernetes.io/hostname: amd5
-          - target:
-              version: v1
               kind: StatefulSet
               name: powerdns-mariadb
             patch: |
