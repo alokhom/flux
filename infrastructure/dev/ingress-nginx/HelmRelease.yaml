@@ -122,7 +122,7 @@ spec:
       ## Disabled by default
       hostPort:
         # -- Enable 'hostPort' or not
-        enabled: true
+        enabled: false
         ports:
           # -- 'hostPort' http port
           http: 80
