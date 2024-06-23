@@ -213,9 +213,9 @@ spec:
           # traefik.ingress.kubernetes.io/router.middlewares: traefik-subpath-stripprefixregex@kubernetescrd
           # cert-manager.io/cluster-issuer: ca-issuer
         hostname: powerdns-php.systemtracker.no-ip.org
-        path: /sub-phpmyadmin/
+        path: /
         pathType: ImplementationSpecific
-        tls: true
+        tls: false
 
       db:
         chartName: mariadb
