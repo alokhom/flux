@@ -4,6 +4,7 @@ resources:
   - HelmRelease.yaml
   - HelmRepository.yaml
   - namespace.yaml
+  - ./pdns-admin
 
 # patchesJson6902:
 # - target:
