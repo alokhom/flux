@@ -1152,13 +1152,13 @@ spec:
       #"5556": "graylog/tcp-gelf:5556"
       #"389": "openldap/openldap:389"
       "8200": "vault/vault:8200"
-      "53": "powerdns/powerdns-dns-tcp:53"
+      "5353": "powerdns/powerdns-dns-tcp:53"
 
     # -- UDP service key-value pairs
     ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
     ##
     udp:
-      "53": "powerdns/powerdns-dns-udp:53"
+      "5353": "powerdns/powerdns-dns-udp:53"
 
     # -- Prefix for TCP and UDP ports names in ingress controller service
     ## Some cloud providers, like Yandex Cloud may have a requirements for a port name regex to support cloud load balancer integration
