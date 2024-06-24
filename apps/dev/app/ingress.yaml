@@ -31,7 +31,7 @@ spec:
   #    - nginx.systemtracker.no-ip.org
   #  secretName: nginx-tls
   rules:
-  - host: nginx.systemtracker.no-ip.org
+  - host: nginx.alokcomputinglabs.no
     http:
       paths:
       - path: /
