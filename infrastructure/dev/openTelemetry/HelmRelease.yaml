@@ -404,12 +404,18 @@ spec:
         # targetMemoryUtilizationPercentage: 80
 
     nodeSelector:
-      ingester: {}
-      querier: {}
-      compactor: {}
-      router: {}
-      alertmanager: {}
-      zplane: {}
+      ingester:
+        kubernetes.io/hostname: amd5
+      querier:
+        kubernetes.io/hostname: amd5
+      compactor:
+        kubernetes.io/hostname: amd5
+      router:
+        kubernetes.io/hostname: amd5
+      alertmanager:
+        kubernetes.io/hostname: amd5
+      zplane:
+        kubernetes.io/hostname: amd5
 
     tolerations:
       ingester: []
