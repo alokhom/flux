@@ -20,6 +20,8 @@ spec:
         app.kubernetes.io/name: hadoop
         app.kubernetes.io/component: yarn-nm
     spec:
+      nodeSeclector:
+        kubernetes.io/hostname: amd5
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
