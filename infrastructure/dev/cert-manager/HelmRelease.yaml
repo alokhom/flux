@@ -19,12 +19,12 @@ spec:
       logLevel: 4
     nodeSelector:
       kubernetes.io/os: linux
-      kubernetes.io/hostname: amd5
+      #kubernetes.io/hostname: amd5
     webhook:
       nodeSelector:
         kubernetes.io/os: linux
-        kubernetes.io/hostname: amd5
+        #kubernetes.io/hostname: amd5
     cainjector:
       nodeSelector:
         kubernetes.io/os: linux
-        kubernetes.io/hostname: amd5
+        #kubernetes.io/hostname: amd5
