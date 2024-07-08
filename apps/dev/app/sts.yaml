@@ -16,8 +16,8 @@ spec:
       labels:
         app: nginx
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: amd5
+      #nodeSelector:
+      # kubernetes.io/hostname: amd5
       terminationGracePeriodSeconds: 10
       containers:
       - name: nginx
