@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: hue
+  namespace: hadoop
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: hue
+      version: "1.0.3"
+      sourceRef:
+        kind: HelmRepository
+        name: gethue
+        namespace: hadoop
+      interval: 5m
