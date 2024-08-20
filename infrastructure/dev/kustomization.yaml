@@ -21,9 +21,9 @@ resources:
   - ./powerdns
   #- ./nodered
   #- ./kubeFlow
-  - ./stepCA
+  #- ./stepCA
   #- ./pebbleLE
   - ./vault
   #- ./kubeVirt
   #- ./openTelemetry
-  - ./flinkOp
+  #- ./flinkOp
